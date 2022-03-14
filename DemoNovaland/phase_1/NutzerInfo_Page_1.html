@@ -1,0 +1,114 @@
+{% block style %}
+<!-- Der Block Style ist der Ort an dem das Aussehen von der Seite mit Hilfe von CSS gestaltet wird -->
+<!-- Ich habe diesen Style auf alle HTML Seiten abgewendet. Eigentlich geschieht das durch .CSS Style Sheets aber irgendwie wollte das Programm die Styles nicht übernehmen.-->
+<!-- Um den Style an sich in die Elemente zu integrieren, verwendet man class="" in dem HTML Befehl also zum Beispiel bei <p> </p> verwendet man <p class='button'> </p> und kann damit den Style zuordnen-->
+<!-- Der Style wird in den Style Block definiert, in dem man den Elementnamen einträgt und einen Punkt davor setzt. Danach werden alle Veränderungen die danach definiert werden, für die Klasse übernommen.-->
+
+    <link rel="stylesheet" href="Button.css">
+    <style>
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    /* h2 habe ich hauptsächlich definiert um den schwarzen Rand ganz unten auf der Website zu gestalten. */
+    .h2{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;
+    }
+    /* Mit h1 wird der Header der Website versehen. Das wichtigste vor allem ist der dunkel graue Background der die gleiche Farbe wie h2 hat.
+        Die einzelnen Eigenschaften die hier definiert betreffen die Farben, die Ränder, den Hintergrund und die Position der Schrift auf der Seite*/
+    .h1{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;}
+    /* In p definiere ich die normale schrift im Text. Bis jetzt habe ich nur definiert das sie larger ist aber man könnte noch die Schriftart ändern oder sie anders positionieren.*/
+    .p{
+        font-size: larger;
+    }
+
+    </style>
+{% endblock %}
+
+
+
+
+{% block title %}
+<!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
+    <link rel="stylesheet" type="text/css" href="Button.css"/>
+    <h1 class="h1"> Aufklärung </h1>
+{% endblock %}
+
+
+{% block content %}
+    <body onload="time()"></body>
+Sie nehmen an einer Untersuchung freiwillig teil. Sie können zu jedem Zeitpunkt abbrechen. Ihr Name wird innerhalb der Untersuchung nicht gebraucht und getrennt sicher aufbewahrt. Niemand kann erfahren, wie Sie sich innerhalb der Untersuchung verhalten.
+<br>
+Wie Sie sich verhalten, beeinflusst Ihre persönliche Bezahlung, die Sie für die Teilnahme erhalten. Die Auszahlungssumme lässt aber im Endergebnis keinerlei Rückschlüsse auf Ihre persönlichen Entscheidungen zu.
+<br>
+Die Studie findet statt am XY und dauert zwischen 10 Uhr morgens und 19 Uhr abends. In dieser Zeit bekommen Sie immer wieder Nachrichten, mit der Bitte, etwas auf der Plattform zu lesen. Sie haben immer 60 Minuten Zeit, darauf zu reagieren. Zwei Stunden entsprechen einem Monat in Novaland, sodass Sie in einem Tag 5 Monate in Novaland erleben.
+<br>
+Sie werden gebeten, bei der Untersuchung mit anderen Personen zusammen etwas zu machen oder zu entscheiden. Dabei kann es sein, dass Sie mit jemandem sich austauschen, der gar nicht existiert. Sie können dabei nicht erkennen, ob und, wenn ja, wann das der Fall sein wird.
+<br>
+Die Verantwortung für diese Studie liegt bei Prof. Dr. Achim Goerres von der Universität Duisburg-Essen. Sie wird finanziert vom European Research Council und dient nur dem wissenschaftlichen Fortschritt. Es werden damit keinerlei gewinnorientierten Interessen verfolgt.
+<br>
+Die Studie hat ein Datenschutzkonzept, das mit dem Datenschutzbeauftragten der Universität Duisburg-Essen durchgesprochen ist: Dr. Kai-Uwe Loser. Bei Fragen zum Datenschutz wenden Sie sich bitte an ERC@ oder an den Datenschutzbeauftragten …
+<br>
+<br>
+
+
+<input type="radio" name="Daten" onclick="Ja()" class="radio" value="Eigenes Auto"> Ja </input>
+<br>
+<input type="radio" name="Daten" onclick="Nein()" class="radio" value="Auto mieten"> Nein </input>
+<br>
+     <div id="Korrektur">
+     </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 class="h2"> </h2>
+
+{% endblock %}
+
+{% block script %}
+<!-- Next Button auf der Seite-->
+<script>
+var starttime
+
+function time(){
+   starttime = new Date();
+}
+    function Ja(){
+            document.getElementById("Korrektur").innerHTML = "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+    }
+
+    function Nein() {
+            document.getElementById("Korrektur").innerHTML = "<br>" + "Wenn Sie der Datenverarbeitung nicht zustimmen können wir Sie leider nicht an unserer Studie teilnehmen lassen. Bitte entschuldigen Sie dies.";
+    }
+
+    function Next(){
+        let TimeFirstRound = (new Date() - starttime)/1000;
+        liveSend({'ZeitErsteRunde': 'Zeit1', 'Zeit1': TimeFirstRound});
+        document.getElementById("form").submit();
+
+    }
+</script>
+{% endblock %}
+

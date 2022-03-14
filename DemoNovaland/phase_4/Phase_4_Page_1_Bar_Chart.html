@@ -1,0 +1,240 @@
+{% block style %}
+<!-- Der Block Style ist der Ort an dem das Aussehen von der Seite mit Hilfe von CSS gestaltet wird -->
+<!-- Ich habe diesen Style auf alle HTML Seiten abgewendet. Eigentlich geschieht das durch .CSS Style Sheets aber irgendwie wollte das Programm die Styles nicht übernehmen.-->
+<!-- Um den Style an sich in die Elemente zu integrieren, verwendet man class="" in dem HTML Befehl also zum Beispiel bei <p> </p> verwendet man <p class='button'> </p> und kann damit den Style zuordnen-->
+<!-- Der Style wird in den Style Block definiert, in dem man den Elementnamen einträgt und einen Punkt davor setzt. Danach werden alle Veränderungen die danach definiert werden, für die Klasse übernommen.-->
+
+    <link rel="stylesheet" href="Button.css">
+    <style>
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    /* h2 habe ich hauptsächlich definiert um den schwarzen Rand ganz unten auf der Website zu gestalten. */
+    .h2{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;
+    }
+    /* Mit h1 wird der Header der Website versehen. Das wichtigste vor allem ist der dunkel graue Background der die gleiche Farbe wie h2 hat.
+        Die einzelnen Eigenschaften die hier definiert betreffen die Farben, die Ränder, den Hintergrund und die Position der Schrift auf der Seite*/
+    .h1{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;}
+    /* In p definiere ich die normale schrift im Text. Bis jetzt habe ich nur definiert das sie larger ist aber man könnte noch die Schriftart ändern oder sie anders positionieren.*/
+    .p{
+        font-size: larger;
+    }
+
+    </style>
+{% endblock %}
+
+{% block styleBar %}
+<!-- Der Block Style ist der Ort an dem das Aussehen von der Seite mit Hilfe von CSS gestaltet wird -->
+<!-- Ich habe diesen Style auf alle HTML Seiten abgewendet. Eigentlich geschieht das durch .CSS Style Sheets aber irgendwie wollte das Programm die Styles nicht übernehmen.-->
+<!-- Um den Style an sich in die Elemente zu integrieren, verwendet man class="" in dem HTML Befehl also zum Beispiel bei <p> </p> verwendet man <p class='button'> </p> und kann damit den Style zuordnen-->
+<!-- Der Style wird in den Style Block definiert, in dem man den Elementnamen einträgt und einen Punkt davor setzt. Danach werden alle Veränderungen die danach definiert werden, für die Klasse übernommen.-->
+
+    <link rel="stylesheet" href="Button.css">
+    <style>
+     .section{
+         width: 100%;
+         height: 100%;
+     }
+     .box{
+         position: relative;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 550px;
+         height: 300px;
+         background: transparent;
+         border-bottom: 1px solid #000;
+         border-left: 1px solid #000;
+         display: flex;
+     }
+     .box .skill {
+         position: relative;
+         flex: 1;
+         text-align: center;
+
+     }
+     .box .skill .graph{
+         position: absolute;
+         width: 40px;
+         bottom: 0;
+         background: rgba(0,0,0,.1);
+         left: 50%;
+         transform: translateX(-50%);
+     }
+
+     .box .skill .graph:before{
+         content: '';
+         position: absolute;
+         top: 2px;
+         left: 2px;
+         right: 2px;
+         bottom: 0;
+         background: linear-gradient(0deg, #000000,#200000 );
+     }
+
+     .box .skill .graph:after{
+         content: '';
+         position: absolute;
+         top: 2px;
+         left: 2px;
+         right: 2px;
+         bottom: 0;
+         background: linear-gradient(0deg, #000000,#200000 );
+     }
+
+     .box .skill .graph .percent {
+         position: absolute;
+         top: -20px;
+         left: 50%;
+         transform: translateX(-50%);
+         test-align: center;
+         color: black;
+         front-weight: bold;
+     }
+
+     .box .skill .name{
+         position: absolute;
+         bottom: -30%;
+         left: 50%;
+         transform: translateX(-50%);
+         text-align: center;
+         color: black;
+         padding: 2px 6pc;
+         border-radius: 4px;
+     }
+
+     .column1{
+        float: top;
+        padding: 10px;
+        height: 20%;
+    }
+     .column2{
+        float: top;
+        padding: 10px;
+        height: 50%;
+     }
+
+
+    </style>
+{% endblock %}
+
+
+
+
+{% block title %}
+<!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
+    <link rel="stylesheet" type="text/css" href="Button.css"/>
+    <h1 class="h1"> Phase IV: Election Outcome and Environmental Disaster </h1>
+{% endblock %}
+
+
+{% block content %}
+    <div class="column1">
+    Willkommen zurück. Sie haben in der letzten Phase Wahlen gehabt und das hier sind die Ergebnisse:
+    <br>
+    <br>
+    <br>
+</div>
+
+    <div class="column2">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <section class="section">
+        <div class="box">
+            <div class="skill">
+                <div class="graph" style="height: {% LPNProzent %}%">
+                    <div class="percent"> {% LPNProzent %}%</div>
+                </div>
+                <div class="name"> LPN </div>
+            </div>
+
+            <div class="skill">
+                <div class="graph"style="height: {% SPNProzent %}%">
+                    <div class="percent"> {% SPNProzent %}%</div>
+                </div>
+                <div class="name"> SPN </div>
+            </div>
+
+            <div class="skill">
+                <div class="graph"style="height: {% KPNProzent %}%">
+                    <div class="percent"> {% KPNProzent %}%</div>
+                </div>
+                <div class="name"> KPN </div>
+            </div>
+
+            <div class="skill">
+                <div class="graph"style="height: {% PPNProzent %}%">
+                    <div class="percent"> {% PPNProzent %} %</div>
+                </div>
+                <div class="name"> PPN </div>
+            </div>
+
+             </div>
+    </section>
+    </div>
+<p> </p>
+
+<br>
+<br>
+<br>
+<br>
+
+    Die Partei: {% if PPNProzent > KPNProzent and PPNProzent > SPNProzent and PPNProzent > LPNProzent %} Partei Progressives Novaland {% elif  KPNProzent > PPNProzent and KPNProzent > SPNProzent and KPNProzent > LPNProzent %} Konservative Partei Novaland
+    {% elif  SPNProzent > PPNProzent and SPNProzent > KPNProzent and SPNProzent > LPNProzent %} Soziale Partei Novaland {% elif  LPNProzent > PPNProzent and LPNProzent > KPNProzent and LPNProzent > SPNProzent %} Liberale Partei Novaland {% endif %} hat die meisten Stimmen für sich gewinnen können.
+    <br>
+    Diese bring diese Veränderung mit sich:
+    <br>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<div class="column1">
+<button class='button' type='button' onclick='Next()'> Weiter </button>
+    </div>
+
+<h2 class="h2"> </h2>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+
+
+    function Next(){
+        document.getElementById("form").submit();
+    }
+</script>
+{% endblock %}
+

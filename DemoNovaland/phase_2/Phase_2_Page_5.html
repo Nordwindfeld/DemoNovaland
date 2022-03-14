@@ -1,0 +1,139 @@
+{% block style %}
+<!-- Der Block Style ist der Ort an dem das Aussehen von der Seite mit Hilfe von CSS gestaltet wird -->
+<!-- Ich habe diesen Style auf alle HTML Seiten abgewendet. Eigentlich geschieht das durch .CSS Style Sheets aber irgendwie wollte das Programm die Styles nicht übernehmen.-->
+<!-- Um den Style an sich in die Elemente zu integrieren, verwendet man class="" in dem HTML Befehl also zum Beispiel bei <p> </p> verwendet man <p class='button'> </p> und kann damit den Style zuordnen-->
+<!-- Der Style wird in den Style Block definiert, in dem man den Elementnamen einträgt und einen Punkt davor setzt. Danach werden alle Veränderungen die danach definiert werden, für die Klasse übernommen.-->
+
+    <link rel="stylesheet" href="Button.css">
+    <style>
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    /* h2 habe ich hauptsächlich definiert um den schwarzen Rand ganz unten auf der Website zu gestalten. */
+    .h2{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;
+    }
+    /* Mit h1 wird der Header der Website versehen. Das wichtigste vor allem ist der dunkel graue Background der die gleiche Farbe wie h2 hat.
+        Die einzelnen Eigenschaften die hier definiert betreffen die Farben, die Ränder, den Hintergrund und die Position der Schrift auf der Seite*/
+    .h1{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;}
+    /* In p definiere ich die normale schrift im Text. Bis jetzt habe ich nur definiert das sie larger ist aber man könnte noch die Schriftart ändern oder sie anders positionieren.*/
+    .p{
+        font-size: larger;
+    }
+
+    </style>
+{% endblock %}
+
+
+
+
+{% block title %}
+<!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
+    <link rel="stylesheet" type="text/css" href="Button.css"/>
+    <h1 class="h1"> Life-Style Frage 2 </h1>
+{% endblock %}
+
+
+{% block content %}
+    <body onload="time()"></body>
+Ihnen stehen verschiedene Möglichkeiten der Verpflegung zur Auswahl:
+<br>
+ <div id="Korrektur">
+<input type="radio" name="Frage_4_Verpflegung" onclick="Restaurant()" class="radio" value="Restaurants"> Sie gehen regelmäßig in Restaurants essen (700 Novas) </input>
+<br>
+<input type="radio" name="Frage_4_Verpflegung" onclick="EssenBestellen()" class="radio" value="Essen bestellen"> Sie bestellen sich häufig etwas zu essen nach Hause (500 Novas) </input>
+<br>
+<input type="radio" name="Frage_4_Verpflegung" onclick="SelberKochen()" class="radio" value="Selber kochen"> Sie kaufen günstig ein und kochen selbst (200 Novas) </input>
+<br>
+ </div>
+ <div id="Kontostand">
+ <br>
+Ihr Kontostand beträgt gerade: {% NeuerWert2 %} Novas
+    </div>
+<br>
+<br>
+<br>
+<h2 class="h2"> </h2>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+let NettoEinkommen = js_vars.NeuerWert;
+let Verpflegungskosten = 0;
+let Konto = 0;
+let starttime;
+
+ function time(){
+   starttime = new Date();
+}
+
+    function Restaurant(){
+        liveSend({'Verpflegung': 'Verpflegung', 'VerpflegungskostenKosten': 700, 'VerpflegungsArt': "Restaurants"});
+        Verpflegungskosten = 700;
+        Konto = NettoEinkommen - Verpflegungskosten;
+        if (Konto > 200){
+            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+        }
+        if (Konto < 200){
+            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten.";
+            }
+        }
+
+    function EssenBestellen() {
+        liveSend({"Verpflegung": "Verpflegung", 'VerpflegungskostenKosten': 500, 'VerpflegungsArt': "Essen bestellen"});
+        Verpflegungskosten = 500;
+        Konto = NettoEinkommen - Verpflegungskosten;
+        if (Konto > 200) {
+            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+        }
+        if (Konto < 200) {
+            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten.";
+        }
+    }
+
+     function SelberKochen(){
+        liveSend({"Verpflegung": "Verpflegung", 'VerpflegungskostenKosten': 200, 'VerpflegungsArt': "Selber kochen"});
+         Verpflegungskosten = 200;
+         Konto = NettoEinkommen - Verpflegungskosten;
+        if (Konto > 200) {
+            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+        }
+        if (Konto < 200) {
+            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten.";
+        }
+    }
+
+    function Next(){
+        let ZeitP2S5 = (new Date() - starttime)/1000;
+        liveSend({"ZeitP2S5": "ZeitP2S5",'ZeitP2S5': ZeitP2S5});
+        document.getElementById("form").submit();
+    }
+</script>
+{% endblock %}
+

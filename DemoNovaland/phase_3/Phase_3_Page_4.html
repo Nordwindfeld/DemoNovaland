@@ -1,0 +1,117 @@
+{% block style %}
+<!-- Der Block Style ist der Ort an dem das Aussehen von der Seite mit Hilfe von CSS gestaltet wird -->
+<!-- Ich habe diesen Style auf alle HTML Seiten abgewendet. Eigentlich geschieht das durch .CSS Style Sheets aber irgendwie wollte das Programm die Styles nicht übernehmen.-->
+<!-- Um den Style an sich in die Elemente zu integrieren, verwendet man class="" in dem HTML Befehl also zum Beispiel bei <p> </p> verwendet man <p class='button'> </p> und kann damit den Style zuordnen-->
+<!-- Der Style wird in den Style Block definiert, in dem man den Elementnamen einträgt und einen Punkt davor setzt. Danach werden alle Veränderungen die danach definiert werden, für die Klasse übernommen.-->
+
+    <link rel="stylesheet" href="Button.css">
+    <style>
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    /* h2 habe ich hauptsächlich definiert um den schwarzen Rand ganz unten auf der Website zu gestalten. */
+    .h2{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;
+    }
+    /* Mit h1 wird der Header der Website versehen. Das wichtigste vor allem ist der dunkel graue Background der die gleiche Farbe wie h2 hat.
+        Die einzelnen Eigenschaften die hier definiert betreffen die Farben, die Ränder, den Hintergrund und die Position der Schrift auf der Seite*/
+    .h1{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;}
+    /* In p definiere ich die normale schrift im Text. Bis jetzt habe ich nur definiert das sie larger ist aber man könnte noch die Schriftart ändern oder sie anders positionieren.*/
+    .p{
+        font-size: larger;
+    }
+
+    .column1{
+        float: left;
+        width: 70%;
+        padding: 10px;
+        height: 200px;
+    }
+   .column2{
+        float: right;
+        width: 30%;
+        padding: 10px;
+        height: 200px;
+    }
+
+
+    </style>
+{% endblock %}
+
+{% block title %}
+<!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
+    <link rel="stylesheet" type="text/css" href="Button.css"/>
+    <h1 class="h1"> Parteien </h1>
+{% endblock %}
+
+
+{% block content %}
+    <body onload="time()"></body>
+<h2> Soziale Partei Novaland </h2>
+<hr>
+<br>
+<div class="row">
+    <div class="column1">
+        <p class="p"> Die SPN (Soziale Partei Novaland) will mehr sozialstaatliche Leistungen, auch wenn das mehr Steuern und Abgaben bedeutet.
+Es wird erwartet, dass bei einer Regierungsbeteiligung der SPN die Einkommen der Menschen mit hohem Einkommen um etwa ... sinken und die Einkommen der Menschen mit niedrigem Einkommen um etwa ... steigen werden.
+Die SPN will die Zuzugsmöglichkeiten für Ausländer einschränken.
+            <br>
+            <br>
+        <button class='button' type='button' onclick='Next()'> Weiter </button>
+
+    </div>
+    <div class="column2">
+        <img src="{% static 'phase_3/SPN.png' %}" width="80%">
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h2 class="h2"> </h2>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP3S4 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP3S4": "ZeitP3S4", 'ZeitP3S4': ZeitP3S4});
+        document.getElementById("form").submit();
+    }
+</script>
+{% endblock %}
+

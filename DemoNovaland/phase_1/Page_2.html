@@ -1,0 +1,107 @@
+{% block head %}
+    Novaland-Enduser-Experience
+    <meta name="Novaland-Enduser">
+{% endblock %}
+
+{% block style %}
+<!-- Der Block Style ist der Ort an dem das Aussehen von der Seite mit Hilfe von CSS gestaltet wird -->
+<!-- Ich habe diesen Style auf alle HTML Seiten abgewendet. Eigentlich geschieht das durch .CSS Style Sheets aber irgendwie wollte das Programm die Styles nicht übernehmen.-->
+<!-- Um den Style an sich in die Elemente zu integrieren, verwendet man class="" in dem HTML Befehl also zum Beispiel bei <p> </p> verwendet man <p class='button'> </p> und kann damit den Style zuordnen-->
+<!-- Der Style wird in den Style Block definiert, in dem man den Elementnamen einträgt und einen Punkt davor setzt. Danach werden alle Veränderungen die danach definiert werden, für die Klasse übernommen.-->
+
+    <link rel="stylesheet" href="Button.css">
+    <style>
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    /* h2 habe ich hauptsächlich definiert um den schwarzen Rand ganz unten auf der Website zu gestalten. */
+    .h2{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;
+    }
+    /* Mit h1 wird der Header der Website versehen. Das wichtigste vor allem ist der dunkel graue Background der die gleiche Farbe wie h2 hat.
+        Die einzelnen Eigenschaften die hier definiert betreffen die Farben, die Ränder, den Hintergrund und die Position der Schrift auf der Seite*/
+    .h1{
+        padding: 60px;
+        text-align: center;
+        background: #363636;
+        color: white;
+        font-size: 30px;}
+    /* In p definiere ich die normale schrift im Text. Bis jetzt habe ich nur definiert das sie larger ist aber man könnte noch die Schriftart ändern oder sie anders positionieren.*/
+    .p{
+        font-size: larger;
+    }
+
+    </style>
+{% endblock %}
+
+
+
+
+{% block title %}
+<!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
+    <link rel="stylesheet" type="text/css" href="Button.css"/>
+    <h1 class="h1"> Storytelling </h1>
+{% endblock %}
+
+
+{% block content %}
+    <body onload="time()"></body>
+In Novaland bezahlt man mit Novas. 1 Nova ist ungefähr so viel wert wie 1 Euro.
+Im Schnitt verdient ein Bürger oder eine Bürgerin im Monat vor Abgaben 3500 Novas.
+<br>
+<br>
+Novaland hat ein breit ausgebautes Sozialsystem mit umfänglichem sozialen Versorgungs- und Fürsorgesystem.
+Der Großteil der Ausgaben wird entrichtet, um den Menschen in Novaland:
+<br>
+<ul>
+<li>das Existenzminimum zu garantieren, </li>
+<li>eine Versorgung im Falle von Arbeitslosigkeit oder Krankheit zu gewährleisten </li>
+<li>Zugang zu einer funktionierenden Infrastruktur mit Straßen, öffentlichem Personennahverkehr und Zahlungssystem zu ermöglichen, </li>
+<li>die gleichen Bildungschancen zu bieten </li>
+<li>das Auskommen im hohen Alter zu sichern</li>
+</ul>
+<br>
+Dieses soziale System wird durch Steuern und Abgaben bezahlt, vor allem durch Einkommens- und Mehrwertsteuer.
+Je höher das Einkommen, desto höher die Steuern und Abgaben
+<br>
+<br>
+    <button class='button' type='button' onclick='Next()'> Weiter </button>
+    <br>
+    <br>
+    <br>
+    <h2 class="h2"> </h2>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    let starttime;
+
+    function time(){
+   starttime = new Date();
+}
+
+    function Next(){
+    let TimeFirstRoundPhase2 = (new Date() - starttime)/1000;
+        liveSend({'ZeitPhaseEinsZweiteSeite': 'ZeitPhaseEinsZweiteSeite', 'Phase1Seite2Zeit': TimeFirstRoundPhase2});
+        document.getElementById("form").submit();
+    }
+</script>
+{% endblock %}
+
