@@ -45,41 +45,24 @@
     </style>
 {% endblock %}
 
-
-
-
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Endseite Phase 1 </h1>
+    <h1 class="h1"> Phase IV: Election Outcome and Environmental Disaster </h1>
 {% endblock %}
 
 
 {% block content %}
-Vielen Dank für ihre Teilnahme an der ersten Runde von unserer Studie.
-Sie erhalten von uns eine Mail mit der Sie weiter an usnerer Studie teilnehmen können.
-Wir würden Sie trotzdem drum bitten, falls es komplikationen mit ihrer E-Mail geben sollte, diese Adresse zu kopieren:
-   <a href="{{ player.URL }}">{% player.URL %}</a>
-
-    <br>
+<p class="p"> Die Studie Novaland geht um 14 Uhr weiter. Sie können das Fenster schließen. </p>
 <br>
-{% formfields %}
-<br>
-<br>
-<button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
 <br>
 <br>
 <h2 class="h2"> </h2>
 
+
 {% endblock %}
 
 {% block script %}
-<!-- Next Button auf der Seite-->
-<script>
-    function Next(){
-        document.getElementById("form").submit();
-    }
-</script>
 {% endblock %}
 

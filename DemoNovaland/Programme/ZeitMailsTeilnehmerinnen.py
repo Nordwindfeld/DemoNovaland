@@ -1,5 +1,4 @@
 import smtplib
-from time import *
 from datetime import *
 from datetime import time
 import psycopg2
@@ -36,12 +35,12 @@ def zwoelfUhrMail():
             Mail = cursor.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
             print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
-            From_mail = "pilotnovaland@gmail.com"
+            From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/demo"
+            Url = "https://pilotnovaland2022.herokuapp.com/join/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -53,12 +52,12 @@ def zwoelfUhrMail():
             msg['Content-type'] = 'text/plain; charset=utf-8'
             msg['Content-transfer-encoding'] = '8bit'
             msg['Subject'] = subject
-            msg['From'] = From_mail
+            msg['From'] = "novaland@uni-duisburg-essen.de"
             msg['To'] = To_Mail
             msg.set_payload(Nachricht, charset="utf-8")
 
             try:
-                server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl_context)
+                server = smtplib.SMTP_SSL("mailout.uni-duisburg-essen.de", 465, context=ssl_context)
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
@@ -104,7 +103,7 @@ def vierzehnUhrMail():
             Mail = cursor.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
             print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
-            From_mail = "pilotnovaland@gmail.com"
+            From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
@@ -121,19 +120,19 @@ def vierzehnUhrMail():
             msg['Content-type'] = 'text/plain; charset=utf-8'
             msg['Content-transfer-encoding'] = '8bit'
             msg['Subject'] = subject
-            msg['From'] = From_mail
+            msg['From'] = "novaland@uni-duisburg-essen.de"
             msg['To'] = To_Mail
             msg.set_payload(Nachricht, charset="utf-8")
 
             try:
-                server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl_context)
+                server = smtplib.SMTP_SSL("mailout.uni-duisburg-essen.de", 465, context=ssl_context)
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
                 cursor = connection.cursor()
                 print("Email gesendet")
             except:
-                print('Die Mail ist falsch')
+                print('E-Mail konnte nicht gesendet werden')
                 pass
     except Exception as error:
         print(error)
@@ -173,12 +172,12 @@ def SechzehnUhrMail():
             Mail = cursor.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
             print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
-            From_mail = "pilotnovaland@gmail.com"
+            From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/demo"
+            Url = "https://pilotnovaland2022.herokuapp.com/join/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -190,12 +189,12 @@ def SechzehnUhrMail():
             msg['Content-type'] = 'text/plain; charset=utf-8'
             msg['Content-transfer-encoding'] = '8bit'
             msg['Subject'] = subject
-            msg['From'] = From_mail
+            msg['From'] = "novaland@uni-duisburg-essen.de"
             msg['To'] = To_Mail
             msg.set_payload(Nachricht, charset="utf-8")
 
             try:
-                server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl_context)
+                server = smtplib.SMTP_SSL("mailout.uni-duisburg-essen.de", 465, context=ssl_context)
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
@@ -242,12 +241,12 @@ def achzehnUhrMail():
             Mail = cursor.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
             print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
-            From_mail = "pilotnovaland@gmail.com"
+            From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/demo"
+            Url = "https://pilotnovaland2022.herokuapp.com/join/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -259,12 +258,12 @@ def achzehnUhrMail():
             msg['Content-type'] = 'text/plain; charset=utf-8'
             msg['Content-transfer-encoding'] = '8bit'
             msg['Subject'] = subject
-            msg['From'] = From_mail
+            msg['From'] = "novaland@uni-duisburg-essen.de"
             msg['To'] = To_Mail
             msg.set_payload(Nachricht, charset="utf-8")
 
             try:
-                server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl_context)
+                server = smtplib.SMTP_SSL("mailout.uni-duisburg-essen.de", 465, context=ssl_context)
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
@@ -301,7 +300,7 @@ ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (datetime.now().time(
 print(ProgrammTagZeit)
 
 #Studie Uhrzeit
-Datum_Studie = date(2022, 3, 14) ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
+Datum_Studie = date(2022, 3, 31) ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
 zwoelfUhrZeit = time(12, 0, 0)
 ZeitZwoelf = 12 * 60 * 60
 print(ZeitZwoelf)

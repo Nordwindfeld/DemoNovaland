@@ -4,9 +4,18 @@ SESSION_CONFIGS = [
     dict(
         name='Demo_Novaland',
         app_sequence=['phase_1', 'phase_2', 'phase_3', 'phase_4'],
-        num_demo_participants=1,
+        num_demo_participants=6,
     ),
 ]
+ROOMS = [
+    dict(
+        name="DemoNovaland",
+        display_name="Novaland",
+        participant_label_file='DemoNovaland/Platzhalter.txt',
+        use_secure_urls=True
+    )
+]
+
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.

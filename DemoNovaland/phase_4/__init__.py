@@ -1,5 +1,7 @@
 import psycopg2
 from otree.api import *
+from datetime import *
+from datetime import time
 
 
 doc = """
@@ -43,43 +45,21 @@ class Player(BasePlayer):
     PPNProzent = models.FloatField()
 
 
-# PAGES
-class Login(Page):
-    form_model = 'player'
-
-    @staticmethod
-    def live_method(player: Player, data):
-        if 'IdEingabe' in data:
-            player.IDPlayer = data['ID']
-
-        if player.IDPlayer in player.IdAlle:
-            player.ID_korrekt = 1
-            response = dict(type='IDKORREKT')
-            return {0: response}
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        player.ID_korrekt = 0
-        connection5 = psycopg2.connect(user='aipclfonwuiort',
-                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                                       port='5432',
-                                       database='dcoubsit8jsig0')
-
-        cursor5 = connection5.cursor()
-        id_script = 'SELECT Nutzer_ID from Novaland'
-        cursor5.execute(id_script)
-        id_value = cursor5.fetchall()
-        player.IdAlle = str(id_value)
-        cursor5.close()
-        connection5.close()
-
-        player.IDPlayer = ""
+class Waiting_Site(Page):
+    def is_displayed(player: Player):
+        Zeit = 16 * 60 * 60
+        ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (datetime.now().time().minute * 60) + datetime.now().time().second
+        differenz = Zeit - ProgrammTagZeit
+        if differenz > 0:
+            return True
+        else:
+            return False
 
 
 class Phase_4_Page_1_Bar_Chart(Page):
     @staticmethod
     def vars_for_template(player: Player):
+        player.IDPlayer = player.participant.code
         player.ID_korrekt = 0
         connection = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
@@ -112,6 +92,7 @@ class Phase_4_Page_1_Bar_Chart(Page):
 
         cursor.close()
         connection.close()
+        connection.close()
 
 
-page_sequence = [Login, Phase_4_Page_1_Bar_Chart]
+page_sequence = [Waiting_Site, Phase_4_Page_1_Bar_Chart]

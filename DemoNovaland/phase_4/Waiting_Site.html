@@ -18,6 +18,8 @@
         font-size: 16px;
         margin: auto;
         cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
     }
     /* h2 habe ich hauptsächlich definiert um den schwarzen Rand ganz unten auf der Website zu gestalten. */
     .h2{
@@ -46,22 +48,13 @@
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Login </h1>
+    <h1 class="h1"> Phase IV: Election Outcome and Environmental Disaster </h1>
 {% endblock %}
 
 
 {% block content %}
-<p class="p"> Willkommen zu der zweiten Runde von Novaland.
-Bitte geben Sie die ID ein, welche Sie per Mail erhalten haben. </p>
+<p class="p"> Die Studie Novaland geht um 16 Uhr weiter. Sie können das Fenster schließen. </p>
 <br>
-<input id='IDPlayer' type='text'>
-    <br>
-<button id='IDPlayer' class='button' type='button' onclick='Kontrolle()'> Prüfen </Button>
-<br>
-<div id="falsch">
-</div>
-    <div id="test">
-</div>
 <br>
 <br>
 <br>
@@ -69,39 +62,7 @@ Bitte geben Sie die ID ein, welche Sie per Mail erhalten haben. </p>
 
 
 {% endblock %}
-{% block block %}
-<script>
-  IdEingabe = document.getElementById("IDPlayer").value;
-
-function Kontrolle() {
-    ID_Kontrolle = 0;
-    IdEingabe = document.getElementById("IDPlayer").value;
-   if (/\S/.test(IdEingabe)){
-                liveSend({'IdEingabe': 'ID', 'ID': IdEingabe})
-            }
-
-        if (ID_Kontrolle == 0) {
-            document.getElementById("falsch").innerHTML = "<strong> Die Id ist leider falsch </strong>";
-        }
-
-}
-    //URLlink = window.location.href;
-    //document.getElementById("test").innerHTML = URLlink;
-
-</script>
-{% endblock %}
 
 {% block script %}
-<script>
-    function liveRecv(data) {
-            if(data['type'] == 'IDKORREKT') {
-                document.getElementById("falsch").innerHTML= "<strong>Einen Moment bitte! Sie werden eingeloggt.</strong>";
-                document.getElementById("form").submit();
-            }
-        }
-
-
-</script>
 {% endblock %}
-
 

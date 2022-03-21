@@ -1,6 +1,8 @@
 import psycopg2
 from otree.api import *
 import random
+from datetime import *
+from datetime import time
 
 
 class C(BaseConstants):
@@ -24,6 +26,8 @@ class Player(BasePlayer):
     IdAlle = models.StringField()
     IDPlayer = models.StringField()
     ID_korrekt = models.IntegerField()
+    ParticipantID = models.StringField()
+    LoginCheck = models.IntegerField()
 
     # -----------------------
     # Page 1
@@ -74,105 +78,36 @@ class Player(BasePlayer):
     P2S7Zeit = models.FloatField()
     P2S8Zeit = models.FloatField()
     P2S9Zeit = models.FloatField()
+    UnixTimeP2S2 = models.FloatField()
+    UnixTimeP2S3 = models.FloatField()
+    UnixTimeP2S4 = models.FloatField()
+    UnixTimeP2S5 = models.FloatField()
+    UnixTimeP2S6 = models.FloatField()
+    UnixTimeP2S7 = models.FloatField()
+    UnixTimeP2S8 = models.FloatField()
+    UnixTimeP2S9 = models.FloatField()
 
     # ------------------------------------------
     # Info, ob diese Runde schon gespielt worden ist
     # ------------------------------------------
     Runde_2_erledigt = models.StringField()
 
-class Login(Page):
-    form_model = 'player'
-
-    @staticmethod
-    def live_method(player: Player, data):
-        if 'IdEingabe' in data:
-            player.IDPlayer = data['ID']
-
-        if player.IDPlayer in player.IdAlle:
-            player.ID_korrekt = 1
-            response = dict(type='IDKORREKT')
-            return {0: response}
-
-    def vars_for_template(player: Player):
-        player.ID_korrekt = 0
-        connection5 = psycopg2.connect(user='aipclfonwuiort',
-                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                                       port='5432',
-                                       database='dcoubsit8jsig0')
-
-        cursor5 = connection5.cursor()
-
-        create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
-                                    AppStart varchar(200),
-                                    Nutzer_ID varchar(12),
-                                    Alter_Nutzer integer,
-                                    Geschlecht varchar(10),
-                                    Mail varchar(50),
-                                    Seitenzahl integer,
-                                    ChrisGeschlecht varchar(10),
-                                    Frage_1_Staatsbuerger varchar(20),
-                                    Frage_2_Einfluss varchar(20),
-                                    Frage_3 varchar(20),
-                                    Frage_4 varchar(20),
-                                    Brutto_Einkommen float,
-                                    Netto_Einkommen float,
-                                    Frage_5_Einkommen_Zahl varchar(16),
-                                    Frage_6_Einkommen_Vergleich varchar(30),
-                                    Frage_7_Wohnen varchar(30),
-                                    Wohnungskosten float,
-                                    Frage_8_Verpflegung varchar(30),
-                                    Verpflegungskosten float,
-                                    Frage_9_Mobilitaet varchar(30),
-                                    Mobilitaetskosten float,
-                                    Rest_Einkommen float,
-                                    Partei varchar(50),
-                                    NuterInfo_Abgeschlossen varchar(4),
-                                    Runde_1_Erledigt varchar(4),
-                                    Runde_2_Erledigt varchar(4),
-                                    Runde_3_Erledigt varchar(4),
-                                    Runde_4_Erledigt varchar(4), 
-                                    Runde_5_Erledigt varchar(4),
-                                    Zeit_Phase1_Seite1 varchar (8),
-                                    Zeit_Phase1_Seite2 varchar (8),
-                                    Zeit_Phase1_Seite3 varchar (8),
-                                    Zeit_Phase1_Seite4 varchar (8),
-                                    Zeit_Phase1_Seite5 varchar (8),
-                                    Zeit_Phase1_Seite6 varchar (8),
-                                    Zeit_Phase1_Seite7 varchar (8),
-                                    Zeit_Phase1_Seite8 varchar (8),
-                                    Zeit_P2S2 varchar (10),
-                                    Zeit_P2S3 varchar (10),
-                                    Zeit_P2S4 varchar (10),
-                                    Zeit_P2S5 varchar(10),
-                                    Zeit_P2S6 varchar(10),
-                                    Zeit_P2S7 varchar(10),
-                                    Zeit_P2S8 varchar(10),
-                                    Zeit_P2S9 varchar(10),
-                                    Zeit_P3S1 varchar (10),
-                                    Zeit_P3S2 varchar (10),
-                                    Zeit_P3S3 varchar (10),
-                                    Zeit_P3S4 varchar (10),
-                                    Zeit_P3S5 varchar (10),
-                                    Zeit_P3S6 varchar (10),
-                                    Zeit_P3S7 varchar (10)
-                                      )'''
-
-        cursor5.execute(create_script)
-
-        id_script = 'SELECT Nutzer_ID from Novaland'
-        cursor5.execute(id_script)
-        id_value = cursor5.fetchall()
-        player.IdAlle = str(id_value)
-        cursor5.close()
-        connection5.close()
-
-        player.IDPlayer = ""
+class Waiting_Site(Page):
+    def is_displayed(player: Player):
+        Zeit = 12 * 60 * 60
+        ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (datetime.now().time().minute * 60) + datetime.now().time().second
+        differenz = Zeit - ProgrammTagZeit
+        if differenz > 0:
+            return True
+        else:
+            return False
 
 
 class Phase_2_page_1(Page):
     @staticmethod
     def vars_for_template(player: Player):
+        player.IDPlayer = player.participant.code
+
         niedrig = range(1, 250, 3)
         mittel = range(2, 250, 3)
         hoch = range(3, 250, 3)
@@ -396,5 +331,5 @@ class Phase_2_Page_10(Page):
         connection3.close()
 
 
-page_sequence = [Login, Phase_2_page_1, Phase_2_Page_2, Phase_2_page_3, Phase_2_Page_4, Phase_2_Page_5, Phase_2_Page_6,
+page_sequence = [Waiting_Site, Phase_2_page_1, Phase_2_Page_2, Phase_2_page_3, Phase_2_Page_4, Phase_2_Page_5, Phase_2_Page_6,
                  Phase_2_Page_7, Phase_2_Page_8, Phase_2_Page_9, Phase_2_Page_10]
