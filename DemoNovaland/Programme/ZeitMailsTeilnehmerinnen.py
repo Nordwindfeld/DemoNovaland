@@ -6,6 +6,19 @@ import ssl
 from email import *
 
 
+####################################################################################################
+#                      Programm für das automatische verschicken von E-Mails:
+#
+# # Ich habe in dem Programm datetime Variabeln drin, die bestimmen ab wann, welche Mail abgeschickt
+# # werden kann. Wenn der Code abgespielt wird, checkt er ganz unten, welche Funktion nun abgespielt
+# # werden soll. Schickt, diese aber jedes mal ab, wenn der Code läuft, wenn man also möchte, dass
+# # alle zwei Stunden Mail abgeschickt werden sollen, muss das manuell gemacht werden oder eine
+# # get-Funktion auf dem Server schreiben, welche das Programm nur alle zwei Stunden checked
+####################################################################################################
+
+# Hier werden die Funktionen für die einzelne Uhrzeit geschrieben
+#########################################################################
+
 ###################################################
 #                       12 Uhr Mail:
 ###################################################
@@ -16,25 +29,24 @@ def zwoelfUhrMail():
 
     try:
         connection = psycopg2.connect(user='aipclfonwuiort',
-                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                                       port='5432',
-                                       database='dcoubsit8jsig0')
+                                      password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                      host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                      port='5432',
+                                      database='dcoubsit8jsig0')
         cursor = connection.cursor()
 
-        IDBekommen = 'SELECT nutzer_id FROM Novaland'
+        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
         cursor.execute(IDBekommen)
         ID = cursor.fetchall()
         for ID in ID:
             MailAdress = str(ID).replace("(", "").replace(")", "").replace(",", "")
             USERID = (str(MailAdress).replace("[", "").replace("]", "").replace("'", ''))
-            print(USERID)
-            ScriptMail = '''SELECT Mail FROM Novaland WHERE nutzer_id = %s'''
+            print("Die User ID lautet: " + USERID)
+            ScriptMail = '''SELECT DISTINCT Mail FROM Novaland WHERE nutzer_id = %s'''
             MailID = [USERID]
             cursor.execute(ScriptMail, MailID)
             Mail = cursor.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
-            print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
             From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
@@ -45,7 +57,7 @@ def zwoelfUhrMail():
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
                         "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + Url + " " \
-                        "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
+                                                                                                                     "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
                         "\n\nWir bedanken uns bei ihnen recht herzlich!\n\n Universität Duisburg"
             msg = message.Message()
             msg.set_charset("utf-8")
@@ -61,10 +73,18 @@ def zwoelfUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                cursor = connection.cursor()
-                print("Email gesendet")
+                ChangeValue = '''UPDATE Novaland SET ZwoelfUhrMail = %s, SMSZwoelfUhrMailZeit = %s, SMSZwoelfUhrMailUnixTime = %s WHERE Nutzer_ID = %s'''
+                Values = ["Nein", datetime.now(), time.time(), USERID]
+                cursor.execute(ChangeValue, Values)
+                connection.commit()
+                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
             except:
-                print('Die Mail ist falsch')
+                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
+                server.quit()
+                ChangeValue = '''UPDATE Novaland SET ZwoelfUhrMail = %s WHERE Nutzer_ID = %s'''
+                Values = ["Nein", USERID]
+                cursor.execute(ChangeValue, Values)
+                connection.commit()
                 pass
     except Exception as error:
         print(error)
@@ -74,46 +94,46 @@ def zwoelfUhrMail():
         if connection is not None:
             connection.close()
 
+
 ###################################################
-#                       15 Uhr Mail:
+#                       14 Uhr Mail:
 ###################################################
 
 def vierzehnUhrMail():
-    connection = None
-    cursor = None
+    connection2 = None
+    cursor2 = None
 
     try:
-        connection = psycopg2.connect(user='aipclfonwuiort',
+        connection2 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                        host='ec2-3-216-113-109.compute-1.amazonaws.com',
                                        port='5432',
                                        database='dcoubsit8jsig0')
-        cursor = connection.cursor()
+        cursor2 = connection2.cursor()
 
-        IDBekommen = 'SELECT nutzer_id FROM Novaland'
-        cursor.execute(IDBekommen)
-        ID = cursor.fetchall()
+        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
+        cursor2.execute(IDBekommen)
+        ID = cursor2.fetchall()
         for ID in ID:
             MailAdress = str(ID).replace("(", "").replace(")", "").replace(",", "")
             USERID = (str(MailAdress).replace("[", "").replace("]", "").replace("'", ''))
-            print(USERID)
-            ScriptMail = '''SELECT Mail FROM Novaland WHERE nutzer_id = %s'''
+            print("Die User ID lautet: " + USERID)
+            ScriptMail = '''SELECT DISTINCT Mail FROM Novaland WHERE nutzer_id = %s'''
             MailID = [USERID]
-            cursor.execute(ScriptMail, MailID)
-            Mail = cursor.fetchone()
+            cursor2.execute(ScriptMail, MailID)
+            Mail = cursor2.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
-            print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
             From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/demo"
+            Url = "https://pilotnovaland2022.herokuapp.com/join/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
                         "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + Url + " " \
-                        "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
+                                                                                                                     "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
                         "\n\nWir bedanken uns bei ihnen recht herzlich!\n\n Universität Duisburg"
             msg = message.Message()
             msg.set_charset("utf-8")
@@ -129,18 +149,26 @@ def vierzehnUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                cursor = connection.cursor()
-                print("Email gesendet")
+                ChangeValue = '''UPDATE Novaland SET VierzehnUhrMail = %s, SMSVierzehnUhrMailZeit = %s, SMSVierzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
+                Values = ["Ja", datetime.now(), time.time(), USERID]
+                cursor2.execute(ChangeValue, Values)
+                connection2.commit()
+                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
             except:
-                print('E-Mail konnte nicht gesendet werden')
+                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
+                server.quit()
+                ChangeValue = '''UPDATE Novaland SET VierzehnUhrMail = %s WHERE Nutzer_ID = %s'''
+                Values = ["Nein", USERID]
+                cursor2.execute(ChangeValue, Values)
+                connection2.commit()
                 pass
     except Exception as error:
         print(error)
     finally:
-        if cursor is not None:
-            cursor.close()
-        if connection is not None:
-            connection.close()
+        if cursor2 is not None:
+            cursor2.close()
+        if connection2 is not None:
+            connection2.close()
 
 
 ###################################################
@@ -148,30 +176,29 @@ def vierzehnUhrMail():
 ###################################################
 
 def SechzehnUhrMail():
-    connection = None
-    cursor = None
+    connection3 = None
+    cursor3 = None
 
     try:
-        connection = psycopg2.connect(user='aipclfonwuiort',
+        connection3 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                        host='ec2-3-216-113-109.compute-1.amazonaws.com',
                                        port='5432',
                                        database='dcoubsit8jsig0')
-        cursor = connection.cursor()
+        cursor3 = connection3.cursor()
 
-        IDBekommen = 'SELECT nutzer_id FROM Novaland'
-        cursor.execute(IDBekommen)
-        ID = cursor.fetchall()
+        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
+        cursor3.execute(IDBekommen)
+        ID = cursor3.fetchall()
         for ID in ID:
             MailAdress = str(ID).replace("(", "").replace(")", "").replace(",", "")
             USERID = (str(MailAdress).replace("[", "").replace("]", "").replace("'", ''))
-            print(USERID)
-            ScriptMail = '''SELECT Mail FROM Novaland WHERE nutzer_id = %s'''
+            print("Die User ID lautet: " + USERID)
+            ScriptMail = '''SELECT DISTINCT Mail FROM Novaland WHERE nutzer_id = %s'''
             MailID = [USERID]
-            cursor.execute(ScriptMail, MailID)
-            Mail = cursor.fetchone()
+            cursor3.execute(ScriptMail, MailID)
+            Mail = cursor3.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
-            print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
             From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
@@ -182,7 +209,7 @@ def SechzehnUhrMail():
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
                         "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + Url + " " \
-                        "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
+                                                                                                                     "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
                         "\n\nWir bedanken uns bei ihnen recht herzlich!\n\n Universität Duisburg"
             msg = message.Message()
             msg.set_charset("utf-8")
@@ -198,49 +225,56 @@ def SechzehnUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                cursor = connection.cursor()
-                print("Email gesendet")
+                ChangeValue = '''UPDATE Novaland SET SechzehnUhrMail = %s, SMSSechzehnUhrMailZeit = %s, SMSSechzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
+                Values = ["Ja", datetime.now(), time.time(), USERID]
+                cursor3.execute(ChangeValue, Values)
+                connection3.commit()
+                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
             except:
-                print('Die Mail ist falsch')
+                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
+                ChangeValue = '''UPDATE Novaland SET SechzehnUhrMail = %s WHERE Nutzer_ID = %s'''
+                Values = ["Nein", USERID]
+                cursor3.execute(ChangeValue, Values)
+                connection3.commit()
+                server.quit()
                 pass
     except Exception as error:
         print(error)
     finally:
-        if cursor is not None:
-            cursor.close()
-        if connection is not None:
-            connection.close()
+        if cursor3 is not None:
+            cursor3.close()
+        if connection3 is not None:
+            connection3.close()
 
 
 ###################################################
-#                       15 Uhr Mail:
+#                       18 Uhr Mail:
 ###################################################
 
 def achzehnUhrMail():
-    connection = None
-    cursor = None
+    connection4 = None
+    cursor4 = None
 
     try:
-        connection = psycopg2.connect(user='aipclfonwuiort',
+        connection4 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                        host='ec2-3-216-113-109.compute-1.amazonaws.com',
                                        port='5432',
                                        database='dcoubsit8jsig0')
-        cursor = connection.cursor()
+        cursor4 = connection4.cursor()
 
-        IDBekommen = 'SELECT nutzer_id FROM Novaland'
-        cursor.execute(IDBekommen)
-        ID = cursor.fetchall()
+        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
+        cursor4.execute(IDBekommen)
+        ID = cursor4.fetchall()
         for ID in ID:
             MailAdress = str(ID).replace("(", "").replace(")", "").replace(",", "")
             USERID = (str(MailAdress).replace("[", "").replace("]", "").replace("'", ''))
-            print(USERID)
-            ScriptMail = '''SELECT Mail FROM Novaland WHERE nutzer_id = %s'''
+            print("Die User ID lautet: " + USERID)
+            ScriptMail = '''SELECT DISTINCT Mail FROM Novaland WHERE nutzer_id = %s'''
             MailID = [USERID]
-            cursor.execute(ScriptMail, MailID)
-            Mail = cursor.fetchone()
+            cursor4.execute(ScriptMail, MailID)
+            Mail = cursor4.fetchone()
             To_Mail = str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
-            print(str(Mail).replace("(", "").replace(")", "").replace(",", "").replace("'", ''))
             From_mail = "hq0679"
             Passwort = "0?$W6XrieU!J+KO=,,zv"
             ssl_context = ssl.create_default_context()
@@ -251,7 +285,7 @@ def achzehnUhrMail():
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
                         "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + Url + " " \
-                        "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
+                                                                                                                     "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
                         "\n\nWir bedanken uns bei ihnen recht herzlich!\n\n Universität Duisburg"
             msg = message.Message()
             msg.set_charset("utf-8")
@@ -267,19 +301,27 @@ def achzehnUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                cursor = connection.cursor()
-                print("Email gesendet")
+                ChangeValue = '''UPDATE Novaland SET AchtzehnUhrMail = %s, AchtzehnUhrMailZeit = %s, AchtzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
+                Values = ["Ja", datetime.now(), time.time(), USERID]
+                cursor4.execute(ChangeValue, Values)
+                connection4.commit()
+                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
             except:
-                print('Die Mail ist falsch')
+                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
+                ChangeValue = '''UPDATE Novaland SET AchtzehnUhrMail = %s WHERE Nutzer_ID = %s'''
+                Values = ["Nein", USERID]
+                cursor4.execute(ChangeValue, Values)
+                connection4.commit()
+                server.quit()
+
                 pass
     except Exception as error:
         print(error)
     finally:
-        if cursor is not None:
-            cursor.close()
-        if connection is not None:
-            connection.close()
-
+        if cursor4 is not None:
+            cursor4.close()
+        if connection4 is not None:
+            connection4.close()
 
 
 ############################################----------------------------####################################
@@ -296,22 +338,23 @@ def achzehnUhrMail():
 # Programm Uhrzeit
 Datum_Programm = date.today()
 Zeit_Programm = datetime.now().time()
-ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (datetime.now().time().minute * 60) + datetime.now().time().second
+ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
+        datetime.now().time().minute * 60) + datetime.now().time().second
 print(ProgrammTagZeit)
 
-#Studie Uhrzeit
-Datum_Studie = date(2022, 3, 31) ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
+# Studie Uhrzeit
+Datum_Studie = date(2022, 3, 21)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
 zwoelfUhrZeit = time(12, 0, 0)
-ZeitZwoelf = 12 * 60 * 60
+ZeitZwoelf = 12 * 30 * 60
 print(ZeitZwoelf)
 vierzehnUhrZeit = time(14, 0, 0)
-ZeitVierzehnUhr = 14 * 60 * 60
+ZeitVierzehnUhr = 14 * 30 * 60
 print(ZeitVierzehnUhr)
 SechZehnUhrZeit = time(16, 0, 0)
-ZeitSechzehnUhr = 16 * 60 * 60
+ZeitSechzehnUhr = 16 * 30 * 60
 print(ZeitSechzehnUhr)
 achtzehnUhrzeit = time(18, 0, 0)
-ZeitAchtZehnUhr = 18 * 3600
+ZeitAchtZehnUhr = 18 * 30 * 60
 print(ZeitAchtZehnUhr)
 
 print(zwoelfUhrZeit)
@@ -337,12 +380,4 @@ if str(Datum_Programm - Datum_Studie) == "0:00:00":
         achzehnUhrMail()
         print(differenzAchtzehn)
 
-
-
-
-
-
-
-
-# 14 Uhr mail
 

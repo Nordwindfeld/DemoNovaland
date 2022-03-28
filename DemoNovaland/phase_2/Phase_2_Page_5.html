@@ -60,9 +60,9 @@
 Ihnen stehen verschiedene Möglichkeiten der Verpflegung zur Auswahl:
 <br>
  <div id="Korrektur">
-<input type="radio" name="Frage_4_Verpflegung" onclick="Restaurant()" class="radio" value="Restaurants"> Sie gehen regelmäßig in Restaurants essen (700 Novas) </input>
+<input type="radio" name="Frage_4_Verpflegung" onclick="Restaurant()" class="radio" value="Restaurants"> Sie gehen regelmäßig in Restaurants essen (400 Novas) </input>
 <br>
-<input type="radio" name="Frage_4_Verpflegung" onclick="EssenBestellen()" class="radio" value="Essen bestellen"> Sie bestellen sich häufig etwas zu essen nach Hause (500 Novas) </input>
+<input type="radio" name="Frage_4_Verpflegung" onclick="EssenBestellen()" class="radio" value="Essen bestellen"> Sie bestellen sich häufig etwas zu essen nach Hause (300 Novas) </input>
 <br>
 <input type="radio" name="Frage_4_Verpflegung" onclick="SelberKochen()" class="radio" value="Selber kochen"> Sie kaufen günstig ein und kochen selbst (200 Novas) </input>
 <br>
@@ -91,8 +91,8 @@ let starttime;
 }
 
     function Restaurant(){
-        liveSend({'Verpflegung': 'Verpflegung', 'VerpflegungskostenKosten': 700, 'VerpflegungsArt': "Restaurants"});
-        Verpflegungskosten = 700;
+        liveSend({'Verpflegung': 'Verpflegung', 'VerpflegungskostenKosten': 400, 'VerpflegungsArt': "Restaurants"});
+        Verpflegungskosten = 400;
         Konto = NettoEinkommen - Verpflegungskosten;
         if (Konto > 200){
             document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
@@ -104,8 +104,8 @@ let starttime;
         }
 
     function EssenBestellen() {
-        liveSend({"Verpflegung": "Verpflegung", 'VerpflegungskostenKosten': 500, 'VerpflegungsArt': "Essen bestellen"});
-        Verpflegungskosten = 500;
+        liveSend({"Verpflegung": "Verpflegung", 'VerpflegungskostenKosten': 300, 'VerpflegungsArt': "Essen bestellen"});
+        Verpflegungskosten = 300;
         Konto = NettoEinkommen - Verpflegungskosten;
         if (Konto > 200) {
             document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";

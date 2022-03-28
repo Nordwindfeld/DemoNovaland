@@ -53,18 +53,19 @@
 
 
 {% block content %}
+    <p class="p">
 Herzlich willkommen zurück in Novaland. Nun geht es weiter um Ihre persönliche Situation in Novaland.
 <br>
     <br>
 Sie haben ein monatliches Brutto-Einkommen vor Abgaben von <strong> {% Brutto_Einkommen %} </strong> Novas.
 Damit ist ihr Einkommen <strong> {% if player.Brutto_Einkommen == 5000 %} überdurchschnittlich
-{% elif player.Brutto_Einkommen == 3500 %} durchschnittlich {% elif player.Brutto_Einkommen == 1250 %} unterdurchschnittlich {% endif %}</strong>
+{% elif player.Brutto_Einkommen == 3500 %} durchschnittlich {% elif player.Brutto_Einkommen == 2000 %} unterdurchschnittlich {% endif %}</strong>
 hoch.
 <br>
 Auf dieses Einkommen müssen Sie Steuern und Sozialabgaben in Höhe von 30% zahlen, sodass Ihnen danach ein monatliches Einkommen von <strong> {% player.Netto_Einkommen %} </strong> Novas bleibt.
-Etwa <strong>{% if player.Netto_Einkommen == 3500  %} 90 %{% elif player.Netto_Einkommen == 2450  %} 50 %{% elif player.Netto_Einkommen == 875  %} 20% {% endif %} </strong>
+Etwa <strong>{% if player.Netto_Einkommen == 3500  %} 90 %{% elif player.Netto_Einkommen == 2000  %} 50 %{% elif player.Netto_Einkommen == 1400  %} 20% {% endif %} </strong>
 der Bevölkerung von Novaland hat ein geringeres Nettoeinkommen als Sie. Von Ihrem Einkommen müssen Sie Ihre monatlichen Ausgaben bezahlen und können gegebenenfalls etwas sparen. Derzeit haben Sie noch keine Ersparnisse.
-<br>
+    </p>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>

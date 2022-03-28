@@ -51,43 +51,34 @@
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Verständnisfrage 4 </h1>
+    <h1 class="h1"> Endseite Phase 1 </h1>
 {% endblock %}
 
 
 {% block content %}
-       <body onload="time()"></body>
+    <p class="p">
+Die zweite Phase in Novaland startet um 12h. Sie erhalten um 11.30h eine Einladung via Email/SMS. Bis gleich!
+Wir würden Sie trotzdem drum bitten, falls es komplikationen mit ihrer E-Mail/SMS geben sollte, diese Adresse zu kopieren:
+   <a href="{{ player.URL }}">{% player.URL %}</a>
+
+    </p>
 <br>
 {% formfields %}
-
-
 <br>
 <br>
-<div id="Moment">
 <button class='button' type='button' onclick='Next()'> Weiter </button>
-</div>
 <br>
 <br>
 <br>
 <h2 class="h2"> </h2>
 
-
 {% endblock %}
 
 {% block script %}
+<!-- Next Button auf der Seite-->
 <script>
-    let starttime;
-
-    function time(){
-   starttime = new Date();
-}
-
     function Next(){
-    let TimeFirstRoundPhase8 = (new Date() - starttime)/1000;
-        liveSend({'ZeitPhaseEinsAchteSeite': 'ZeitPhaseEinsAchteSeite', 'Phase1Seite8Zeit': TimeFirstRoundPhase8});
-        liveSend({"RundeEinsErledigt": "Ja"})
         document.getElementById("form").submit();
-        document.getElementById("Moment").innerHTML = "Einen Moment bitte";
     }
 </script>
 {% endblock %}

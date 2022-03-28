@@ -57,17 +57,17 @@
 
 {% block content %}
     <body onload="time()"></body>
+    <p class="p">
 Wie hoch liegt Ihr monatliches Netto-Einkommen in Novaland?
- <br>
+    </p>
  <div id="Korrektur">
-<input type="radio" name="Frage_1" onclick="niedrig()" class="radio"> 875 Novas </input>
+<input type="radio" name="Frage_1" onclick="niedrig()" class="radio"> 1400 Novas </input>
 <br>
-<input type="radio" name="Frage_1" onclick="mittel()" class="radio"> 2450 Novas </input>
+<input type="radio" name="Frage_1" onclick="mittel()" class="radio"> 2000 Novas </input>
 <br>
 <input type="radio" name="Frage_1" onclick="hoch()" class="radio"> 3500 Novas </input>
     </div>
 
-<br>
 <br>
 <br>
 <h2 class="h2"> </h2>
@@ -84,11 +84,11 @@ let starttime;
    starttime = new Date();
 }
 function niedrig(){
-    if(NettoEinkommen != 875){
+    if(NettoEinkommen != 1400){
             liveSend({"P2S2FrageEinkommen":"P2S2FrageEinkommen", "P2S2AntwortEinkommen": "Falsch"});
-            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Ihr Netto Einkommen beträgt: <br>" + NettoEinkommen + "Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Ihr Netto Einkommen beträgt: <br>" + NettoEinkommen + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
                  }
-    else if (NettoEinkommen == 875){
+    else if (NettoEinkommen == 1400){
         liveSend({"P2S2FrageEinkommen":"P2S2FrageEinkommen", "P2S2AntwortEinkommen": "Richtig"});
         Next();
     }
@@ -96,11 +96,11 @@ function niedrig(){
 
 
     function mittel(){
-        if(NettoEinkommen != 2450){
+        if(NettoEinkommen != 2000){
              liveSend({"P2S2FrageEinkommen":"P2S2FrageEinkommen", "P2S2AntwortEinkommen": "Falsch"});
-            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Ihr Netto Einkommen beträgt: <br>" + NettoEinkommen + "Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Ihr Netto Einkommen beträgt: <br>" + NettoEinkommen + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
                  }
-    else if (NettoEinkommen == 2450){
+    else if (NettoEinkommen == 2000){
         liveSend({"P2S2FrageEinkommen":"P2S2FrageEinkommen", "P2S2AntwortEinkommen": "Richtig"});
         Next();
             }
@@ -109,7 +109,7 @@ function niedrig(){
      function hoch(){
         if(NettoEinkommen != 3500){
             liveSend({"P2S2FrageEinkommen":"P2S2FrageEinkommen", "P2S2AntwortEinkommen": "Falsch"});
-            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Ihr Netto Einkommen beträgt: <br>" + NettoEinkommen + "Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Ihr Netto Einkommen beträgt: <br>" + NettoEinkommen + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
                  }
     else if (NettoEinkommen == 3500){
         liveSend({"P2S2FrageEinkommen":"P2S2FrageEinkommen", "P2S2AntwortEinkommen": "Richtig"});

@@ -42,68 +42,41 @@
         font-size: larger;
     }
 
-    .column1{
-        float: left;
-        width: 70%;
-        padding: 10px;
-        height: 200px;
-        padding-bottom: 100px;
-    }
-   .column2{
-        float: right;
-        width: 30%;
-        padding: 10px;
-        height: 200px;
-    }
-
-
     </style>
 {% endblock %}
+
+
+
 
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Parteien </h1>
+    <h1 class="h1"> Phase III: Election </h1>
 {% endblock %}
 
 
 {% block content %}
     <body onload="time()"></body>
-<p class="p"> Die Parteien befinden sich im Wahlkampf und haben die folgenden Wahlprogramme vorgelegt:</p>
+<p class="p">
+Die Parlamentswahl steht an, bei der Sie als {% if player.Geschlecht == "Weiblich" %}Bürgerin {% else %}Bürger {% endif %}  wählen können.
 <br>
 
-<h2> Liberale Partei Novaland </h2>
-<hr>
-<div class="row">
-    <div class="column1">
-        <p class="p"> Die LPN (Liberale Partei Novaland) will Steuern und Abgaben senken, auch wenn das weniger sozialstaatliche Leistungen bedeutet.
-        Es wird erwartet, dass bei einer Regierungsbeteiligung der LPN die Einkommen der Menschen mit hohem Einkommen um etwa ... steigen und die Einkommen der Menschen mit niedrigem Einkommen um etwa ... sinken werden.
-        Die LPN will die Zuzugsmöglichkeiten für Ausländer erleichtern.
-        <br>
+Wie Sie bereits wissen, ist Novaland eine Demokratie mit einem parlamentarischen System. Der Chef oder die Chefin der Regierung wird durch das Parlament gewählt und braucht dort eine Mehrheit von mehr als 50% der Stimmen. Derzeit regiert eine Regierung aus der LPN (Liberale Partei Novaland) und der KPN (Konservative Partei Novaland), unter Führung der LPN. In der Opposition befinden sich die SPN (Soziale Partei Novaland) und die PPN (Partei Progressives Novaland).
+<br>
+Die zwei Regierungsparteien LPN und KPN haben beschlossen, dass sie nach der Parlamentswahl nur miteinander koalieren werden und eine Koalition mit einer der derzeitigen Oppositionsparteien ausschließen.
+<br>
+Die zwei Oppositionsparteien SPN und PPN haben ebenfalls beschlossen, dass sie nach der Parlamentswahl nur miteinander koalieren werden und eine Koalition mit einer der derzeitigen Regierungsparteien ausschließen.
+<br>
+</p>
+
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
-    </div>
+<br>
+<br>
+<br>
+<h2 class="h2"> </h2>
 
 
-    <div class="column2">
-        <img src="{% static 'phase_3/LPN.png' %}" width="80%">
-    </div>
-</div>
-<br>
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2 class="h2"></h2>
 {% endblock %}
 
 {% block script %}

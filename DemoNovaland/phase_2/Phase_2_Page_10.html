@@ -56,12 +56,15 @@
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1">  Runde 2 beendet </h1>
+    <h1 class="h1">  Zufriedenheitsfrage </h1>
 {% endblock %}
 
 
 {% block content %}
-Sie werden um 14h eine erneute Novaland Einladung erhalten. Bis gleich!
+<body onload="time()"></body>
+   <p class="p"> Wie zufrieden sind Sie mit Ihrer persönlichen Situation in Novaland? </p>
+    <p class="p"> {% formfields %} </p>
+
 <br>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
@@ -75,7 +78,12 @@ Sie werden um 14h eine erneute Novaland Einladung erhalten. Bis gleich!
 
 {% block script %}
 <script>
+    function time(){
+   starttime = new Date();
+}
     function Next(){
+        let ZeitP2S10 = (new Date() - starttime)/1000;
+        liveSend({"ZeitP2S10": "ZeitP2S10",'ZeitP2S10': ZeitP2S10});
         document.getElementById("form").submit();
     }
 </script>

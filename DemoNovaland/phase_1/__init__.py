@@ -5,6 +5,7 @@ import ssl
 from email import *
 from datetime import *
 from email_validator import validate_email, EmailNotValidError
+import time
 
 
 def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erledigt, Telefonnummer):
@@ -18,7 +19,7 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
 
     try:
         create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
-                                AppStart varchar(200),
+                                        AppStart varchar(200),
                                         Nutzer_ID varchar(12),
                                         Alter_Nutzer integer,
                                         Geschlecht varchar(10),
@@ -28,8 +29,7 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         ChrisGeschlecht varchar(10),
                                         Frage_1_Staatsbuerger varchar(20),
                                         Frage_2_Einfluss varchar(20),
-                                        Frage_3 varchar(20),
-                                        Frage_4 varchar(20),
+                                        Frage_3_Sozialleistung varchar(20),
                                         Brutto_Einkommen float,
                                         Netto_Einkommen float,
                                         Frage_5_Einkommen_Zahl varchar(16),
@@ -40,8 +40,17 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Verpflegungskosten float,
                                         Frage_9_Mobilitaet varchar(30),
                                         Mobilitaetskosten float,
+                                        Frage_10_Zufriedenheit varchar(30),
                                         Rest_Einkommen float,
+                                        KontoPhase3Anfang float, 
                                         Partei varchar(50),
+                                        LPNundKPNbund varchar (10),
+                                        SPNundPPNbund varchar (10),
+                                        KoalitionsBund varchar (100),
+                                        Zufriedenheitsfrage2 varchar (10),
+                                        Zufriedenheitsfrage3 varchar (10),
+                                        Spende float,
+                                        KontoPhase4Anfang float, 
                                         NuterInfo_Abgeschlossen varchar(4),
                                         Runde_1_Erledigt varchar(4),
                                         Runde_2_Erledigt varchar(4),
@@ -62,8 +71,6 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Zeit_P1S6 varchar (8),
                                         UnixTime_P1S7 float,
                                         Zeit_P1S7 varchar (8),
-                                        UnixTime_P1S8 float,
-                                        Zeit_P1S8 varchar (8),
                                         UnixTime_P2S2 float,
                                         Zeit_P2S2 varchar (10),
                                         UnixTime_P2S3 float,
@@ -80,6 +87,8 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Zeit_P2S8 varchar(10),
                                         UnixTime_P2S9 float,
                                         Zeit_P2S9 varchar(10),
+                                        UnixTime_P2S10 float,
+                                        Zeit_P2S10 varchar(10),
                                         UnixTime_P3S1 float,
                                         Zeit_P3S1 varchar (10),
                                         UnixTime_P3S2 float,
@@ -93,7 +102,71 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         UnixTime_P3S6 float,
                                         Zeit_P3S6 varchar (10),
                                         UnixTime_P3S7 float,
-                                        Zeit_P3S7 varchar (10)
+                                        Zeit_P3S7 varchar (10),
+                                        UnixTime_P3S8 float,
+                                        Zeit_P3S8 varchar (10),
+                                        UnixTime_P4S1 float,
+                                        Zeit_P4S1 varchar(10),
+                                        UnixTime_P4S2 float,
+                                        Zeit_P4S2 varchar(10),
+                                        UnixTime_P4S3 float,
+                                        Zeit_P4S3 varchar(10),
+                                        UnixTime_P4S4 float,
+                                        Zeit_P4S4 varchar(10),
+                                        UnixTime_P4S5 float,
+                                        Zeit_P4S5 varchar(10),
+                                        UnixTime_P4S6 float,
+                                        Zeit_P4S6 varchar(10),
+                                        UnixTime_P4S7 float,
+                                        Zeit_P4S7 varchar(10),
+                                        UnixTime_P4S8 float,
+                                        Zeit_P4S8 varchar(10),
+                                        UnixTime_P4S9 float,
+                                        Zeit_P4S9 varchar(10),
+                                        UnixTime_P5S1 float,
+                                        Zeit_P5S1 varchar(10),
+                                        UnixTime_P5S2 float,
+                                        Zeit_P5S2 varchar(10),
+                                        UnixTime_P5S3 float,
+                                        Zeit_P5S3 varchar(10),
+                                        UnixTime_P5S4 float,
+                                        Zeit_P5S4 varchar(10),
+                                        UnixTime_P5S5 float,
+                                        Zeit_P5S5 varchar(10),
+                                        UnixTime_P5S6 float,
+                                        Zeit_P5S6 varchar(10),
+                                        UnixTime_P5S7 float,
+                                        Zeit_P5S7 varchar(10),
+                                        UnixTime_P5S8 float,
+                                        Zeit_P5S8 varchar(10),
+                                        UnixTime_P5S9 float,
+                                        Zeit_P5S9 varchar(10),
+                                        UnixTime_P5S10 float,
+                                        Zeit_P5S10 varchar(10),
+                                        ZwoelfUhrMail varchar (4),
+                                        ZwoelUhrMailZeit varchar (200),
+                                        ZwoelfUhrMailUnixTime float,
+                                        VierzehnUhrMail varchar(4),
+                                        VierzehnUhrMailZeit varchar(200),
+                                        VierzehnUhrMailUnixTime float, 
+                                        SechzehnUhrMail varchar(4),
+                                        SechzehnUhrMailZeit varchar(200),
+                                        SechzehnUhrMailUnixTime float, 
+                                        AchtzehnUhrMail varchar(4),
+                                        AchtzehnUhrMailZeit varchar(200),
+                                        AchtzehnUhrMailUnixTime float, 
+                                        SMSZwoelfUhr varchar (4),
+                                        SMSZwoelfUhrMailZeit varchar(200),
+                                        SMSZwoelfUhrMailUnixTime float, 
+                                        SMSVierzehnUhr varchar (4),
+                                        SMSVierzehnUhrMailZeit varchar(200),
+                                        SMSVierzehnUhrMailUnixTime float, 
+                                        SMSSechzehnUhr varchar (4),
+                                        SMSSechzehnUhrMailZeit varchar(200),
+                                        SMSSechzehnUhrMailUnixTime float, 
+                                        SMSAchtzehnUhr varchar (4),
+                                        SMSAchtzehnUhrMailZeit varchar(200),
+                                        SMSAchtzehnUhrMailUnixTime float 
                                 )'''
 
         cursor.execute(create_script)
@@ -126,7 +199,7 @@ connection3 = psycopg2.connect(user='aipclfonwuiort',
 
 cursor3 = connection3.cursor()
 create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
-                                AppStart varchar(200),
+                                       AppStart varchar(200),
                                         Nutzer_ID varchar(12),
                                         Alter_Nutzer integer,
                                         Geschlecht varchar(10),
@@ -136,8 +209,7 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         ChrisGeschlecht varchar(10),
                                         Frage_1_Staatsbuerger varchar(20),
                                         Frage_2_Einfluss varchar(20),
-                                        Frage_3 varchar(20),
-                                        Frage_4 varchar(20),
+                                        Frage_3_Sozialleistung varchar(20),
                                         Brutto_Einkommen float,
                                         Netto_Einkommen float,
                                         Frage_5_Einkommen_Zahl varchar(16),
@@ -148,8 +220,17 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Verpflegungskosten float,
                                         Frage_9_Mobilitaet varchar(30),
                                         Mobilitaetskosten float,
+                                        Frage_10_Zufriedenheit varchar(30),
                                         Rest_Einkommen float,
+                                        KontoPhase3Anfang float, 
                                         Partei varchar(50),
+                                        LPNundKPNbund varchar (10),
+                                        SPNundPPNbund varchar (10),
+                                        KoalitionsBund varchar (100),
+                                        Zufriedenheitsfrage2 varchar (10),
+                                        Zufriedenheitsfrage3 varchar (10),
+                                        Spende float,
+                                        KontoPhase4Anfang float, 
                                         NuterInfo_Abgeschlossen varchar(4),
                                         Runde_1_Erledigt varchar(4),
                                         Runde_2_Erledigt varchar(4),
@@ -170,8 +251,6 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Zeit_P1S6 varchar (8),
                                         UnixTime_P1S7 float,
                                         Zeit_P1S7 varchar (8),
-                                        UnixTime_P1S8 float,
-                                        Zeit_P1S8 varchar (8),
                                         UnixTime_P2S2 float,
                                         Zeit_P2S2 varchar (10),
                                         UnixTime_P2S3 float,
@@ -188,6 +267,8 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Zeit_P2S8 varchar(10),
                                         UnixTime_P2S9 float,
                                         Zeit_P2S9 varchar(10),
+                                        UnixTime_P2S10 float,
+                                        Zeit_P2S10 varchar(10),
                                         UnixTime_P3S1 float,
                                         Zeit_P3S1 varchar (10),
                                         UnixTime_P3S2 float,
@@ -201,7 +282,71 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         UnixTime_P3S6 float,
                                         Zeit_P3S6 varchar (10),
                                         UnixTime_P3S7 float,
-                                        Zeit_P3S7 varchar (10)
+                                        Zeit_P3S7 varchar (10),
+                                        UnixTime_P3S8 float,
+                                        Zeit_P3S8 varchar (10),
+                                        UnixTime_P4S1 float,
+                                        Zeit_P4S1 varchar(10),
+                                        UnixTime_P4S2 float,
+                                        Zeit_P4S2 varchar(10),
+                                        UnixTime_P4S3 float,
+                                        Zeit_P4S3 varchar(10),
+                                        UnixTime_P4S4 float,
+                                        Zeit_P4S4 varchar(10),
+                                        UnixTime_P4S5 float,
+                                        Zeit_P4S5 varchar(10),
+                                        UnixTime_P4S6 float,
+                                        Zeit_P4S6 varchar(10),
+                                        UnixTime_P4S7 float,
+                                        Zeit_P4S7 varchar(10),
+                                        UnixTime_P4S8 float,
+                                        Zeit_P4S8 varchar(10),
+                                        UnixTime_P4S9 float,
+                                        Zeit_P4S9 varchar(10),
+                                        UnixTime_P5S1 float,
+                                        Zeit_P5S1 varchar(10),
+                                        UnixTime_P5S2 float,
+                                        Zeit_P5S2 varchar(10),
+                                        UnixTime_P5S3 float,
+                                        Zeit_P5S3 varchar(10),
+                                        UnixTime_P5S4 float,
+                                        Zeit_P5S4 varchar(10),
+                                        UnixTime_P5S5 float,
+                                        Zeit_P5S5 varchar(10),
+                                        UnixTime_P5S6 float,
+                                        Zeit_P5S6 varchar(10),
+                                        UnixTime_P5S7 float,
+                                        Zeit_P5S7 varchar(10),
+                                        UnixTime_P5S8 float,
+                                        Zeit_P5S8 varchar(10),
+                                        UnixTime_P5S9 float,
+                                        Zeit_P5S9 varchar(10),
+                                        UnixTime_P5S10 float,
+                                        Zeit_P5S10 varchar(10),
+                                        ZwoelfUhrMail varchar (4),
+                                        ZwoelUhrMailZeit varchar (200),
+                                        ZwoelfUhrMailUnixTime float,
+                                        VierzehnUhrMail varchar(4),
+                                        VierzehnUhrMailZeit varchar(200),
+                                        VierzehnUhrMailUnixTime float, 
+                                        SechzehnUhrMail varchar(4),
+                                        SechzehnUhrMailZeit varchar(200),
+                                        SechzehnUhrMailUnixTime float, 
+                                        AchtzehnUhrMail varchar(4),
+                                        AchtzehnUhrMailZeit varchar(200),
+                                        AchtzehnUhrMailUnixTime float, 
+                                        SMSZwoelfUhr varchar (4),
+                                        SMSZwoelfUhrMailZeit varchar(200),
+                                        SMSZwoelfUhrMailUnixTime float, 
+                                        SMSVierzehnUhr varchar (4),
+                                        SMSVierzehnUhrMailZeit varchar(200),
+                                        SMSVierzehnUhrMailUnixTime float, 
+                                        SMSSechzehnUhr varchar (4),
+                                        SMSSechzehnUhrMailZeit varchar(200),
+                                        SMSSechzehnUhrMailUnixTime float, 
+                                        SMSAchtzehnUhr varchar (4),
+                                        SMSAchtzehnUhrMailZeit varchar(200),
+                                        SMSAchtzehnUhrMailUnixTime float 
                                 )'''
 
 cursor3.execute(create_script)
@@ -257,7 +402,8 @@ class Player(BasePlayer):
         label="Wählen Sie bitte das Geschlecht aus, welches Sie sich zugehörig fühlen",
         widget=widgets.RadioSelect
     )
-    Telefonnummer = models.StringField(label="Wenn Sie eine Benachrichtung per SMS bekommen wollen, können Sie hier ihre Telefonnummer eingeben wollen. Bitte gebe Sie ihre Landesvorwahl mit ein. Beispiel: +491763456784  -   Wenn Sie das nicht wollen, geben Sie bitte ein Minus ein.")
+    Telefonnummer = models.StringField(
+        label="Wenn Sie eine Benachrichtung per SMS bekommen wollen, können Sie hier ihre Telefonnummer eingeben. Bitte geben Sie zusätzlich noch ihre Landesvorwahl mit an. Beispiel: +491763456784  -   Wenn Sie das nicht wollen, geben Sie bitte ein Minus - ein.")
 
     # ------------------------------
     # Zeitabfrage
@@ -296,9 +442,6 @@ class Player(BasePlayer):
     # Zeit: Phase 1 Seite 7
     PhaseEinsSeiteSieben = models.FloatField()
     UnixTimeP1S7 = models.FloatField()
-    # Zeit: Phase 1 Seite 8
-    PhaseEinsSeiteAcht = models.FloatField()
-    UnixTimeP1S8 = models.FloatField()
 
     test = models.StringField()
 
@@ -328,16 +471,8 @@ class Player(BasePlayer):
     # -------------------------------------------
     # Page_7
     # ------------------------------------------
-    Frage_3 = models.StringField(choices=[["Ja", "Ja"], ["Nein", "Nein"]],
-                                 label="",
-                                 widget=widgets.RadioSelect)
+    Frage_3 = models.StringField()
 
-    # -------------------------------------------
-    # Page_8
-    # ------------------------------------------
-    Frage_4 = models.StringField(choices=[["Ja", "Ja"], ["Nein", "Nein"]],
-                                 label="",
-                                 widget=widgets.RadioSelect)
 
     # ------------------------------------------
     # Info, ob diese Runde schon gespielt worden ist
@@ -351,6 +486,7 @@ class Player(BasePlayer):
 
 class NutzerInfo_Page_1(Page):
     form_model = 'player'
+
     # -----------------------------
     # Prüft ob das heutige Datum in der Vorraussetzung definiert ist
     # -----------------------------
@@ -361,6 +497,7 @@ class NutzerInfo_Page_1(Page):
     # if DatumDerStudie in HeutigeDatum:
     #     return True
 
+    @staticmethod
     def vars_for_template(player: Player):
         DatumHeute = datetime.now()
         player.ZeitStartapp = str(DatumHeute)
@@ -401,10 +538,11 @@ class NutzerInfo_Page_3(Page):
     def vars_for_template(player: Player):
         player.Loop = 0
         if player.Loop == 0:
-            player.Loop = 1
             connectToRound0(player.ZeitStartapp, player.NutzerID, player.Nutzer_Alter,
                             player.Nutzer_Gender, player.Nutzer_Email, player.NutzerInformationsSeiteAbgeschlossen,
                             player.Telefonnummer)
+            player.Loop = 1
+        player.Loop = 1
 
 
 # ----------------------------------------------------------------------------------------
@@ -470,7 +608,6 @@ class Page_6(Page):
 
 class Page_7(Page):
     form_model = 'player'
-    form_fields = ['Frage_3']
 
     @staticmethod
     def live_method(player: Player, data):
@@ -478,27 +615,16 @@ class Page_7(Page):
             player.PhaseEinsSeiteSieben = data['Phase1Seite7Zeit']
             player.UnixTimeP1S7 = time.time()
 
-
-class Page_8(Page):
-    form_model = 'player'
-    form_fields = ['Frage_4']
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        player.URL = "https://pilotnovaland2022.herokuapp.com/join/" + str(player.NutzerID)
-
-    @staticmethod
-    def live_method(player: Player, data):
-        if "ZeitPhaseEinsAchteSeite" in data:
-            player.PhaseEinsSeiteAcht = data['Phase1Seite8Zeit']
-            player.UnixTimeP1S8 = time.time()
-        if "RundeEinsErledigt" in data:
+        if "Frage3" in data:
+            player.Frage_3 = data["Frage3Antwort"]
             player.Runde_1_erledigt = "Ja"
 
 
-class Page_9(Page):
+class Page_8(Page):
     @staticmethod
     def vars_for_template(player: Player):
+        player.URL = "https://pilotnovaland2022.herokuapp.com/join/" + player.participant.code
+
         connection4 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                        host='ec2-3-216-113-109.compute-1.amazonaws.com',
@@ -508,48 +634,19 @@ class Page_9(Page):
         cursor4 = connection4.cursor()
 
         id_script2 = 'UPDATE Novaland SET chrisgeschlecht = %s, frage_1_staatsbuerger = %s, frage_2_einfluss = %s,' \
-                     'frage_3 = %s, frage_4 = %s, Zeit_P1S1 = %s, Zeit_P1S2 = %s, Zeit_P1S3 = %s,' \
-                     'Zeit_P1S4 = %s, Zeit_P1S5 = %s, Zeit_P1S6 = %s, Zeit_P1S7 = %s,' \
-                     'Zeit_P1S8 = %s, Runde_1_Erledigt = %s, UnixTime_P1S1 =%s, UnixTime_P1S2 = %s, UnixTime_P1S3 = %s, UnixTime_P1S4 = %s, UnixTime_P1S5 = %s, UnixTime_P1S6 = %s, UnixTime_P1S7 = %s, UnixTime_P1S8 = %s WHERE nutzer_id = %s'
-        id_value2 = (player.ChrisGender, player.Frage_1, player.Frage_2, player.Frage_3, player.Frage_4,
+                     'Frage_3_Sozialleistung = %s, Zeit_P1S1 = %s, Zeit_P1S2 = %s, Zeit_P1S3 = %s,' \
+                     'Zeit_P1S4 = %s, Zeit_P1S5 = %s, Zeit_P1S6 = %s, Zeit_P1S7 = %s, Runde_1_Erledigt = %s, UnixTime_P1S1 =%s, UnixTime_P1S2 = %s, UnixTime_P1S3 = %s, UnixTime_P1S4 = %s, UnixTime_P1S5 = %s, UnixTime_P1S6 = %s, UnixTime_P1S7 = %s WHERE nutzer_id = %s'
+        id_value2 = (player.ChrisGender, player.Frage_1, player.Frage_2, player.Frage_3,
                      player.PhaseEinsSeiteEins, player.PhaseEinsSeiteZwei, player.PhaseEinsSeiteDrei,
                      player.PhaseEinsSeiteVier,
                      player.PhaseEinsSeiteFuenf, player.PhaseEinsSeiteSechs, player.PhaseEinsSeiteSieben,
-                     player.PhaseEinsSeiteAcht,
-                     player.Runde_1_erledigt, player.UnixTimeP1S1, player.UnixTimeP1S2, player.UnixTimeP1S3, player.UnixTimeP1S4, player.UnixTimeP1S5, player.UnixTimeP1S6, player.UnixTimeP1S7, player.UnixTimeP1S8, player.NutzerID)
+                     player.Runde_1_erledigt, player.UnixTimeP1S1, player.UnixTimeP1S2, player.UnixTimeP1S3,
+                     player.UnixTimeP1S4, player.UnixTimeP1S5, player.UnixTimeP1S6, player.UnixTimeP1S7, player.NutzerID)
         cursor4.execute(id_script2, id_value2)
         connection4.commit()
         cursor4.close()
         connection4.close()
-        # --------------------------------------------------------------------
-        # --------------------- E-Mails versenden-----------------------------
-        From_mail = "pilotnovaland@gmail.com"
-        Passwort = "0?$W6XrieU!J+KO=,,zv"
-        To_Mail = player.Nutzer_Email
-        ssl_context = ssl.create_default_context()
-        subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
-        code = player.NutzerID
-        Url = " https://pilotnovaland2022.herokuapp.com/join/" + player.participant.code
-        Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
-                    "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
-                    "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
-                    "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + Url + " " \
-                                                                                                                 "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
-                    "\n\nWir bedanken uns bei ihnen recht herzlich!\n\n Universität Duisburg"
-        msg = message.Message()
-        msg.set_charset("utf-8")
-        msg['Content-type'] = 'text/plain; charset=utf-8'
-        msg['Content-transfer-encoding'] = '8bit'
-        msg['Subject'] = subject
-        msg['From'] = From_mail
-        msg['To'] = To_Mail
-        msg.set_payload(Nachricht, charset="utf-8")
-
-        server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl_context)
-        server.login(From_mail, Passwort)
-        server.sendmail(msg['From'], msg['To'], msg.as_string())
-        server.quit()
 
 
 page_sequence = [NutzerInfo_Page_1, NutzerInfo_Page_2, NutzerInfo_Page_3, Page_1, Page_2, Page_3, Page_4, Page_5,
-                 Page_6, Page_7, Page_8, Page_9]
+                 Page_6, Page_7, Page_8]

@@ -57,13 +57,17 @@
 
 {% block content %}
          <body onload="time()"></body>
+    <p class="p">
+Wie werden die Sozialleistungen in Novaland zu großen Teilen finanziert?
+    </p>
+    <br>
+<div id="buttonapp3">
+<input type="radio" onclick="Schulden()" name="Ja" class="radio"> Schulden</input>
 <br>
-{% formfields %}
-
-
+<input type="radio" onclick="Steuern()" name="Ja" class="radio"> Steuern und Abgaben</input>
 <br>
-<br>
-<button class='button' type='button' onclick='Next()'> Weiter </button>
+<input type="radio" onclick="Export()" name="Ja" class="radio"> Export natürlicher Rohstoffe</input>
+</div>
 <br>
 <br>
 <br>
@@ -79,10 +83,26 @@
     function time(){
    starttime = new Date();
 }
+function Schulden(){
+        document.getElementById("buttonapp3").innerHTML = "<p style='color:darkred' class='p'> Die Sozialleistungen werden zum großem Teil aus Steuern und Abgaben finanziert. </p><br><button class='button' type='button' onclick='Next()'> Weiter </button>"
+        liveSend({"Frage3": "Frage3", "Frage3Antwort": "Falsch"})
+    }
+
+    function Steuern(){
+        let TimeFirstRoundPhase7 = (new Date() - starttime)/1000;
+        liveSend({'ZeitPhaseEinsSiebteSeite': 'ZeitPhaseEinsSiebteSeite', 'Phase1Seite7Zeit': TimeFirstRoundPhase7});
+        liveSend({"Frage3": "Frage3", "Frage3Antwort": "Richtig"})
+        Next();
+    }
+
+    function Export(){
+        document.getElementById("buttonapp3").innerHTML = "<p style='color:darkred' class='p'> Die Sozialleistungen werden zum großem Teil aus Steuern und Abgaben finanziert. </p><br><button class='button' type='button' onclick='Next()'> Weiter </button>"
+        liveSend({"Frage3": "Frage3", "Frage3Antwort": "Falsch"})
+    }
 
     function Next(){
-    let TimeFirstRoundPhase4 = (new Date() - starttime)/1000;
-        liveSend({'ZeitPhaseEinsSiebteSeite': 'ZeitPhaseEinsSiebteSeite', 'Phase1Seite7Zeit': TimeFirstRoundPhase4});
+    let TimeFirstRoundPhase7 = (new Date() - starttime)/1000;
+        liveSend({'ZeitPhaseEinsSiebteSeite': 'ZeitPhaseEinsSiebteSeite', 'Phase1Seite7Zeit': TimeFirstRoundPhase7});
         document.getElementById("form").submit();
     }
 </script>

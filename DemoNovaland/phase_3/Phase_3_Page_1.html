@@ -57,14 +57,13 @@
 
 {% block content %}
     <body onload="time()"></body>
-<p class="p"> Seitdem Sie das letzte Mal in Novaland waren, ist ein Monat vergangen. Die Parlamentswahl steht an, bei der Sie als Bürger/Bürgerin wählen können.
-<br>
-<br>
-Wie Sie bereits wissen, ist Novaland eine Demokratie mit einem parlamentarischen System. Der Chef oder die Chefin der Regierung wird durch das Parlament gewählt und braucht dort eine 51% Mehrheit. Derzeit regiert eine Regierung aus der LPN (Liberalen Partei Novaland) und der KPN (Konservative Partei Novaland), unter Führung der LPN.
-<br>
-<br>
-In der Opposition befinden sich die SPN (Soziale Partei Novaland) und die PPN (Partei Progressives Novaland). Die zwei Regierungsparteien LPN und KPN haben beschlossen, dass sie nach der Parlamentswahl nur miteinander koalieren werden und eine Koalition mit einer der derzeitigen Oppositionsparteien ausschließen. Die zwei Oppositionsparteien SPN und PPN haben ebenfalls beschlossen, dass sie nach der Parlamentswahl nur miteinander koalieren werden und eine Koalition mit einer der derzeitigen Regierungsparteien ausschließen.
-<br></p>
+<p class="p"> Seitdem Sie das letzte Mal in Novaland waren, ist ein Monat vergangen.
+
+Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas.
+    Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %}. </strong>
+    Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen.
+    Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase3Anfang %}</strong> Novas.
+</p>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>

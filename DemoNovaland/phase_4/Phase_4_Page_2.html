@@ -151,6 +151,7 @@
 
 
 {% block content %}
+    <body onload="time()"></body>
     <div class="column1">
     Willkommen zurück. Sie haben in der letzten Phase Wahlen gehabt und das hier sind die Ergebnisse:
     <br>
@@ -206,10 +207,11 @@
 <br>
 <br>
 
-    Die Partei: {% if PPNProzent > KPNProzent and PPNProzent > SPNProzent and PPNProzent > LPNProzent %} Partei Progressives Novaland {% elif  KPNProzent > PPNProzent and KPNProzent > SPNProzent and KPNProzent > LPNProzent %} Konservative Partei Novaland
-    {% elif  SPNProzent > PPNProzent and SPNProzent > KPNProzent and SPNProzent > LPNProzent %} Soziale Partei Novaland {% elif  LPNProzent > PPNProzent and LPNProzent > KPNProzent and LPNProzent > SPNProzent %} Liberale Partei Novaland {% endif %} hat die meisten Stimmen für sich gewinnen können.
-    <br>
-    Diese bring diese Veränderung mit sich:
+    Die {% Platzeins %} ist die stärkste Kraft.
+    Gefolgt von der {% PlatzZwei %}.
+    Die Partei {% PlatzDrei %} ist die dritt stärkste Kraft und die {% PlatzVier %} ist die schwächste Kraft.
+   <br>
+
     <br>
 
 
@@ -229,10 +231,12 @@
 
 {% block script %}
 <script>
-
-
-
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP3S1 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP3S1": "ZeitP3S1", 'ZeitP3S1': ZeitP3S1});
         document.getElementById("form").submit();
     }
 </script>

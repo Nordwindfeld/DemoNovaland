@@ -57,19 +57,23 @@
 
 {% block content %}
         <body onload="time()"></body>
+    <p class="p">
 Ihnen stehen verschiedene Möglichkeiten der Mobilität zur Auswahl:
-<br>
+    </p>
+        <br>
  <div id="Korrektur">
-<input type="radio" name="Frage_5_Mobilitaet" onclick="EigenesAuto()" class="radio" value="Eigenes Auto"> Sie fahren hauptsächlich mit dem eigenen Auto (700 Novas) </input>
+<input type="radio" name="Frage_5_Mobilitaet" onclick="EigenesAuto()" class="radio" value="Eigenes Auto"> Sie fahren hauptsächlich mit dem eigenen Auto (200 Novas) </input>
 <br>
-<input type="radio" name="Frage_5_Mobilitaet" onclick="AutoMieten()" class="radio" value="Auto mieten"> Sie mieten bei Bedarf ein Auto und nutzen ansonsten öffentliche Verkehrsmittel (450 Novas) </input>
+<input type="radio" name="Frage_5_Mobilitaet" onclick="AutoMieten()" class="radio" value="Auto mieten"> Sie mieten bei Bedarf ein Auto und nutzen ansonsten öffentliche Verkehrsmittel (150 Novas) </input>
 <br>
-<input type="radio" name="Frage_5_Mobilitaet" onclick="Fahrrad()" class="radio" value="Fahrrad - Öffentliche Verkehrsmittel"> Sie fahren Fahrrad und nutzen bei Bedarf öffentliche Verkehrsmittel (200 Novas) </input>
+<input type="radio" name="Frage_5_Mobilitaet" onclick="Fahrrad()" class="radio" value="Fahrrad - Öffentliche Verkehrsmittel"> Sie fahren Fahrrad und nutzen bei Bedarf öffentliche Verkehrsmittel (50 Novas) </input>
 <br>
  </div>
  <div id="Kontostand">
  <br>
+     <p class="p">
 Ihr Kontostand beträgt gerade: {% LetzterWert2 %} Novas
+     </p>
     </div>
 <br>
 <br>
@@ -90,41 +94,41 @@ let starttime;
 }
 
     function EigenesAuto(){
-        liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 700, 'MobilitaetArt': "Eigenes Auto"});
-        MoebilitaetsKosten = 700;
+        liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 200, 'MobilitaetArt': "Eigenes Auto"});
+        MoebilitaetsKosten = 200;
         Konto = NettoEinkommen - MoebilitaetsKosten;
         if (Konto > 100){
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" +"<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 100){
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
-                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten.";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten." + "</p>";
             }
         }
 
     function AutoMieten() {
-        liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 450, 'MobilitaetArt': "Auto mieten"});
-        MoebilitaetsKosten = 450;
+        liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 150, 'MobilitaetArt': "Auto mieten"});
+        MoebilitaetsKosten = 150;
         Konto = NettoEinkommen - MoebilitaetsKosten;
         if (Konto > 100) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 100) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
-                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten.";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten." + "</p>";
         }
     }
 
      function Fahrrad(){
-        liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 200, 'MobilitaetArt': "Fahrrad"});
-         MoebilitaetsKosten = 200;
+        liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 50, 'MobilitaetArt': "Fahrrad"});
+         MoebilitaetsKosten = 50;
          Konto = NettoEinkommen - MoebilitaetsKosten;
         if (Konto > 100) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 100) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
-                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten.";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten." + "</p>";
         }
     }
 

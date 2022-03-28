@@ -53,7 +53,7 @@
 
 {% block content %}
     <body onload="time()"></body>
-{% formfields %}
+<p class="p"> {% formfields %} </p>
 <br>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
@@ -70,10 +70,10 @@
 var starttime
 
 function time(){
-   starttime2 = new Date();
+    starttime = new Date();
 }
     function Next(){
-        let TimeSecondRound = (new Date() - starttime2)/1000;
+        let TimeSecondRound = (new Date() - starttime)/1000;
         liveSend({'ZeitZweiteRunde': 'Zeit2', 'Zeit2': TimeSecondRound});
         liveSend({'Savedata': 'Savedata'});
         document.getElementById("form").submit();

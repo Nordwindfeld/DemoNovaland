@@ -68,7 +68,8 @@
 
 
 {% block content %}
-<p class="p"> Sie werden um 16h eine erneute Novaland Einladung erhalten. Bis gleich! </p>
+    <body onload="time()"></body>
+<p class="p"> Die Wahl ist im vollen Gange. Novaland wartet gespannt auf das Wahlergebnis und die Regierungsbildung. </p>
 <br>
 
 <br>
@@ -81,7 +82,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP3S8 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP3S8": "ZeitP3S8", 'ZeitP3S8': ZeitP3S8});
         document.getElementById("form").submit();
     }
 </script>

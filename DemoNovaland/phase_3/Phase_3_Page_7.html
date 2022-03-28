@@ -42,42 +42,79 @@
         font-size: larger;
     }
 
-    .column1{
+    .column3{
         float: left;
-        width: 70%;
+        width: 50%;
         padding: 10px;
         height: 200px;
         padding-bottom: 100px;
     }
-   .column2{
-        float: right;
-        width: 30%;
-        padding: 10px;
-        height: 200px;
-    }
 
+    .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     </style>
 {% endblock %}
 
+
+
+
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Wahlen </h1>
+    <h1 class="h1"> Wahlen in Novaland </h1>
 {% endblock %}
 
 
 {% block content %}
     <body onload="time()"></body>
-<p class="p"> Die Wahl ist im vollen Gange. Novaland wartet gespannt auf das Wahlergebnis und die Regierungsbildung. </p>
+<p class="p">
+Es Wahltag in Novaland. Sie dürfen nun entscheiden, für welche der vier Parteien Sie bei der Parlamentswahl in Novaland Ihre Stimme abgeben.
+Mit ihrer Stimme können Sie die Regierungsbildung in Novaland beeinflussen und gemeinsam mit den anderen Personen in Novaland die nächste Regierung in Novaland mitbestimmen.
+</p>
 <br>
+<p class="p" style="text-align: center">
+Sie haben eine Stimme. Welche Partei wählen Sie?
+</p>
+<br>
+<div class="row">
+    <div class="column3">
+        <img src="{% static 'phase_3/KPN.png' %}" width="30%" class="center">
+        <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Konservative Partei Novaland"> Konservative Partei Novaland </p>
 
-<br>
-<br>
+    </div>
+
+    <div class="column3">
+        <img src="{% static 'phase_3/LPN.png' %}" width="30%" class="center">
+       <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Liberale Partei Novaland">  Liberale Partei Novaland </p>
+    </div>
+</div>
+
+    <br>
+
+<div class="row">
+    <div class="column3">
+        <img src="{% static 'phase_3/SPN.png' %}" width="30%" class="center">
+        <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Soziale Partei Novaland">  Soziale Partei Novaland </p>
+    </div>
+
+    <div class="column3">
+        <img src="{% static 'phase_3/PPN.png' %}" width="30%" class="center">
+        <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Partei Progressives Novaland">  Partei Progressives Novaland </p>
+    </div>
+</div>
+
+
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
 <br>
-<h2 class="h2"></h2>
+<br>
+<h2 class="h2"> </h2>
+
+
 {% endblock %}
 
 {% block script %}
