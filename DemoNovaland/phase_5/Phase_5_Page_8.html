@@ -56,6 +56,7 @@
 
 
 {% block content %}
+    <body onload="time()"></body>
 
 <br>
 <br>
@@ -70,7 +71,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP5S8 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S8": "ZeitP5S8", 'ZeitP5S8': ZeitP5S8});
         document.getElementById("form").submit();
     }
 </script>

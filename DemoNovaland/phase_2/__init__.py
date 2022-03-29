@@ -107,7 +107,7 @@ class Player(BasePlayer):
 
 class Waiting_Site(Page):
     def is_displayed(player: Player):
-        Zeit = 12 * 60 * 60
+        Zeit = 0 * 60 * 60 # Erste Wert ändern
         ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
                     datetime.now().time().minute * 60) + datetime.now().time().second
         differenz = Zeit - ProgrammTagZeit

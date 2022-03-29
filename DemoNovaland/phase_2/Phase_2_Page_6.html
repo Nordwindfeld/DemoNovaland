@@ -60,7 +60,6 @@
     <p class="p">
 Ihnen stehen verschiedene Möglichkeiten der Mobilität zur Auswahl:
     </p>
-        <br>
  <div id="Korrektur">
 <input type="radio" name="Frage_5_Mobilitaet" onclick="EigenesAuto()" class="radio" value="Eigenes Auto"> Sie fahren hauptsächlich mit dem eigenen Auto (200 Novas) </input>
 <br>
@@ -124,7 +123,7 @@ let starttime;
          MoebilitaetsKosten = 50;
          Konto = NettoEinkommen - MoebilitaetsKosten;
         if (Konto > 100) {
-            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 100) {
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"

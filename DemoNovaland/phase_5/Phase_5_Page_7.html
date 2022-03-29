@@ -56,11 +56,28 @@
 
 
 {% block content %}
+    <body onload="time()"></body>
+    <p class="p">
+Die Organisation „Novaland hilft“ sammelt weiterhin Spenden, um den Opfern des Brandes zu helfen. Wollen Sie Opfern von Ihrem verfügbaren Einkommen spenden?
+    Sie haben ein Vermögen von <strong>{% player.KontoNachBrandSchaden %}</strong>.
+    <br>
+
 
 <br>
-<br>
-<button class='button' type='button' onclick='Next()'> Weiter </button>
-<br>
+<div id="Delete">
+    <p class="p"> Spendenfrage 2:</p>
+    <br>
+    Ich spende <input id="Spende2" type="number"> Novas
+            <br>
+            <br>
+            <button class="button" type="button" onclick="Spende2()"> Spenden</button>
+
+        </div>
+    <br>
+    <div id="ZuViel">
+
+    </div>
+    </p>
 <br>
 <br>
 <h2 class="h2"> </h2>
@@ -70,7 +87,25 @@
 
 {% block script %}
 <script>
-    function Next(){
+let KontoStand = js_vars.KontoNachBrandSchaden
+ function time(){
+     let starttime = new Date();
+ }
+
+function Spende2(){
+    let Spende = document.getElementById("Spende2").value
+    liveSend({"Spende2": "SpendenZahl2", "SpendenZahl2": Spende});
+    let NachSpende = Kontostand - Spende;
+    if (NachSpende > 0) {
+        document.getElementById("Delete").innerHTML = "<p class='p'>" + "Sie haben " + Spende + " Novas gespendet" + "<br>" + "Ihnen bleiben noch " + NachSpende + " Novas übrig." + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+    }
+    if (NachSpende < 0) {
+        document.getElementById("ZuViel").innerHTML = "<p class='p'>" + "Sie können nicht mehr Geld spenden, als Sie besitzen." + "</p>";
+    }
+}
+    function Next() {
+        let ZeitP5S7 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S7": "ZeitP5S7", 'ZeitP5S7': ZeitP5S7});
         document.getElementById("form").submit();
     }
 </script>

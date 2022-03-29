@@ -67,16 +67,20 @@
     Sie haben ein Vermögen von {% player.KontoPhase4Anfang %} Novas.
     <br>
     <br>
+        <div id="Delete">
     Spendenfrage:
-    Ich spende <input id="Spende" type="number" > Novas.
+    Ich spende <input id="Spende2" type="number"> Novas
+            <br>
+            <br>
+            <button class="button" type="button" onclick="Spende()"> Spenden</button>
 
+        </div>
+    <br>
+    <div id="ZuViel">
 
-    </p>
+    </div>
+</p>
 
-<br>
-<br>
-<button class='button' type='button' onclick='Next()'> Weiter </button>
-<br>
 <br>
 <br>
 <h2 class="h2"> </h2>
@@ -86,15 +90,29 @@
 
 {% block script %}
 <script>
+Kontostand = js_vars.Kontostand
+
  function time(){
    starttime = new Date();
 }
-    function Next() {
-     let Spende = document.getElementById("Spende").value
+
+function Spende(){
+    let Spende = document.getElementById("Spende2").value
+    liveSend({"Spende": "SpendenZahl", "SpendenZahl": Spende});
+    NachSpende = Kontostand - Spende;
+    if (NachSpende > 0) {
+        document.getElementById("Delete").innerHTML = "<p class='p'>" + "Sie haben " + Spende + " Novas gespendet" + "<br>" + "Ihnen bleiben noch " + NachSpende + " Novas übrig." + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+    }
+    if (NachSpende < 0) {
+        document.getElementById("ZuViel").innerHTML = "<p class='p'>" + "Sie können nicht mehr Geld spenden, als Sie besitzen." + "</p>";
+    }
+}
+
+    function Next(){
         let Zeitp4s9 = (new Date() - starttime) / 1000;
-        liveSend({"Spende": "Spende", "Spende": Spende})
-        liveSend({"Zeitp4s9": "Zeitp4s9", 'Zeitp4s9': Zeitp4s9});
+        liveSend({"ZeitP4S9": "ZeitP4S9", 'ZeitP4S9': Zeitp4s9});
         document.getElementById("form").submit();
+
     }
 </script>
 {% endblock %}

@@ -57,8 +57,9 @@
 
 {% block content %}
     <body onload="time()"></body>
+    <p class='p'>
 Ihnen stehen verschiedene Möglichkeiten der Verpflegung zur Auswahl:
-<br>
+    </p>
  <div id="Korrektur">
 <input type="radio" name="Frage_4_Verpflegung" onclick="Restaurant()" class="radio" value="Restaurants"> Sie gehen regelmäßig in Restaurants essen (400 Novas) </input>
 <br>
@@ -68,10 +69,11 @@ Ihnen stehen verschiedene Möglichkeiten der Verpflegung zur Auswahl:
 <br>
  </div>
  <div id="Kontostand">
- <br>
+ <p class="p">
+     <br>
 Ihr Kontostand beträgt gerade: {% NeuerWert2 %} Novas
+ </p>
     </div>
-<br>
 <br>
 <br>
 <h2 class="h2"> </h2>
@@ -95,11 +97,11 @@ let starttime;
         Verpflegungskosten = 400;
         Konto = NettoEinkommen - Verpflegungskosten;
         if (Konto > 200){
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 200){
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
-                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten.";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten." + "</p>";
             }
         }
 
@@ -108,11 +110,11 @@ let starttime;
         Verpflegungskosten = 300;
         Konto = NettoEinkommen - Verpflegungskosten;
         if (Konto > 200) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 200) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
-                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten.";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten." + "</p>";
         }
     }
 
@@ -121,11 +123,11 @@ let starttime;
          Verpflegungskosten = 200;
          Konto = NettoEinkommen - Verpflegungskosten;
         if (Konto > 200) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
         if (Konto < 200) {
-            document.getElementById("Kontostand").innerHTML = "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
-                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten.";
+            document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
+                + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Verpflegung leider nicht leisten." + "</p>";
         }
     }
 

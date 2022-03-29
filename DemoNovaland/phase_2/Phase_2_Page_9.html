@@ -62,12 +62,14 @@
 
 {% block content %}
                 <body onload="time()"></body>
-Der erste Monat in Novaland ist vorüber. Sie sind Staatsbürger von Novaland und haben ein monatliches Nettoeinkommen in Höhe von <strong>{% player.Netto_Einkommen %}</strong>.
+    <p class='p'>
+Der erste Monat in Novaland ist vorüber. Sie sind Staatsbürger von Novaland und haben ein monatliches Nettoeinkommen in Höhe von <strong>{% player.Netto_Einkommen %}</strong> Novas.
     Im Verhältnis zu der restlichen Bevölkerung haben Sie ein <strong>{% if player.Netto_Einkommen == 3500 %}hohes {% elif player.Netto_Einkommen == 2450 %}mittleres {% elif player.Netto_Einkommen == 875 %}niedriges{% endif %}</strong> Einkommen.
 <br>
 Sie haben sich dafür entscheiden in <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %}</strong>.
 <br>
-    Sie konnten in diesem Monat <strong>{% player.Rest_Einkommen %}</strong> sparen.
+    Sie konnten in diesem Monat <strong>{% player.Rest_Einkommen %}</strong> Novas sparen.
+    </p>
 <br>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>

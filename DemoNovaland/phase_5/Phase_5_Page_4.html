@@ -56,8 +56,17 @@
 
 
 {% block content %}
-
-<br>
+<body onload="time()"></body>
+    <p class="p">
+    {% if player.BrandBetroffen == "Ja" %}
+Leider ist auch Ihre Region von den Bränden betroffen. Nachdem der Brand immer stärker näherte, wurden Sie und Ihre Nachbarn evakuiert. Sie konnten nichts Nennenswertes von Ihrem Hab und Gut mitnehmen.
+Das Haus, in dem Sie gewohnt haben, und alles andere Materielle wurde komplett zerstört. Durch die Evakuierung entstehen Ihnen Kosten in Höhe von <strong>{% player.BrandSchadenKosten %}</strong> Novas, weil Sie sich per Notmiete und zusätzlichen laufenden Ausgaben selbst versorgen müssen. Zudem müssen Sie im nächsten Monat unbezahlten Urlaub nehmen, um ein neues Zuhause zu finden.
+Viele Bewohnerinnen und Bewohner Novalands sind von den Bränden betroffen und haben ihr Zuhause sowie ihr Hab und Gut verloren. Die Feuerwehr von Novaland konnte zum Glück alle Menschen retten, sodass es zu keinen Todesopfern kam.
+     {% else %}
+Glücklicherweise bleibt Ihre Region, in dem Sie wohnen, von den Bränden verschont. Sie können weiterhin in Ihrem Zuhause wohnen und wie gewohnt Ihrer Arbeit nachgehen.
+Viele Bewohnerinnen und Bewohner Novalands sind von den Bränden betroffen und haben ihr Zuhause sowie ihr Hab und Gut verloren. Die Feuerwehr von Novaland konnte zum Glück alle Menschen retten, sodass es zu keinen Todesopfern kam.
+{% endif %}
+        </p>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
@@ -70,7 +79,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP5S4 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S4": "ZeitP5S4", 'ZeitP5S4': ZeitP5S4});
         document.getElementById("form").submit();
     }
 </script>

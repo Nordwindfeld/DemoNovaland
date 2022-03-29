@@ -56,8 +56,15 @@
 
 
 {% block content %}
+    <body onload="time()"></body>
+    <p class="p">
+    {% if player.BrandBetroffen == "Ja" %}
+        Sie haben jetzt ein Vermögen von <strong>{% player.KontoNachBrandSchaden %} Novas</strong>.
+    {% elif player.BrandBetroffen == "Nein" %}
+Sie haben weiterhin ein Vermögen von <strong>{% player.KontoNachBrandSchaden %} Novas</strong>.
+{% endif %}
+    </p>
 
-<br>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
@@ -70,7 +77,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP5S5 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S5": "ZeitP5S5", 'ZeitP5S5': ZeitP5S5});
         document.getElementById("form").submit();
     }
 </script>

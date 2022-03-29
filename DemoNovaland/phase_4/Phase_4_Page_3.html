@@ -57,13 +57,12 @@
 
 {% block content %}
     <body onload="time()"></body>
+    <p class="p">
 {% if player.LPNundKPNbund == "Ja" %}Ein Regierungsbündnis der LPN (Liberale Partei Novaland) und der KPN (Konservative Partei Novaland) wird die kommenden 5 Jahre die politischen Geschicke Novalands leiten. {% endif %}
  {% if player.SPNundPPNbund == "Ja" %}Ein Regierungsbündnis der SPN (Soziale Partei Novaland) und der PPN (Partei Progressives Novaland) wird die kommenden 5 Jahre die politischen Geschicke Novalands leiten. {% endif %}
 <br>
-<br>
-    Die Regierung wird angeführt von Mika Noel der "{% Platzeins %}". Noel ist bekannt für Ihre Glaubwürdigkeit und Durchsetzungskraft. Es ist zu erwarten, dass die Wahlversprechen zügig umgesetzt werden.
-
-<br>
+    Die Regierung wird angeführt von Mika Noel der "{% player.PlatzEins %}". Noel ist bekannt für Ihre Glaubwürdigkeit und Durchsetzungskraft. Es ist zu erwarten, dass die Wahlversprechen zügig umgesetzt werden.
+    </p>
     <br>
     <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
@@ -81,7 +80,7 @@
 }
     function Next() {
         let Zeitp4s3 = (new Date() - starttime) / 1000;
-        liveSend({"Zeitp4s3": "Zeitp4s3", 'Zeitp4s3': Zeitp4s3});
+        liveSend({"ZeitP4S3": "ZeitP4S3", 'ZeitP4S3': Zeitp4s3});
         document.getElementById("form").submit();
     }
 </script>

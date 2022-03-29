@@ -56,7 +56,10 @@
 
 
 {% block content %}
-
+    <body onload="time()"></body>
+<p class="p">
+Durch die Spendenaktion von „Novaland hilft“ kamen <strong> {% player.SpendenInsgesamt %} </strong> Novas zusammen, die den Menschen in den betroffenen Regionen zugutekamen.
+</p>
 <br>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
@@ -70,7 +73,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP5S2 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S2": "ZeitP5S2", 'ZeitP5S2': ZeitP5S2});
         document.getElementById("form").submit();
     }
 </script>

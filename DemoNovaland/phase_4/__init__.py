@@ -62,6 +62,7 @@ class Player(BasePlayer):
 
     # Seite 8
     Spende = models.FloatField()
+    KontoPhase4Ende = models.FloatField()
 
     # ---------------------------
     # Ergebnis
@@ -74,6 +75,7 @@ class Player(BasePlayer):
     KPNProzent = models.FloatField()  # für die Tabele
     PPNStimmen = models.FloatField()  # Tabelle
     PPNProzent = models.FloatField()  # Tabelle
+    PlatzEins = models.StringField()
 
     # Zeit
     S4P1Zeit = models.FloatField()
@@ -94,13 +96,13 @@ class Player(BasePlayer):
     UnixTimeP4S7 = models.FloatField()
     UnixTimeP4S8 = models.FloatField()
     UnixTimeP4S9 = models.FloatField()
-    Runde_4_Erledigt = models.FloatField()
+    Runde_4_Erledigt = models.StringField()
 
 
 class Waiting_Site(Page):
     @staticmethod
     def is_displayed(player: Player):
-        Zeit = 16 * 60 * 60
+        Zeit = 0 * 60 * 60
         ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
                     datetime.now().time().minute * 60) + datetime.now().time().second
         differenz = Zeit - ProgrammTagZeit
@@ -233,15 +235,19 @@ class Phase_4_Page_2(Page):
         player.SPNProzent = (player.SPNStimmen / AlleStimmenZahl) * 100
         player.LPNProzent = (player.LPNStimmen / AlleStimmenZahl) * 100
         player.PPNProzent = (player.PPNStimmen / AlleStimmenZahl) * 100
-        ListeWahl = [player.KPNProzent, player.SPNProzent, player.LPNProzent, player.PPNProzent]
+        ListeWahl = sorted([player.KPNProzent, player.SPNProzent, player.LPNProzent, player.PPNProzent])
         if ListeWahl[3] == player.KPNProzent:
             Platzeins = "Konservative Partei Novaland"
-        if ListeWahl[3] == player.SPNProzent:
+            player.PlatzEins = "Konservative Partei Novaland"
+        elif ListeWahl[3] == player.SPNProzent:
             Platzeins = "Soziale Partei Novaland"
-        if ListeWahl[3] == player.LPNProzent:
+            player.PlatzEins = "Soziale Partei Novaland"
+        elif ListeWahl[3] == player.LPNProzent:
             Platzeins = "Liberale Partei Novaland"
-        if ListeWahl[3] == player.PPNProzent:
+            player.PlatzEins = "Liberale Partei Novaland"
+        elif ListeWahl[3] == player.PPNProzent:
             Platzeins = "Partei Progressives Novaland"
+            player.PlatzEins = "Partei Progressives Novaland"
 
         if ListeWahl[2] == player.KPNProzent:
             PlatzZwei = "Konservative Partei Novaland"
@@ -365,12 +371,19 @@ class Phase_4_Page_9(Page):
         player.Runde_4_Erledigt = "Ja"
 
     @staticmethod
+    def js_vars(player: Player):
+        return {
+            "Kontostand": player.KontoPhase4Anfang,
+        }
+
+    @staticmethod
     def live_method(player: Player, data):
         if "ZeitP4S9" in data:
             player.S4P9Zeit = data["ZeitP4S9"]
             player.UnixTimeP4S9 = time.time()
         if "Spende" in data:
-            player.Spende = data["Spende"]
+            player.Spende = float(data["SpendenZahl"])
+            player.KontoPhase4Ende = player.KontoPhase4Anfang - player.Spende
 
 
 class Phase_4_Page_10(Page):
@@ -385,9 +398,9 @@ class Phase_4_Page_10(Page):
 
         cursor3 = connection3.cursor()
 
-        update_rows2 = '''UPDATE Novaland SET LPNundKPNbund = %s, SPNundPPNbund = %s, KoalitionsBund = %s, KontoPhase4Anfang = %s, Zufriedenheitsfrage2 = %s, Zufriedenheitsfrage3 = %s, Spende = %s, Runde_4_Erledigt = %s, Zeit_P4S1 = %s, Zeit_P4S2 = %s, Zeit_P4S3 = %s, Zeit_P4S4 = %s, Zeit_P4S5 = %s, Zeit_P4S6 = %s, Zeit_P4S7 = %s, Zeit_P4S8 = %s, Zeit_P4S9 = %s, UnixTime_P4S1 = %s, UnixTime_P4S2 = %s, UnixTime_P4S3 = %s, UnixTime_P4S4 = %s, UnixTime_P4S5 = %s, UnixTime_P4S6 = %s, UnixTime_P4S7 = %s, UnixTime_P4S8 = %s, UnixTime_P4S9 = %s WHERE nutzer_id = %s'''
+        update_rows2 = '''UPDATE Novaland SET LPNundKPNbund = %s, SPNundPPNbund = %s, KoalitionsBund = %s, KontoPhase4Anfang = %s, KontoPhase4Ende = %s, Zufriedenheitsfrage2 = %s, Zufriedenheitsfrage3 = %s, Spende = %s, Runde_4_Erledigt = %s, Zeit_P4S1 = %s, Zeit_P4S2 = %s, Zeit_P4S3 = %s, Zeit_P4S4 = %s, Zeit_P4S5 = %s, Zeit_P4S6 = %s, Zeit_P4S7 = %s, Zeit_P4S8 = %s, Zeit_P4S9 = %s, UnixTime_P4S1 = %s, UnixTime_P4S2 = %s, UnixTime_P4S3 = %s, UnixTime_P4S4 = %s, UnixTime_P4S5 = %s, UnixTime_P4S6 = %s, UnixTime_P4S7 = %s, UnixTime_P4S8 = %s, UnixTime_P4S9 = %s WHERE nutzer_id = %s'''
         update_values2 = (
-            player.LPNundKPNbund, player.SPNundPPNbund, player.KoalitionsBund, player.KontoPhase4Anfang, player.Zufriedenheitsfrage_2, player.Zufriedenheitsfrage_3, player.Spende, player.Runde_4_Erledigt, player.S4P1Zeit, player.S4P2Zeit,
+            player.LPNundKPNbund, player.SPNundPPNbund, player.KoalitionsBund, player.KontoPhase4Anfang, player.KontoPhase4Ende, player.Zufriedenheitsfrage_2, player.Zufriedenheitsfrage_3, player.Spende, player.Runde_4_Erledigt, player.S4P1Zeit, player.S4P2Zeit,
             player.S4P3Zeit, player.S4P4Zeit,
             player.S4P5Zeit, player.S4P6Zeit, player.S4P7Zeit, player.S4P8Zeit, player.S4P9Zeit, player.UnixTimeP4S1,
             player.UnixTimeP4S2, player.UnixTimeP4S3, player.UnixTimeP4S4, player.UnixTimeP4S5, player.UnixTimeP4S6,

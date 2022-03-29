@@ -63,9 +63,8 @@
 {% block content %}
 <body onload="time()"></body>
    <p class="p"> Wie zufrieden sind Sie mit Ihrer persönlichen Situation in Novaland? </p>
-    <p class="p"> {% formfields %} </p>
+    {% formfields %}
 
-<br>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>

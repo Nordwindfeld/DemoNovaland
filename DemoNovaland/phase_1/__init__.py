@@ -44,13 +44,21 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Rest_Einkommen float,
                                         KontoPhase3Anfang float, 
                                         Partei varchar(50),
-                                        LPNundKPNbund varchar (10),
-                                        SPNundPPNbund varchar (10),
+                                        LPNundKPNbund varchar (100),
+                                        SPNundPPNbund varchar (100),
                                         KoalitionsBund varchar (100),
-                                        Zufriedenheitsfrage2 varchar (10),
-                                        Zufriedenheitsfrage3 varchar (10),
+                                        Zufriedenheitsfrage2 varchar (40),
+                                        Zufriedenheitsfrage3 varchar (40),
                                         Spende float,
                                         KontoPhase4Anfang float, 
+                                        KontoPhase4Ende float,
+                                        KontoPhase5Anfang float, 
+                                        BrandBetroffen varchar (10),
+                                        BrandSchadenKosten float,
+                                        KontoNachBrandSchaden float,
+                                        Zufriedenheitsfrage4 varchar (40),
+                                        Spende2 float,
+                                        KontoPhase5Ende float,
                                         NuterInfo_Abgeschlossen varchar(4),
                                         Runde_1_Erledigt varchar(4),
                                         Runde_2_Erledigt varchar(4),
@@ -166,7 +174,7 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         SMSSechzehnUhrMailUnixTime float, 
                                         SMSAchtzehnUhr varchar (4),
                                         SMSAchtzehnUhrMailZeit varchar(200),
-                                        SMSAchtzehnUhrMailUnixTime float 
+                                        SMSAchtzehnUhrMailUnixTime float
                                 )'''
 
         cursor.execute(create_script)
@@ -199,7 +207,7 @@ connection3 = psycopg2.connect(user='aipclfonwuiort',
 
 cursor3 = connection3.cursor()
 create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
-                                       AppStart varchar(200),
+                                        AppStart varchar(200),
                                         Nutzer_ID varchar(12),
                                         Alter_Nutzer integer,
                                         Geschlecht varchar(10),
@@ -224,13 +232,21 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Rest_Einkommen float,
                                         KontoPhase3Anfang float, 
                                         Partei varchar(50),
-                                        LPNundKPNbund varchar (10),
-                                        SPNundPPNbund varchar (10),
+                                        LPNundKPNbund varchar (100),
+                                        SPNundPPNbund varchar (100),
                                         KoalitionsBund varchar (100),
-                                        Zufriedenheitsfrage2 varchar (10),
-                                        Zufriedenheitsfrage3 varchar (10),
+                                        Zufriedenheitsfrage2 varchar (40),
+                                        Zufriedenheitsfrage3 varchar (40),
                                         Spende float,
                                         KontoPhase4Anfang float, 
+                                        KontoPhase4Ende float,
+                                        KontoPhase5Anfang float, 
+                                        BrandBetroffen varchar (10),
+                                        BrandSchadenKosten float,
+                                        KontoNachBrandSchaden float,
+                                        Zufriedenheitsfrage4 varchar (40),
+                                        Spende2 float,
+                                        KontoPhase5Ende float,
                                         NuterInfo_Abgeschlossen varchar(4),
                                         Runde_1_Erledigt varchar(4),
                                         Runde_2_Erledigt varchar(4),
@@ -346,8 +362,7 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         SMSSechzehnUhrMailUnixTime float, 
                                         SMSAchtzehnUhr varchar (4),
                                         SMSAchtzehnUhrMailZeit varchar(200),
-                                        SMSAchtzehnUhrMailUnixTime float 
-                                )'''
+                                        SMSAchtzehnUhrMailUnixTime float )'''
 
 cursor3.execute(create_script)
 id_script = 'SELECT Nutzer_ID FROM Novaland'

@@ -59,7 +59,7 @@
     <body onload="time()"></body>
 <p class="p">
 
-Der Koalitionsvertrag zwischen {% if player.LPNundKPNbund == "Ja" %}LPN und KPN {% if player.SPNundPPNbund == "Ja" %}SPN und PPN{% endif %} ist unterzeichnet und das Regierungsprogramm für die kommenden 5 Jahre steht fest.
+Der Koalitionsvertrag zwischen {% if player.LPNundKPNbund == "Ja" %}LPN und KPN {% elif player.SPNundPPNbund == "Ja" %}SPN und PPN{% endif %} ist unterzeichnet und das Regierungsprogramm für die kommenden 5 Jahre steht fest.
 <br>
 <br>
 {% if player.LPNundKPNbund == "Ja" %}
@@ -70,14 +70,11 @@ Wie bereits in Ihren Wahlprogrammen angedeutet, planen die Regierungsparteien SP
 </p>
 
 <br>
-<br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
 <br>
 <br>
 <h2 class="h2"> </h2>
-
-
 {% endblock %}
 
 {% block script %}
@@ -87,7 +84,7 @@ Wie bereits in Ihren Wahlprogrammen angedeutet, planen die Regierungsparteien SP
 }
     function Next() {
         let Zeitp4s5 = (new Date() - starttime) / 1000;
-        liveSend({"Zeitp4s5": "Zeitp4s5", 'Zeitp4s5': Zeitp4s5});
+        liveSend({"ZeitP4S5": "ZeitP4S5", 'ZeitP4S5': Zeitp4s5});
         document.getElementById("form").submit();
     }
 </script>

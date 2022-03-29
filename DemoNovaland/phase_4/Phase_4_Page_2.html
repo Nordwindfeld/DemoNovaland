@@ -153,8 +153,9 @@
 {% block content %}
     <body onload="time()"></body>
     <div class="column1">
+    <p class="p">
     Willkommen zurück. Sie haben in der letzten Phase Wahlen gehabt und das hier sind die Ergebnisse:
-    <br>
+    </p>
     <br>
     <br>
 </div>
@@ -205,20 +206,12 @@
 <br>
 <br>
 <br>
-<br>
-
+<p class="p">
     Die {% Platzeins %} ist die stärkste Kraft.
     Gefolgt von der {% PlatzZwei %}.
     Die Partei {% PlatzDrei %} ist die dritt stärkste Kraft und die {% PlatzVier %} ist die schwächste Kraft.
-   <br>
 
-    <br>
-
-
-
-<br>
-<br>
-<br>
+</p>
 <br>
 <div class="column1">
 <button class='button' type='button' onclick='Next()'> Weiter </button>
@@ -235,8 +228,8 @@
    starttime = new Date();
 }
     function Next() {
-        let ZeitP3S1 = (new Date() - starttime) / 1000;
-        liveSend({"ZeitP3S1": "ZeitP3S1", 'ZeitP3S1': ZeitP3S1});
+        let ZeitP4S2 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP4S2": "ZeitP4S2", 'ZeitP4S2': ZeitP4S2});
         document.getElementById("form").submit();
     }
 </script>

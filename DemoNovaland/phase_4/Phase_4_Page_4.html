@@ -57,9 +57,7 @@
 
 {% block content %}
     <body onload="time()"></body>
-<br>
     <p class="p">Wie zufrieden sind Sie mit dem Wahlausgang und der Regierungsbildung in Novaland?
-<br>
 <br>
     {% formfields %}
 
@@ -84,7 +82,7 @@
 }
     function Next() {
         let Zeitp4s4 = (new Date() - starttime) / 1000;
-        liveSend({"Zeitp4s4": "Zeitp4s4", 'Zeitp4s4': Zeitp4s4});
+        liveSend({"ZeitP4S4": "ZeitP4S4", 'ZeitP4S4': Zeitp4s4});
         document.getElementById("form").submit();
     }
 </script>

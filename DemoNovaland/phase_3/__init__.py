@@ -61,7 +61,7 @@ class Player(BasePlayer):
 class Waiting_Site(Page):
     @staticmethod
     def is_displayed(player: Player):
-        Zeit = 14 * 60 * 60
+        Zeit = 0 * 60 * 60
         ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
                 datetime.now().time().minute * 60) + datetime.now().time().second
         differenz = Zeit - ProgrammTagZeit

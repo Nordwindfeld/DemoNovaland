@@ -56,8 +56,11 @@
 
 
 {% block content %}
-
-<br>
+    <body onload="time()"></body>
+    <p class="p">
+Wie zufrieden sind Sie mit der Leistung der Regierung während der Brände?
+</p>
+    {% formfields %}
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
@@ -70,7 +73,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP5S6 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S6": "ZeitP5S6", 'ZeitP5S6': ZeitP5S6});
         document.getElementById("form").submit();
     }
 </script>
