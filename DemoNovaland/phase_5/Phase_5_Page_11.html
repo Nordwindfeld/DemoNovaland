@@ -56,6 +56,15 @@
 
 
 {% block content %}
+     <body onload="time()"></body>
+<p class="p">
+    Wir sind nun am Ende unserer Zeit in Novaland angekommen. Sie verlassen diese Welt, die nicht wirklich existiert. Sie haben diese Zeit mit echten Menschen zusammen erlebt, deren Identität Sie nicht kennen und niemals kennenlernen werden.
+<br>
+Es steht Ihnen frei, über das, was Sie erlebt haben, mit anderen zu sprechen.
+<br>
+Gibt es etwas, das Sie uns noch schreiben möchten?
+</p>
+    {% formfields %}
 
 <br>
 <br>
@@ -70,7 +79,12 @@
 
 {% block script %}
 <script>
-    function Next(){
+ function time(){
+   starttime = new Date();
+}
+    function Next() {
+        let ZeitP5S11 = (new Date() - starttime) / 1000;
+        liveSend({"ZeitP5S11": "ZeitP5S11", 'ZeitP5S11': ZeitP5S11});
         document.getElementById("form").submit();
     }
 </script>

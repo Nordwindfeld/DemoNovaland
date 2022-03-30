@@ -128,7 +128,7 @@ class Phase_4_Page_1(Page):
                                        database='dcoubsit8jsig0')
 
         cursor3 = connection3.cursor()
-        IDValue = [player.participant.code]
+        IDValue = [player.participant.label]
 
         Geschlecht = '''SELECT Geschlecht FROM Novaland WHERE nutzer_id = %s'''
         cursor3.execute(Geschlecht, IDValue)
@@ -213,7 +213,7 @@ class Phase_4_Page_1(Page):
 class Phase_4_Page_2(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        player.IDPlayer = player.participant.code
+        player.IDPlayer = player.participant.label
         connection = psycopg2.connect(user='aipclfonwuiort',
                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',

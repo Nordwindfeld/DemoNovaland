@@ -104,10 +104,10 @@ let starttime;
         Hauskosten = 1100;
         Konto = NettoEinkommen - Hauskosten;
         liveSend({"Haus": "Haus", "HausKosten": 1100, "HausArt": "freistehendes Haus"});
-        if (Konto > 400){
+        if (Konto >= 400){
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
-        if (Konto < 400){
+        if (Konto < 200){
             document.getElementById("Kontostand").innerHTML = "<br>" + "<p class='p'>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
                 + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Immobilie leider nicht leisten." + "</p>";
         }
@@ -117,10 +117,10 @@ let starttime;
         liveSend({"Haus": "Haus", 'HausKosten': 950, 'HausArt': "Reihenhaus"});
         Hauskosten = 950;
         Konto = NettoEinkommen - Hauskosten;
-        if (Konto > 400){
+        if (Konto >= 400){
             document.getElementById("Kontostand").innerHTML = "<br>" + "<p class='p'>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
-        if (Konto < 400){
+        if (Konto < 200){
             document.getElementById("Kontostand").innerHTML = "<br>" + "<p class='p'>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
                 + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Immobilie leider nicht leisten." + "</p>";
         }
@@ -130,10 +130,10 @@ let starttime;
         liveSend({"Haus": "Haus", 'HausKosten': 700, 'HausArt': "geräumige Wohnung"});
         Hauskosten = 700;
         Konto = NettoEinkommen - Hauskosten;
-        if (Konto > 400){
+        if (Konto >= 400){
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
-        if (Konto < 400){
+        if (Konto < 200){
             document.getElementById("Kontostand").innerHTML ="<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
                 + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Immobilie leider nicht leisten." + "</p>";
         }

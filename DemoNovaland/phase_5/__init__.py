@@ -24,6 +24,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    IDPlayer = models.StringField()
+
     # Seite 1
     Geschlecht = models.StringField()
     NettoEinkommen = models.FloatField()
@@ -32,7 +34,7 @@ class Player(BasePlayer):
     Mobilitaetskosten = models.FloatField()
     Resteinkommen = models.FloatField()
     Spende = models.FloatField()
-    KontoPhase5Anfang = models.FloatField() ###################
+    KontoPhase5Anfang = models.FloatField()  ###################
     KontoPhase5Ende = models.FloatField()
 
     # Seite 2
@@ -54,6 +56,28 @@ class Player(BasePlayer):
     # Seite 7
     Spende2 = models.FloatField()
 
+    # Seite 8
+    Spenden2Insgesamt = models.FloatField()
+
+    # Seite 9
+    SteuerFrage1 = models.StringField(
+        choices=[["Ja", "Ja"], ["Nein", "Nein"]],
+        label="",
+        widget=widgets.RadioSelect
+    )
+
+    # Seite 10
+    Vertrauensfrage1 = models.StringField(
+        choices=[["Volles Vertrauen", "Volles Vertrauen"], ["Leichtes Vertrauen", ""], ["Mitte", ""],
+                 ["Wenig Vertrauen", ""],
+                 ["Überhaupt kein Vertrauen", "Überhaupt kein Vertrauen"]],
+        label="",
+        widget=widgets.RadioSelect
+    )
+
+    # Seite 11
+    OffeneFrage = models.LongStringField()
+
     # Zeit
     S5P1Zeit = models.FloatField()
     S5P2Zeit = models.FloatField()
@@ -64,15 +88,19 @@ class Player(BasePlayer):
     S5P7Zeit = models.FloatField()
     S5P8Zeit = models.FloatField()
     S5P9Zeit = models.FloatField()
+    S5P10Zeit = models.FloatField()
+    S5P11Zeit = models.FloatField()
     UnixTimeP5S1 = models.FloatField()
     UnixTimeP5S2 = models.FloatField()
     UnixTimeP5S3 = models.FloatField()
     UnixTimeP5S4 = models.FloatField()
     UnixTimeP5S5 = models.FloatField()
-    UnixTimeP4S6 = models.FloatField()
+    UnixTimeP5S6 = models.FloatField()
     UnixTimeP5S7 = models.FloatField()
     UnixTimeP5S8 = models.FloatField()
     UnixTimeP5S9 = models.FloatField()
+    UnixTimeP5S10 = models.FloatField()
+    UnixTimeP5S11 = models.FloatField()
     Runde_5_Erledigt = models.StringField()
 
 
@@ -93,6 +121,8 @@ class Waiting_Site(Page):
 class Phase_5_Page_1(Page):
     @staticmethod
     def vars_for_template(player: Player):
+        player.IDPlayer = player.participant.label
+
         connection3 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                        host='ec2-3-216-113-109.compute-1.amazonaws.com',
@@ -100,7 +130,7 @@ class Phase_5_Page_1(Page):
                                        database='dcoubsit8jsig0')
 
         cursor3 = connection3.cursor()
-        IDValue = [player.participant.code]
+        IDValue = [player.participant.label]
 
         Geschlecht = '''SELECT Geschlecht FROM Novaland WHERE nutzer_id = %s'''
         cursor3.execute(Geschlecht, IDValue)
@@ -198,10 +228,10 @@ class Phase_5_Page_2(Page):
     @staticmethod
     def vars_for_template(player: Player):
         connection4 = psycopg2.connect(user='aipclfonwuiort',
-                                      password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                                      host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                                      port='5432',
-                                      database='dcoubsit8jsig0')
+                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                       port='5432',
+                                       database='dcoubsit8jsig0')
         cursor4 = connection4.cursor()
 
         IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
@@ -209,12 +239,17 @@ class Phase_5_Page_2(Page):
         ID = cursor4.fetchall()
         AlleSpenden = 0.0
         for ID in ID:
-            USERID = (str(str(ID).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]", "").replace("'", ''))
+            USERID = (str(str(ID).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
+                                                                                                               "").replace(
+                "'", ''))
             ScriptZahl = '''SELECT DISTINCT Spende From Novaland Where nutzer_id = %s'''
             Users = [USERID]
             cursor4.execute(ScriptZahl, Users)
             Spenden = cursor4.fetchone()
-            SpendenZahl = float(str(str(Spenden).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]", "").replace("'", ''))
+            SpendenZahl = float(
+                str(str(Spenden).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
+                                                                                                              "").replace(
+                    "'", ''))
             AlleSpenden = AlleSpenden + SpendenZahl
 
         player.SpendenInsgesamt = AlleSpenden
@@ -243,7 +278,7 @@ class Phase_5_Page_4(Page):
         NichtBetroffen = range(2, 250, 2)
         if player.id_in_group in betroffene:
             player.BrandBetroffen = "Ja"
-            player.BrandSchadenKosten = (player.KontoPhase5Anfang / 2) + player.Resteinkommen
+            player.BrandSchadenKosten = (player.KontoPhase5Anfang - player.Resteinkommen) / 2
             player.KontoNachBrandSchaden = player.KontoPhase5Anfang - player.BrandSchadenKosten
         if player.id_in_group in NichtBetroffen:
             player.BrandBetroffen = "Nein"
@@ -300,8 +335,42 @@ class Phase_5_Page_8(Page):
             player.S5P8Zeit = data["ZeitP5S8"]
             player.UnixTimeP5S8 = time.time()
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        connection5 = psycopg2.connect(user='aipclfonwuiort',
+                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                       port='5432',
+                                       database='dcoubsit8jsig0')
+        cursor5 = connection5.cursor()
+
+        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
+        cursor5.execute(IDBekommen)
+        ID = cursor5.fetchall()
+        AlleSpenden2 = 0.0
+        for ID in ID:
+            USERID = (str(str(ID).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
+                                                                                                               "").replace(
+                "'", ''))
+            ScriptZahl = '''SELECT DISTINCT Spende2 From Novaland Where nutzer_id = %s'''
+            Users = [USERID]
+            cursor5.execute(ScriptZahl, Users)
+            Spenden2 = cursor5.fetchone()
+            SpendenZahl2 = float(
+                str(str(Spenden2).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
+                                                                                                               "").replace(
+                    "'", ''))
+            AlleSpenden2 = AlleSpenden2 + SpendenZahl2
+
+        player.Spenden2Insgesamt = AlleSpenden2
+        cursor5.close()
+        connection5.close()
+
 
 class Phase_5_Page_9(Page):
+    form_model = 'player'
+    form_fields = ['SteuerFrage1']
+
     @staticmethod
     def live_method(player: Player, data):
         if "ZeitP5S9" in data:
@@ -310,6 +379,9 @@ class Phase_5_Page_9(Page):
 
 
 class Phase_5_Page_10(Page):
+    form_model = 'player'
+    form_fields = ['Vertrauensfrage1']
+
     @staticmethod
     def live_method(player: Player, data):
         if "ZeitP5S10" in data:
@@ -318,7 +390,60 @@ class Phase_5_Page_10(Page):
 
 
 class Phase_5_Page_11(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['OffeneFrage']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        player.Runde_5_Erledigt = "Ja"
+        connection3 = psycopg2.connect(user='aipclfonwuiort',
+                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                       port='5432',
+                                       database='dcoubsit8jsig0')
+
+        cursor3 = connection3.cursor()
+
+        update_rows2 = '''UPDATE Novaland SET KontoPhase5Anfang = %s, Spende = %s, SpendeIngesamt = %s, BrandBetroffen = %s, BrandSchadenKosten = %s, KontoNachBrandSchaden, Zufriedenheitsfrage4 = %s, Spende2 = %s, Spenden2Insgesamt = %s, KontoPhase5Ende = %s, Steuerfrage1 = %s, Vertrauensfrage1 = %s, Runde_5_Erledigt = %s, Zeit_P5S1 = %s, Zeit_P5S2 = %s, Zeit_P5S3 = %s, Zeit_P5S4 = %s, Zeit_P5S5 = %s, Zeit_P5S6 = %s, Zeit_P5S7 = %s, Zeit_P5S8 = %s, Zeit_P5S9 = %s, Zeit_P5S10 = %s, UnixTime_P5S1 = %s, UnixTime_P5S2 = %s, UnixTime_P5S3 = %s, UnixTime_P5S4 = %s, UnixTime_P5S5 = %s, UnixTime_P5S6 = %s, UnixTime_P5S7 = %s, UnixTime_P5S8 = %s, UnixTime_P5S9 = %s, UnixTime_P5S10 = %s WHERE nutzer_id = %s'''
+        update_values2 = (
+            player.KontoPhase5Anfang, player.Spende, player.SpendenInsgesamt, player.BrandBetroffen, player.BrandSchadenKosten, player.KontoNachBrandSchaden, player.ZufriedenheitsFrage4, player.Spende2, player.Spenden2Insgesamt, player.KontoPhase5Ende, player.SteuerFrage1, player.Vertrauensfrage1,
+            player.Runde_5_Erledigt, player.S5P1Zeit, player.S5P2Zeit,
+            player.S5P3Zeit, player.S5P4Zeit,
+            player.S5P5Zeit, player.S5P6Zeit, player.S5P7Zeit, player.S5P8Zeit, player.S5P9Zeit, player.S5P10Zeit, player.UnixTimeP5S1,
+            player.UnixTimeP5S2, player.UnixTimeP5S3, player.UnixTimeP5S4, player.UnixTimeP5S5, player.UnixTimeP5S6,
+            player.UnixTimeP5S7, player.UnixTimeP4S8, player.UnixTimeP5S9, player.UnixTimeP5S10, player.IDPlayer)
+        cursor3.execute(update_rows2, update_values2)
+
+        connection3.commit()
+        cursor3.close()
+        connection3.close()
+
+    @staticmethod
+    def live_method(player: Player, data):
+        if "ZeitP5S11" in data:
+            player.S5P11Zeit = data["ZeitP5S11"]
+            player.UnixTimeP5S11 = time.time()
 
 
-page_sequence = [Waiting_Site, Phase_5_Page_1, Phase_5_Page_2, Phase_5_Page_3, Phase_5_Page_4, Phase_5_Page_5, Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_8, Phase_5_Page_9, Phase_5_Page_10, Phase_5_Page_11]
+class Phase_5_Page_12(Page):
+    @staticmethod
+    def vars_for_template(player: Player):
+        connection4 = psycopg2.connect(user='aipclfonwuiort',
+                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                       port='5432',
+                                       database='dcoubsit8jsig0')
+
+        cursor4 = connection4.cursor()
+
+        update_rows3 = '''UPDATE Novaland SET OffeneFrage = %s, Zeit_P5S11 = %s, UnixTime_P5S11 = %s WHERE nutzer_id = %s'''
+        update_values3 = (player.OffeneFrage, player.S5P11Zeit, player.UnixTimeP5S11, player.IDPlayer)
+        cursor4.execute(update_rows3, update_values3)
+
+        connection4.commit()
+        cursor4.close()
+        connection4.close()
+
+
+page_sequence = [Waiting_Site, Phase_5_Page_1, Phase_5_Page_2, Phase_5_Page_3, Phase_5_Page_4, Phase_5_Page_5,
+                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_8, Phase_5_Page_9, Phase_5_Page_10, Phase_5_Page_11, Phase_5_Page_12]

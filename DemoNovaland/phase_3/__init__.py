@@ -87,7 +87,7 @@ class Phase_3_Page_1(Page):
                                        database='dcoubsit8jsig0')
 
         cursor3 = connection3.cursor()
-        IDValue = [player.participant.code]
+        IDValue = [player.participant.label]
 
         Geschlecht = '''SELECT Geschlecht FROM Novaland WHERE nutzer_id = %s'''
         cursor3.execute(Geschlecht, IDValue)
@@ -95,7 +95,7 @@ class Phase_3_Page_1(Page):
 
         NettoEinkommen = '''SELECT Netto_Einkommen FROM Novaland WHERE nutzer_id = %s'''
         cursor3.execute(NettoEinkommen, IDValue)
-        player.NettoEinkommen = float((str(str(cursor3.fetchone()).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]", "").replace("'", '')))
+        player.NettoEinkommen = float((str(cursor3.fetchone()).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]", "").replace("'", ''))
 
         Wohnungskosten = '''SELECT Wohnungskosten FROM Novaland WHERE nutzer_id = %s'''
         cursor3.execute(Wohnungskosten, IDValue)
@@ -160,7 +160,7 @@ class Phase_3_Page_2(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        player.IDPlayer = player.participant.code
+        player.IDPlayer = player.participant.label
 
 
 class Phase_3_Page_3(Page):

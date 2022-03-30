@@ -49,16 +49,21 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         KoalitionsBund varchar (100),
                                         Zufriedenheitsfrage2 varchar (40),
                                         Zufriedenheitsfrage3 varchar (40),
-                                        Spende float,
                                         KontoPhase4Anfang float, 
                                         KontoPhase4Ende float,
                                         KontoPhase5Anfang float, 
+                                        Spende float,
+                                        SpendeInsgesamt float,                                        
                                         BrandBetroffen varchar (10),
                                         BrandSchadenKosten float,
                                         KontoNachBrandSchaden float,
                                         Zufriedenheitsfrage4 varchar (40),
                                         Spende2 float,
+                                        Spenden2Insgesamt float,
                                         KontoPhase5Ende float,
+                                        Steuerfrage1 varchar (10),
+                                        Vertrauensfrage1 varchar (30),
+                                        OffeneFrage varchar (1000),
                                         NuterInfo_Abgeschlossen varchar(4),
                                         Runde_1_Erledigt varchar(4),
                                         Runde_2_Erledigt varchar(4),
@@ -151,6 +156,8 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Zeit_P5S9 varchar(10),
                                         UnixTime_P5S10 float,
                                         Zeit_P5S10 varchar(10),
+                                        UnixTime_P5S11 float,
+                                        Zeit_P5S11 varchar(10),
                                         ZwoelfUhrMail varchar (4),
                                         ZwoelUhrMailZeit varchar (200),
                                         ZwoelfUhrMailUnixTime float,
@@ -238,6 +245,7 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Zufriedenheitsfrage2 varchar (40),
                                         Zufriedenheitsfrage3 varchar (40),
                                         Spende float,
+                                        SpendeInsgesamt float,
                                         KontoPhase4Anfang float, 
                                         KontoPhase4Ende float,
                                         KontoPhase5Anfang float, 
@@ -246,7 +254,11 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         KontoNachBrandSchaden float,
                                         Zufriedenheitsfrage4 varchar (40),
                                         Spende2 float,
+                                        Spenden2Insgesamt float,
                                         KontoPhase5Ende float,
+                                        Steuerfrage1 varchar (10),
+                                        Vertrauensfrage1 varchar (30),
+                                        OffeneFrage varchar (1000),
                                         NuterInfo_Abgeschlossen varchar(4),
                                         Runde_1_Erledigt varchar(4),
                                         Runde_2_Erledigt varchar(4),
@@ -339,6 +351,8 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Zeit_P5S9 varchar(10),
                                         UnixTime_P5S10 float,
                                         Zeit_P5S10 varchar(10),
+                                        UnixTime_P5S11 float,
+                                        Zeit_P5S11 varchar(10),
                                         ZwoelfUhrMail varchar (4),
                                         ZwoelUhrMailZeit varchar (200),
                                         ZwoelfUhrMailUnixTime float,
@@ -516,7 +530,7 @@ class NutzerInfo_Page_1(Page):
     def vars_for_template(player: Player):
         DatumHeute = datetime.now()
         player.ZeitStartapp = str(DatumHeute)
-        player.NutzerID = player.participant.code
+        player.NutzerID = player.participant.label
         player.test = ID_URL
 
     @staticmethod
@@ -638,7 +652,8 @@ class Page_7(Page):
 class Page_8(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        player.URL = "https://pilotnovaland2022.herokuapp.com/join/" + player.participant.code
+        player.URL = "http://localhost:8000/room/DemoNovaland?participant_label=" + player.participant.label
+
 
         connection4 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',

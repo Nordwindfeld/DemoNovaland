@@ -11,8 +11,8 @@ ROOMS = [
     dict(
         name="DemoNovaland",
         display_name="Novaland",
-        participant_label_file='DemoNovaland\Platzhalter.txt',
-        use_secure_urls=True
+        participant_label_file='_static/Platzhalter.txt',
+        use_secure_urls=False
     )
 ]
 

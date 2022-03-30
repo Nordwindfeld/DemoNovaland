@@ -56,31 +56,25 @@
 
 
 {% block content %}
-    <body onload="time()"></body>
-<p class="p">Inwieweit vertrauen Sie darauf, dass die Regierung Novalands die zusätzlichen Steuergelder effektiv einsetzt?</p>
+<p class="p">
+Wir bedanken uns sehr herzlich bei Ihnen für Ihre Zeit, die Sie hier mit uns verbracht haben.
 <br>
-    {% formfields %}
+    <br>
+Prof. Dr. Achim Goerres
+    <br>
+Dr. Jan Karem Höhne
+    <br>
+Jakob Kemper
 <br>
-<br>
-<button class='button' type='button' onclick='Next()'> Weiter </button>
-<br>
+    <br>
+Von der Universität Duisburg-Essen
+
+</p>
+
 <br>
 <br>
 <h2 class="h2"> </h2>
 
 
-{% endblock %}
-
-{% block script %}
-<script>
- function time(){
-   starttime = new Date();
-}
-    function Next() {
-        let ZeitP5S10 = (new Date() - starttime) / 1000;
-        liveSend({"ZeitP5S10": "ZeitP5S10", 'ZeitP5S10': ZeitP5S10});
-        document.getElementById("form").submit();
-    }
-</script>
 {% endblock %}
 

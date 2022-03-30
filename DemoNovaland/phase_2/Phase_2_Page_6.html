@@ -96,10 +96,10 @@ let starttime;
         liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 200, 'MobilitaetArt': "Eigenes Auto"});
         MoebilitaetsKosten = 200;
         Konto = NettoEinkommen - MoebilitaetsKosten;
-        if (Konto > 100){
+        if (Konto >= 0){
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "</p>" +"<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
-        if (Konto < 100){
+        if (Konto < 0){
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
                 + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten." + "</p>";
             }
@@ -109,10 +109,10 @@ let starttime;
         liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 150, 'MobilitaetArt': "Auto mieten"});
         MoebilitaetsKosten = 150;
         Konto = NettoEinkommen - MoebilitaetsKosten;
-        if (Konto > 100) {
+        if (Konto >= 0) {
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
-        if (Konto < 100) {
+        if (Konto < 0) {
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
                 + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten." + "</p>";
         }
@@ -122,10 +122,10 @@ let starttime;
         liveSend({'Mobilitaet': 'Mobilitaet', 'MobilitaetKosten': 50, 'MobilitaetArt': "Fahrrad"});
          MoebilitaetsKosten = 50;
          Konto = NettoEinkommen - MoebilitaetsKosten;
-        if (Konto > 100) {
+        if (Konto >= 0) {
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>" + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
         }
-        if (Konto < 100) {
+        if (Konto < 0) {
             document.getElementById("Kontostand").innerHTML = "<p class='p'>" + "<br>" + "Ihr Kontostand beträgt noch: " + Konto + " Novas" + "<br>"
                 + "Da Sie noch mehrere Ausgaben haben, können Sie sich diese Art der Fortbewegung leider nicht leisten." + "</p>";
         }

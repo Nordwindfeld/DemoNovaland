@@ -120,7 +120,7 @@ class Waiting_Site(Page):
 class Phase_2_page_1(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        player.IDPlayer = player.participant.code
+        player.IDPlayer = player.participant.label
 
         niedrig = range(1, 250, 3)
         mittel = range(2, 250, 3)
