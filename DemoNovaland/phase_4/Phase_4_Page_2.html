@@ -207,10 +207,50 @@
 <br>
 <br>
 <p class="p">
+<!-- Hier werden alle verschiedenen Szenarios an Text definiert -->
+<!----------------------------- Zwei mal Platz Eins -->
+    {% if player.PlatzEinsZweiAktiv == "Ja" and player.PlatzZweiZweiAktiv == "Nein" and player.PlatzDreiZweiAktiv == "Nein" %}
+    Die zwei Parteien: {% player.PlatzEinsZwei %} sind die stärkste Kraft.
+    Gefolgt von der {% PlatzDrei %}.
+    Die {% PlatzVier %} ist die schwächste Kraft.
+
+<!----------------------------- Zwei mal Platz Zwei -->
+    {% elif player.PlatzEinsZweiAktiv == "Nein" and player.PlatzZweiZweiAktiv == "Ja" and player.PlatzDreiZweiAktiv == "Nein" %}
+    Die {% Platzeins %} ist die stärkste Kraft.
+    Gefolgt von den zwei Parteien: {% player.PlatzZweiZwei %}.
+    Die {% PlatzVier %} ist die schwächste Kraft.
+
+<!----------------------------- Zwei mal Eins und Zwei mal Zwei - Dieses Szenario wird denke ich nicht stattfinden da dann die Funktion drunter geschalten wird aber zur Sicherheit. -->
+    {% elif player.PlatzEinsZweiAktiv == "Ja" and player.PlatzZweiZweiAktiv == "Ja" and player.PlatzDreiZweiAktiv == "Nein" %}
+    Die zwei Parteien: {% player.PlatzEinsZwei %}.
+    Gefolgt von den zwei Parteien: {% player.PlatzDreiZwei %}.
+
+<!----------------------------- Zwei mal Platz 1 und zwei mal Platz drei -->
+    {% elif player.PlatzEinsZweiAktiv == "Ja" and player.PlatzZweiZweiAktiv == "Nein" and player.PlatzDreiZweiAktiv == "Ja" %}
+    Die zwei Parteien: {% player.PlatzEinsZwei %}.
+    Gefolgt von den zwei Parteien: {% player.PlatzDreiZwei %}.
+
+<!----------------------------- Zwei mal Platz Drei -->
+    {% elif player.PlatzEinsZweiAktiv == "Nein" and player.PlatzZweiZweiAktiv == "Nein" and player.PlatzDreiZweiAktiv == "Ja" %}
+    Die {% Platzeins %} ist die stärkste Kraft.
+    Gefolgt von der {% PlatzZwei %}. Die zwei Parteien {% player.PlatzDreiZwei %} haben den gleichen Ergebnisstand und haben die wenigsten Stimmen.
+
+<!----------------------------- Drei mal Platz Eins -->
+    {% elif player.PlatzEinsDreiAktiv == "Ja" %}
+     Die drei Parteien: {% player.PlatzEinsDrei %} sind alle gleich auf.
+     Die Partei {% PlatzVier %}
+
+<!----------------------------- Drei mal Platz Zwei -->
+    {% elif player.PlatzZweiDreiAktiv == "Ja" %}
+    Die Partei {% Platzeins %} ist die stärkste Kraft.
+    Die drei Parteien {% player.PlatzZweiDreiAktiv %} sind gleich auf.
+
+
+    {% else %}
     Die {% Platzeins %} ist die stärkste Kraft.
     Gefolgt von der {% PlatzZwei %}.
     Die Partei {% PlatzDrei %} ist die dritt stärkste Kraft und die {% PlatzVier %} ist die schwächste Kraft.
-
+    {% endif %}
 </p>
 <br>
 <div class="column1">

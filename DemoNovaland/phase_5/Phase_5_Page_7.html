@@ -64,10 +64,9 @@ Die Organisation „Novaland hilft“ sammelt weiterhin Spenden, um den Opfern d
 </p>
 
 <br>
-<div id="Delete">
-    <p class="p"> Spendenfrage 2:</p>
-    <br>
-    Ich spende <input id="Spende2" type="number"> Novas
+ <div id="Delete">
+    Spendenfrage:
+    Ich spende <input id="Spende5" type="number"> Novas
             <br>
             <br>
             <button class="button" type="button" onclick="Spende2()"> Spenden</button>
@@ -87,16 +86,16 @@ Die Organisation „Novaland hilft“ sammelt weiterhin Spenden, um den Opfern d
 
 {% block script %}
 <script>
-let KontoStand = js_vars.KontoNachBrandSchaden
+KontoStand = js_vars.Kontostand2
  function time(){
-     let starttime = new Date();
+     starttime = new Date();
  }
 
 function Spende2(){
-    let Spende = document.getElementById("Spende2").value
-    liveSend({"Spende2": "SpendenZahl2", "SpendenZahl2": Spende});
-    let NachSpende = Kontostand - Spende;
-    if (NachSpende > 0) {
+    let Spende3 = document.getElementById("Spende5").value;
+    liveSend({"Spende2": "SpendenZahl2", "SpendenZahl2": Spende3});
+    let NachSpende = Kontostand - Spende3;
+    if (NachSpende >= 0) {
         document.getElementById("Delete").innerHTML = "<p class='p'>" + "Sie haben " + Spende + " Novas gespendet" + "<br>" + "Ihnen bleiben noch " + NachSpende + " Novas übrig." + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
     }
     if (NachSpende < 0) {

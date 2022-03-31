@@ -59,8 +59,40 @@
     <body onload="time()"></body>
     <p class="p">
 Seitdem Sie das letzte Mal in Novaland waren, ist ein Monat vergangen.
+        {% if player.Brutto_Einkommen == 5000 and player.KoalitionsBund == "LPN und KPN" %}
+        <br> Sie sind von dem Koalitionsbündnis der LPN und KPN betroffen und ihr Bruttoeinkommen steigert sich um 10%.
+        <br> Daher liegt ihr Ersparnis diesen Monat bei <strong>{% xReich %}</strong> Novas. Ihr Konto beträgt nun <strong>{% player.KontoPhase5Anfang %}</strong>.
 
-Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas. Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>. Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen. Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase5Anfang %}</strong>.
+        {% elif player.Brutto_Einkommen == 5000 and player.KoalitionsBund == "SPN und PPN" %}
+        <br> Sie sind von dem Koalitionsbündnis der SPN und PPN betroffen und ihr Bruttoeinkommen mindert sich um 5%.
+        <br> Daher liegt ihr Erspartes diesen Monat bei <strong>{% xReich %}</strong> Novas. Ihr Konto beträgt nun <strong>{% player.KontoPhase5Anfang %}</strong>
+
+        {% elif player.Brutto_Einkommen == 5000 and player.KoalitionsBund == "Gleichstand" %}
+        Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas. Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>. Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen. Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase5Anfang %}</strong>.
+
+        {% elif player.Brutto_Einkommen == 2850 and player.KoalitionsBund == "LPN und KPN" %}
+        Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas. Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>. Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen. Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase5Anfang %}</strong>.
+
+        {% elif player.Brutto_Einkommen == 2850 and player.KoalitionsBund == "SPN und PPN" %}
+        Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas. Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>. Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen. Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase5Anfang %}</strong>.
+
+        {% elif player.Brutto_Einkommen == 2850 and player.KoalitionsBund == "Gleichstand" %}
+        Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas. Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>. Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen. Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase5Anfang %}</strong>.
+
+        {% elif player.Brutto_Einkommen == 2000 and player.KoalitionsBund == "LPN und KPN" %}
+        <br> Sie sind von dem Koalitionsbündnis der LPN und KPN betroffen und ihr Bruttoeinkommen mindert sich um 5%.
+        <br> Daher liegt ihr Ersparnis diesen Monat bei <strong>{% xArm %}</strong> Novas. Ihr Konto beträgt nun <strong>{% player.KontoPhase5Anfang %}</strong>
+
+        {% elif player.Brutto_Einkommen == 2000 and player.KoalitionsBund == "SPN und PPN" %}
+        <br> Sie sind von dem Koalitionsbündnis der LPN und KPN betroffen und ihr Bruttoeinkommen steigert sich um 10%.
+        <br> Daher liegt ihr Ersparnis diesen Monat bei <strong>{% xArm %}</strong> Novas. Ihr Konto beträgt nun <strong>{% player.KontoPhase5Anfang %}</strong>
+
+        {% elif player.Brutto_Einkommen == 2000 and player.KoalitionsBund == "Gleichstand" %}
+        Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas. Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>. Das heißt, dass Sie diesen Monat <strong>{% player.Resteinkommen %}</strong> Novas sparen. Sie haben jetzt ein Vermögen von <strong>{% player.KontoPhase5Anfang %}</strong>.
+
+        {% endif %}
+
+
 </p>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>

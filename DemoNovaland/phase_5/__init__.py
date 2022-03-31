@@ -36,6 +36,8 @@ class Player(BasePlayer):
     Spende = models.FloatField()
     KontoPhase5Anfang = models.FloatField()  ###################
     KontoPhase5Ende = models.FloatField()
+    KoalitionsBund = models.StringField()
+    Brutto_Einkommen = models.FloatField()
 
     # Seite 2
     SpendenInsgesamt = models.FloatField()
@@ -180,13 +182,54 @@ class Phase_5_Page_1(Page):
                                                                                                           "").replace(
                 "]", "").replace("'", '')))
 
+        KoalitionsBund = '''SELECT KoalitionsBund FROM Novaland WHERE nutzer_id = %s'''
+        cursor3.execute(KoalitionsBund, IDValue)
+        player.KoalitionsBund = (str(str(cursor3.fetchone()).replace("(", "").replace(")", "").replace(",", "")).replace("[",
+                                                                                                          "").replace(
+                "]", "").replace("'", ''))
+
+        Brutto_Einkommen = '''SELECT Brutto_Einkommen FROM Novaland WHERE nutzer_id = %s'''
+        cursor3.execute(Brutto_Einkommen, IDValue)
+        player.Brutto_Einkommen = (
+            float(str(str(cursor3.fetchone()).replace("(", "").replace(")", "").replace(",", "")).replace("[",
+                                                                                                          "").replace(
+                "]", "").replace("'", '')))
+
         connection3.commit()
         cursor3.close()
         connection3.close()
 
-        player.KontoPhase5Anfang = player.Resteinkommen * 4 - player.Spende
+        ### Die Szenarien durchgehen, wenn ein bestimmtes Bündnis entstanden ist
+        if player.KoalitionsBund == "LPN und KPN":
+            if player.Brutto_Einkommen == 5000:
+                x = player.NettoEinkommen - player.Resteinkommen
+                xReich = (player.NettoEinkommen * 0.1) + player.NettoEinkommen - x
+                player.KontoPhase5Anfang = player.Resteinkommen * 3 - player.Spende + xReich
 
-        ##########################
+            if player.Brutto_Einkommen == 2850:
+                player.KontoPhase5Anfang = player.Resteinkommen * 4 - player.Spende
+
+            if player.Brutto_Einkommen == 2000:
+                x = player.NettoEinkommen - player.Resteinkommen
+                xArm = player.NettoEinkommen - (player.NettoEinkommen * 0.05) - x
+                player.KontoPhase5Anfang = player.Resteinkommen * 3 - player.Spende - xArm
+
+        elif player.KoalitionsBund == "SPN und PPN":
+            if player.Brutto_Einkommen == 5000:
+                x = player.NettoEinkommen - player.Resteinkommen
+                xReich = player.NettoEinkommen - (player.NettoEinkommen * 0.05) - x
+                player.KontoPhase5Anfang = player.Resteinkommen * 3 - player.Spende - xReich
+
+            if player.Brutto_Einkommen == 2850:
+                player.KontoPhase5Anfang = player.Resteinkommen * 4 - player.Spende
+
+            if player.Brutto_Einkommen == 2000:
+                x = player.NettoEinkommen - player.Resteinkommen
+                xArm = (player.NettoEinkommen * 0.1) + player.NettoEinkommen - x
+                player.KontoPhase5Anfang = player.Resteinkommen * 3 - player.Spende + xArm
+
+        elif player.KoalitionsBund == "Gleichstand":
+            player.KontoPhase5Anfang = player.Resteinkommen * 4 - player.Spende
 
         if player.Wohnungskosten == 1100:
             Wohnung_satz = "einem großen Haus zu wohnen"
@@ -211,10 +254,15 @@ class Phase_5_Page_1(Page):
         if player.Mobilitaetskosten == 50:
             Mobilitaetssatz = "das sie Fahrrad fahren und bei Bedarf öffentliche Verkehrsmittel verwenden"
 
+        if player.KontoPhase5Anfang < 0:
+            player.KontoPhase5Anfang = 0
+
         return {
             "Wohnung": Wohnung_satz,
             "Verpflegung": Verpflegungssatz,
-            "Mobilitaet": Mobilitaetssatz
+            "Mobilitaet": Mobilitaetssatz,
+            "xArm": xArm,
+            "xReicht": xReich
         }
 
     @staticmethod
@@ -239,18 +287,23 @@ class Phase_5_Page_2(Page):
         ID = cursor4.fetchall()
         AlleSpenden = 0.0
         for ID in ID:
-            USERID = (str(str(ID).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
-                                                                                                               "").replace(
-                "'", ''))
-            ScriptZahl = '''SELECT DISTINCT Spende From Novaland Where nutzer_id = %s'''
+            USERID = str(
+                str(ID).replace("(", "").replace(")", "").replace(",", "").replace("[", "").replace("]", "").replace(
+                    "'", ''))
+            ScriptZahl = '''SELECT Spende From Novaland Where nutzer_id = %s'''
             Users = [USERID]
             cursor4.execute(ScriptZahl, Users)
             Spenden = cursor4.fetchone()
-            SpendenZahl = float(
-                str(str(Spenden).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
-                                                                                                              "").replace(
-                    "'", ''))
-            AlleSpenden = AlleSpenden + SpendenZahl
+
+            try:
+                SpendenZahl = float(
+                    str(Spenden).replace("(", "").replace(")", "").replace(",", "").replace("[", "").replace("]",
+                                                                                                             "").replace(
+                        "'", ''))
+                AlleSpenden = AlleSpenden + SpendenZahl
+            except:
+                SpendenZahl = 0
+                AlleSpenden = AlleSpenden + SpendenZahl
 
         player.SpendenInsgesamt = AlleSpenden
         cursor4.close()
@@ -279,7 +332,11 @@ class Phase_5_Page_4(Page):
         if player.id_in_group in betroffene:
             player.BrandBetroffen = "Ja"
             player.BrandSchadenKosten = (player.KontoPhase5Anfang - player.Resteinkommen) / 2
-            player.KontoNachBrandSchaden = player.KontoPhase5Anfang - player.BrandSchadenKosten
+            if player.KontoPhase5Anfang >= player.BrandSchadenKosten:
+                player.KontoNachBrandSchaden = player.KontoPhase5Anfang - player.BrandSchadenKosten
+            if player.KontoPhase5Anfang < player.BrandSchadenKosten:
+                player.BrandSchadenKosten = player.KontoPhase5Anfang
+                player.KontoNachBrandSchaden = player.KontoPhase5Anfang - player.BrandSchadenKosten
         if player.id_in_group in NichtBetroffen:
             player.BrandBetroffen = "Nein"
             player.BrandSchadenKosten = 0
@@ -324,8 +381,12 @@ class Phase_5_Page_7(Page):
     @staticmethod
     def js_vars(player: Player):
         return {
-            "Kontostand": player.KontoNachBrandSchaden,
+            "Kontostand2": player.KontoNachBrandSchaden,
         }
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return False
 
 
 class Phase_5_Page_8(Page):
@@ -365,6 +426,10 @@ class Phase_5_Page_8(Page):
         player.Spenden2Insgesamt = AlleSpenden2
         cursor5.close()
         connection5.close()
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return False
 
 
 class Phase_5_Page_9(Page):
@@ -406,10 +471,13 @@ class Phase_5_Page_11(Page):
 
         update_rows2 = '''UPDATE Novaland SET KontoPhase5Anfang = %s, Spende = %s, SpendeIngesamt = %s, BrandBetroffen = %s, BrandSchadenKosten = %s, KontoNachBrandSchaden, Zufriedenheitsfrage4 = %s, Spende2 = %s, Spenden2Insgesamt = %s, KontoPhase5Ende = %s, Steuerfrage1 = %s, Vertrauensfrage1 = %s, Runde_5_Erledigt = %s, Zeit_P5S1 = %s, Zeit_P5S2 = %s, Zeit_P5S3 = %s, Zeit_P5S4 = %s, Zeit_P5S5 = %s, Zeit_P5S6 = %s, Zeit_P5S7 = %s, Zeit_P5S8 = %s, Zeit_P5S9 = %s, Zeit_P5S10 = %s, UnixTime_P5S1 = %s, UnixTime_P5S2 = %s, UnixTime_P5S3 = %s, UnixTime_P5S4 = %s, UnixTime_P5S5 = %s, UnixTime_P5S6 = %s, UnixTime_P5S7 = %s, UnixTime_P5S8 = %s, UnixTime_P5S9 = %s, UnixTime_P5S10 = %s WHERE nutzer_id = %s'''
         update_values2 = (
-            player.KontoPhase5Anfang, player.Spende, player.SpendenInsgesamt, player.BrandBetroffen, player.BrandSchadenKosten, player.KontoNachBrandSchaden, player.ZufriedenheitsFrage4, player.Spende2, player.Spenden2Insgesamt, player.KontoPhase5Ende, player.SteuerFrage1, player.Vertrauensfrage1,
+            player.KontoPhase5Anfang, player.Spende, player.SpendenInsgesamt, player.BrandBetroffen,
+            player.BrandSchadenKosten, player.KontoNachBrandSchaden, player.ZufriedenheitsFrage4, player.Spende2,
+            player.Spenden2Insgesamt, player.KontoPhase5Ende, player.SteuerFrage1, player.Vertrauensfrage1,
             player.Runde_5_Erledigt, player.S5P1Zeit, player.S5P2Zeit,
             player.S5P3Zeit, player.S5P4Zeit,
-            player.S5P5Zeit, player.S5P6Zeit, player.S5P7Zeit, player.S5P8Zeit, player.S5P9Zeit, player.S5P10Zeit, player.UnixTimeP5S1,
+            player.S5P5Zeit, player.S5P6Zeit, player.S5P7Zeit, player.S5P8Zeit, player.S5P9Zeit, player.S5P10Zeit,
+            player.UnixTimeP5S1,
             player.UnixTimeP5S2, player.UnixTimeP5S3, player.UnixTimeP5S4, player.UnixTimeP5S5, player.UnixTimeP5S6,
             player.UnixTimeP5S7, player.UnixTimeP4S8, player.UnixTimeP5S9, player.UnixTimeP5S10, player.IDPlayer)
         cursor3.execute(update_rows2, update_values2)
@@ -446,4 +514,5 @@ class Phase_5_Page_12(Page):
 
 
 page_sequence = [Waiting_Site, Phase_5_Page_1, Phase_5_Page_2, Phase_5_Page_3, Phase_5_Page_4, Phase_5_Page_5,
-                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_8, Phase_5_Page_9, Phase_5_Page_10, Phase_5_Page_11, Phase_5_Page_12]
+                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_8, Phase_5_Page_9, Phase_5_Page_10, Phase_5_Page_11,
+                 Phase_5_Page_12]

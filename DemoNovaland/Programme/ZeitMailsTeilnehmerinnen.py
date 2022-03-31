@@ -52,7 +52,7 @@ def zwoelfUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/join/"
+            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -128,7 +128,7 @@ def vierzehnUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/join/"
+            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -204,7 +204,7 @@ def SechzehnUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/join/"
+            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -280,7 +280,7 @@ def achzehnUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://pilotnovaland2022.herokuapp.com/join/"
+            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \

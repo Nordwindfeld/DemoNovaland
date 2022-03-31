@@ -100,7 +100,7 @@ function Spende(){
     let Spende = document.getElementById("Spende2").value
     liveSend({"Spende": "SpendenZahl", "SpendenZahl": Spende});
     NachSpende = Kontostand - Spende;
-    if (NachSpende > 0) {
+    if (NachSpende >= 0) {
         document.getElementById("Delete").innerHTML = "<p class='p'>" + "Sie haben " + Spende + " Novas gespendet" + "<br>" + "Ihnen bleiben noch " + NachSpende + " Novas übrig." + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
     }
     if (NachSpende < 0) {

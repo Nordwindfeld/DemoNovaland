@@ -28,7 +28,7 @@ def SMSZwoelfUhr():
         auth_token = '886c2a41182d3f41aa6bbe17b850e553'
         client = Client(account_sid, auth_token)
         code = NutzerID
-        Url = "https://pilotnovaland2022.herokuapp.com/join/" + code
+        Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + code
         msg = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
               "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
               "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -72,7 +72,7 @@ def SMSVierZehnUhr():
         auth_token = '886c2a41182d3f41aa6bbe17b850e553'
         client = Client(account_sid, auth_token)
         code = NutzerID
-        Url = "https://pilotnovaland2022.herokuapp.com/join/" + code
+        Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + code
         msg = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
               "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
               "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -115,7 +115,7 @@ def SMSSechZehnUhr():
         auth_token = '886c2a41182d3f41aa6bbe17b850e553'
         client = Client(account_sid, auth_token)
         code = NutzerID
-        Url = "https://pilotnovaland2022.herokuapp.com/join/" + code
+        Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + code
         msg = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
               "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
               "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -158,7 +158,7 @@ def SMSAchtZehnUhr():
         auth_token = '886c2a41182d3f41aa6bbe17b850e553'
         client = Client(account_sid, auth_token)
         code = NutzerID
-        Url = "https://pilotnovaland2022.herokuapp.com/join/" + code
+        Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + code
         msg = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
               "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
               "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
