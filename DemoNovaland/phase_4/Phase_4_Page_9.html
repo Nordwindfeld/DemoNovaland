@@ -69,7 +69,7 @@
     <br>
         <div id="Delete">
     Spendenfrage:
-    Ich spende <input id="Spende2" type="number"> Novas
+    Ich spende <input id="Spende2" type="number" pattern="[0-9]*" step="1" min="0" oninput="this.value = Math.abs(this.value)"> Novas
             <br>
             <br>
             <button class="button" type="button" onclick="Spende()"> Spenden</button>
@@ -98,10 +98,12 @@ Kontostand = js_vars.Kontostand
 
 function Spende(){
     let Spende = document.getElementById("Spende2").value
+    if(!Spende){Spende = 0}
     liveSend({"Spende": "SpendenZahl", "SpendenZahl": Spende});
     NachSpende = Kontostand - Spende;
     if (NachSpende >= 0) {
         document.getElementById("Delete").innerHTML = "<p class='p'>" + "Sie haben " + Spende + " Novas gespendet" + "<br>" + "Ihnen bleiben noch " + NachSpende + " Novas übrig." + "</p>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+        document.getElementById("ZuViel").innerHTML = " ";
     }
     if (NachSpende < 0) {
         document.getElementById("ZuViel").innerHTML = "<p class='p'>" + "Sie können nicht mehr Geld spenden, als Sie besitzen." + "</p>";

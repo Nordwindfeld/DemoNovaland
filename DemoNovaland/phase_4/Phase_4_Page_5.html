@@ -58,7 +58,7 @@
 {% block content %}
     <body onload="time()"></body>
 <p class="p">
-
+{% if player.KoalitionsBund != "Gleichstand" %}
 Der Koalitionsvertrag zwischen {% if player.LPNundKPNbund == "Ja" %}LPN und KPN {% elif player.SPNundPPNbund == "Ja" %}SPN und PPN{% endif %} ist unterzeichnet und das Regierungsprogramm für die kommenden 5 Jahre steht fest.
 <br>
 <br>
@@ -66,6 +66,8 @@ Der Koalitionsvertrag zwischen {% if player.LPNundKPNbund == "Ja" %}LPN und KPN 
 Wie bereits in Ihren Wahlprogrammen angedeutet, planen die Regierungsparteien LPN und KPN eine Senkung der sozialstaatlichen Leistungen. Dies umfasst insbesondere die Einschränkung der Versorgung bei Arbeitslosigkeit und Krankheit und Kürzungen im Bildungsbereich. Zudem werden die Einkommen der Menschen mit hohem Einkommen um etwa 10% steigen und die Einkommen der Menschen mit niedrigem Einkommen um etwa 5%. sinken. Auf Drängen der KPN werden die Zuzugsmöglichkeiten für Ausländer erschwert.
 {% elif player.SPNundPPNbund == "Ja" %}
 Wie bereits in Ihren Wahlprogrammen angedeutet, planen die Regierungsparteien SPN und PPN eine Erhöhung der sozialstaatlichen Leistungen. Dies umfasst insbesondere den Ausbau der Versorgung bei Arbeitslosigkeit und Krankheit und die Erhöhung der Ausgaben im Bildungsbereich. Zudem werden die Einkommen der Menschen mit hohem Einkommen um etwa 5% sinken und die Einkommen der Menschen mit niedrigem Einkommen um etwa 10%. steigen. Auf Drängen der SPN werden die Zuzugsmöglichkeiten für Ausländer erschwert.
+{% endif %}
+{% else %} Daher kam es auch zu keinen Koalitionsvertrag.
 {% endif %}
 </p>
 

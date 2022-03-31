@@ -66,7 +66,7 @@ Die Organisation „Novaland hilft“ sammelt weiterhin Spenden, um den Opfern d
 <br>
  <div id="DeleteZwei">
     Spendenfrage:
-    Ich spende <input id="Spende5" type="number"> Novas
+    Ich spende <input id="Spende5" type="number" pattern="[0-9]*" step="1" min="0" oninput="this.value = Math.abs(this.value)"> Novas
             <br>
             <br>
             <button class="button" type="button" onclick="Spenden()"> Spenden</button>
@@ -93,6 +93,7 @@ let KontoStand2 = js_vars.Kontostand2
 
 function Spenden(){
     let Spende3 = document.getElementById("Spende5").value;
+    if(!Spende3){Spende3 = 0}
     liveSend({"Spende2": "SpendenZahl2", "SpendenZahl2": Spende3});
     let NachSpenden = KontoStand2 - Spende3;
     if (NachSpenden >= 0) {
@@ -104,7 +105,7 @@ function Spenden(){
 }
     function Next() {
         let ZeitP5S7 = (new Date() - starttime) / 1000;
-        liveSend({"ZeitP5S7": ZeitP5S7, "ZeitP5S7Zeit": ZeitP5S7});
+        liveSend({"ZeitP5S7": ZeitP5S7, "ZeitP5S7Zeit": ZeitP5S7})
         document.getElementById("form").submit();
     }
 </script>

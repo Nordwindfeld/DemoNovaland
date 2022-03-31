@@ -439,7 +439,6 @@ class Phase_5_Page_7(Page):
             player.Spende2 = float(data["SpendenZahl2"])
             player.KontoPhase5Ende = player.KontoNachBrandSchaden - player.Spende2
             SpendenSchicken()
-            player.S5P7Zeit = data["ZeitP5S7Zeit"]
 
 
 class Phase_5_Page_8(Page):
