@@ -4,3 +4,6 @@
 otree==5.7.2
 psycopg2>=2.8.4
 sentry-sdk>=0.7.9
+django
+gunicorn
+django-heroku
