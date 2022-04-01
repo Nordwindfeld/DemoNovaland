@@ -565,5 +565,5 @@ class Phase_5_Page_12(Page):
 
 
 page_sequence = [Waiting_Site, Phase_5_Page_1, Phase_5_Page_2, Phase_5_Page_3, Phase_5_Page_4, Phase_5_Page_5,
-                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_8, Phase_5_Page_9, Phase_5_Page_10, Phase_5_Page_11,
+                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_9, Phase_5_Page_8, Phase_5_Page_10, Phase_5_Page_11,
                  Phase_5_Page_12]
