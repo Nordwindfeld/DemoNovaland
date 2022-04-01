@@ -676,7 +676,7 @@ class Page_7(Page):
 class Page_8(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        player.URL = "http://localhost:8000/room/DemoNovaland?participant_label=" + player.participant.label
+        player.URL = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + player.participant.label
 
 
         connection4 = psycopg2.connect(user='aipclfonwuiort',
