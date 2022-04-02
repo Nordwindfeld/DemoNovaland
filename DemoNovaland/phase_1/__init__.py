@@ -1,8 +1,5 @@
 from otree.api import *
-import smtplib
 import psycopg2
-import ssl
-from email import *
 from datetime import *
 from email_validator import validate_email, EmailNotValidError
 import time
@@ -410,8 +407,6 @@ ID_Alle = str(id_value)
 cursor3.close()
 connection3.close()
 
-ID_URL = ""
-
 
 class C(BaseConstants):
     NAME_IN_URL = 'Novaland'
@@ -555,7 +550,7 @@ class NutzerInfo_Page_1(Page):
         DatumHeute = datetime.now()
         player.ZeitStartapp = str(DatumHeute)
         player.NutzerID = player.participant.label
-        player.test = ID_URL
+
 
     @staticmethod
     def live_method(player: Player, data):
