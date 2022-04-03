@@ -85,7 +85,12 @@ Viele Bewohnerinnen und Bewohner Novalands sind von den Bränden betroffen und h
     function Next() {
         let ZeitP5S4 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S4": "ZeitP5S4", 'ZeitP5S4': ZeitP5S4});
-        document.getElementById("form").submit();
+    }
+
+     function liveRecv(data) {
+        if (data['type'] == 'P5S4Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

@@ -102,8 +102,13 @@ function Schulden(){
 
     function Next(){
     let TimeFirstRoundPhase7 = (new Date() - starttime)/1000;
-        liveSend({'ZeitPhaseEinsSiebteSeite': 'ZeitPhaseEinsSiebteSeite', 'Phase1Seite7Zeit': TimeFirstRoundPhase7});
-        document.getElementById("form").submit();
+        liveSend({'ZeitPhaseEinsSiebteSeite': 'ZeitPhaseEinsSiebteSeite', 'Phase1Seite7Zeit': TimeFirstRoundPhase7});;
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P1S7Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

@@ -306,6 +306,8 @@ class Phase_5_Page_1(Page):
         if "ZeitP5S1" in data:
             player.S5P1Zeit = data["ZeitP5S1"]
             player.UnixTimeP5S1 = time.time()
+            P5S1Zeit = dict(type='P5S1Weiter')
+            return {0: P5S1Zeit}
 
 
 class Phase_5_Page_2(Page):
@@ -350,6 +352,8 @@ class Phase_5_Page_2(Page):
         if "ZeitP5S2" in data:
             player.S5P2Zeit = data["ZeitP5S2"]
             player.UnixTimeP5S2 = time.time()
+            P5S2Zeit = dict(type='P5S2Weiter')
+            return {0: P5S2Zeit}
 
 
 class Phase_5_Page_3(Page):
@@ -358,6 +362,8 @@ class Phase_5_Page_3(Page):
         if "ZeitP5S3" in data:
             player.S5P3Zeit = data["ZeitP5S3"]
             player.UnixTimeP5S3 = time.time()
+            P5S3Zeit = dict(type='P5S3Weiter')
+            return {0: P5S3Zeit}
 
 
 class Phase_5_Page_4(Page):
@@ -383,6 +389,8 @@ class Phase_5_Page_4(Page):
         if "ZeitP5S4" in data:
             player.S5P4Zeit = data["ZeitP5S4"]
             player.UnixTimeP5S4 = time.time()
+            P5S4Zeit = dict(type='P5S4Weiter')
+            return {0: P5S4Zeit}
 
 
 class Phase_5_Page_5(Page):
@@ -391,6 +399,8 @@ class Phase_5_Page_5(Page):
         if "ZeitP5S5" in data:
             player.S5P5Zeit = data["ZeitP5S5"]
             player.UnixTimeP5S5 = time.time()
+            P5S5Zeit = dict(type='P5S5Weiter')
+            return {0: P5S5Zeit}
 
 
 class Phase_5_Page_6(Page):
@@ -402,6 +412,8 @@ class Phase_5_Page_6(Page):
         if "ZeitP5S6" in data:
             player.S5P6Zeit = data["ZeitP5S6"]
             player.UnixTimeP5S6 = time.time()
+            P5S6Zeit = dict(type='P5S6Weiter')
+            return {0: P5S6Zeit}
 
 
 class Phase_5_Page_7(Page):
@@ -416,6 +428,8 @@ class Phase_5_Page_7(Page):
         if "ZeitP5S7" in data:
             player.S5P7Zeit = data["ZeitP5S7Zeit"]
             player.UnixTimeP5S7 = time.time()
+            page7Zeit = dict(type='Page7Zeit')
+            return {0: page7Zeit}
 
         def SpendenSchicken():
             player.Runde_5_Erledigt = "Ja"
@@ -447,6 +461,8 @@ class Phase_5_Page_8(Page):
         if "ZeitP5S8" in data:
             player.S5P8Zeit = data["ZeitP5S8"]
             player.UnixTimeP5S8 = time.time()
+            P5S8Zeit = dict(type='P5S8Weiter')
+            return {0: P5S8Zeit}
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -493,6 +509,8 @@ class Phase_5_Page_9(Page):
         if "ZeitP5S9" in data:
             player.S5P9Zeit = data["ZeitP5S9"]
             player.UnixTimeP5S9 = time.time()
+            P5S9Zeit = dict(type='P5S9Weiter')
+            return {0: P5S9Zeit}
 
 
 class Phase_5_Page_10(Page):
@@ -504,6 +522,8 @@ class Phase_5_Page_10(Page):
         if "ZeitP5S10" in data:
             player.S5P10Zeit = data["ZeitP5S10"]
             player.UnixTimeP5S10 = time.time()
+            P5S10Zeit = dict(type='P5S10Weiter')
+            return {0: P5S10Zeit}
 
 
 class Phase_5_Page_11(Page):
@@ -540,6 +560,8 @@ class Phase_5_Page_11(Page):
         if "ZeitP5S11" in data:
             player.S5P11Zeit = data["ZeitP5S11"]
             player.UnixTimeP5S11 = time.time()
+            P5S11Zeit = dict(type='P5S11Weiter')
+            return {0: P5S11Zeit}
         if "OffeneFrage" in data:
             player.OffeneFrage = data["OffeneFrageAntwort"]
 

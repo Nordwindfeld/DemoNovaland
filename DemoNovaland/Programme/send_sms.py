@@ -2,6 +2,7 @@ import psycopg2
 from twilio.rest import Client
 from datetime import *
 from datetime import time
+import requests
 
 
 def SMSZwoelfUhr():
@@ -155,15 +156,23 @@ def SMSAchtZehnUhr():
         SMS = cursor4.fetchone()
         To_SMS = str(SMS).replace("(", "").replace(")", "").replace(",", "").replace("'", '')
         account_sid = 'ACbaa9b853b0eac4db6a4728dd0deb738f'
-        auth_token = '886c2a41182d3f41aa6bbe17b850e553'
+        auth_token = '97ec70c4436040e9a14a0316e27bcf78'
         client = Client(account_sid, auth_token)
         code = NutzerID
-        Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + code
+        api_key = "1aca2f603ca8b4d9d78c01412837f3fe7e582"
+        url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + code
+        api_url = f"https://cutt.ly/api/api.php?key={api_key}&short={url}"
+        data = requests.get(api_url).json()["url"]
+        if data["status"] == 7:
+            shortened_url = data["shortLink"]
+            URL = str(shortened_url).replace("(", "").replace(")", "").replace(",", "").replace("[", "").replace("]", "").replace("'", '').replace(" ", "")
+        else:
+            print("[!] Error Shortening URL:", data)
         msg = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
               "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
               "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
-              "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + Url + " " \
-                                                                                                           "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
+              "Um an der zweiten Runde teilnehmen zu können, müssen Sie auf diesen Link klicken: " + URL + " " \
+                                                                                                                     "\n\nDamit Sie sich einlogen können müssen Sie einfach diesen Code eingeben: " + code + \
               "\n\nWir bedanken uns bei ihnen recht herzlich!\n\n Universität Duisburg"
         try:
             message = client.messages.create(
@@ -182,7 +191,7 @@ Zeit_Programm = datetime.now().time()
 ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
         datetime.now().time().minute * 60) + datetime.now().time().second
 
-Datum_Studie = date(2022, 3, 21)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
+Datum_Studie = date(2022, 4, 2)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
 zwoelfUhrZeit = time(12, 0, 0)
 ZeitZwoelf = 12 * 60 * 60
 vierzehnUhrZeit = time(14, 0, 0)
@@ -190,7 +199,7 @@ ZeitVierzehnUhr = 14 * 60 * 60
 SechZehnUhrZeit = time(16, 0, 0)
 ZeitSechzehnUhr = 16 * 60 * 60
 achtzehnUhrzeit = time(18, 0, 0)
-ZeitAchtZehnUhr = 18 * 3600
+ZeitAchtZehnUhr = 12 * 3600
 
 differenzZwoelf = ZeitZwoelf - ProgrammTagZeit
 differenzVierzehn = ZeitVierzehnUhr - ProgrammTagZeit

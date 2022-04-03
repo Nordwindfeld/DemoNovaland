@@ -83,7 +83,11 @@ Auf dem Heimweg von der Arbeit stürzen sie unglücklich und verletzen sich am F
     function Next(){
         let ZeitP2S8 = (new Date() - starttime)/1000;
         liveSend({"ZeitP2S8": "ZeitP2S8",'ZeitP2S8': ZeitP2S8});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P2S8Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

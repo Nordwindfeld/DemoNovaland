@@ -120,7 +120,11 @@ function niedrig(){
     function Next(){
         let ZeitP2S2 = (new Date() - starttime)/1000;
         liveSend({'ZeitP2S2':'ZeitP2S2', 'ZeitP2S2Time': ZeitP2S2});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P2S2Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

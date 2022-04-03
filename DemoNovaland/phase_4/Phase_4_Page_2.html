@@ -270,7 +270,11 @@
     function Next() {
         let ZeitP4S2 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP4S2": "ZeitP4S2", 'ZeitP4S2': ZeitP4S2});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P4S2Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

@@ -88,7 +88,12 @@ Die zweite Gruppe (etwa 20 %) ist selbst nicht in Novaland geboren und hat minde
     function Next(){
     let TimeFirstRoundPhase3 = (new Date() - starttime)/1000;
         liveSend({'ZeitPhaseEinsDritteSeite': 'ZeitPhaseEinsDritteSeite', 'Phase1Seite3Zeit': TimeFirstRoundPhase3});
-        document.getElementById("form").submit();
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P1S3Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

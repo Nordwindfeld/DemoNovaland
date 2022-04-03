@@ -608,6 +608,8 @@ class Page_1(Page):
         if "ZeitPhaseEinsErsteSeite" in data:
             player.PhaseEinsSeiteEins = data['Phase1Seite1Zeit']
             player.UnixTimeP1S1 = time.time()
+            P1S1Zeit = dict(type='P1S1Weiter')
+            return {0: P1S1Zeit}
 
 
 class Page_2(Page):
@@ -616,6 +618,8 @@ class Page_2(Page):
         if "ZeitPhaseEinsZweiteSeite" in data:
             player.PhaseEinsSeiteZwei = data['Phase1Seite2Zeit']
             player.UnixTimeP1S2 = time.time()
+            P1S2Weiter = dict(type='P1S2Weiter')
+            return {0: P1S2Weiter}
 
 
 class Page_3(Page):
@@ -624,6 +628,8 @@ class Page_3(Page):
         if "ZeitPhaseEinsDritteSeite" in data:
             player.PhaseEinsSeiteDrei = data['Phase1Seite3Zeit']
             player.UnixTimeP1S3 = time.time()
+            P1S3Weiter = dict(type='P1S3Weiter')
+            return {0: P1S3Weiter}
 
 
 class Page_4(Page):
@@ -632,6 +638,8 @@ class Page_4(Page):
         if "ZeitPhaseEinsVierteSeite" in data:
             player.PhaseEinsSeiteVier = data['Phase1Seite4Zeit']
             player.UnixTimeP1S4 = time.time()
+            P1S4Weiter = dict(type='P1S4Weiter')
+            return {0: P1S4Weiter}
 
 
 class Page_5(Page):
@@ -640,6 +648,8 @@ class Page_5(Page):
         if "ZeitPhaseEinsFuenfeSeite" in data:
             player.PhaseEinsSeiteFuenf = data['Phase1Seite5Zeit']
             player.UnixTimeP1S5 = time.time()
+            P1S5Weiter = dict(type='P1S5Weiter')
+            return {0: P1S5Weiter}
         if "Frage1" in data:
             player.Frage_1 = data["Frage1Antwort"]
 
@@ -650,6 +660,8 @@ class Page_6(Page):
         if "ZeitPhaseEinsSechsteSeite" in data:
             player.PhaseEinsSeiteSechs = data['Phase1Seite6Zeit']
             player.UnixTimeP1S6 = time.time()
+            P1S6Weiter = dict(type='P1S6Weiter')
+            return {0: P1S6Weiter}
         if "Frage2" in data:
             player.Frage_2 = data["Frage2Antwort"]
 
@@ -662,6 +674,8 @@ class Page_7(Page):
         if "ZeitPhaseEinsSiebteSeite" in data:
             player.PhaseEinsSeiteSieben = data['Phase1Seite7Zeit']
             player.UnixTimeP1S7 = time.time()
+            P1S7Weiter = dict(type='P1S7Weiter')
+            return {0: P1S7Weiter}
 
         if "Frage3" in data:
             player.Frage_3 = data["Frage3Antwort"]

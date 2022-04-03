@@ -165,6 +165,8 @@ class Phase_2_Page_2(Page):
         if "ZeitP2S2" in data:
             player.P2S2Zeit = data["ZeitP2S2Time"]
             player.UnixTimeP2S2 = time.time()
+            P2S2Zeit = dict(type='P2S2Weiter')
+            return {0: P2S2Zeit}
 
 
 class Phase_2_page_3(Page):
@@ -190,6 +192,8 @@ class Phase_2_page_3(Page):
         if "P2S3Zeit" in data:
             player.P2S3Zeit = data['P2S3Zeit']
             player.UnixTimeP2S3 = time.time()
+            P2S3Zeit = dict(type='P2S3Weiter')
+            return {0: P2S3Zeit}
 
 
 class Phase_2_Page_4(Page):
@@ -213,6 +217,8 @@ class Phase_2_Page_4(Page):
         if "ZeitP2S4" in data:
             player.P2S4Zeit = data["ZeitP2S4"]
             player.UnixTimeP2S4 = time.time()
+            P2S4Zeit = dict(type='P2S4Weiter')
+            return {0: P2S4Zeit}
 
 
 class Phase_2_Page_5(Page):
@@ -240,6 +246,8 @@ class Phase_2_Page_5(Page):
         if "ZeitP2S5" in data:
             player.P2S5Zeit = data["ZeitP2S5"]
             player.UnixTimeP2S5 = time.time()
+            P2S5Zeit = dict(type='P2S5Weiter')
+            return {0: P2S5Zeit}
 
 
 class Phase_2_Page_6(Page):
@@ -267,6 +275,8 @@ class Phase_2_Page_6(Page):
         if "ZeitP2S6" in data:
             player.P2S6Zeit = data["ZeitP2S6"]
             player.UnixTimeP2S6 = time.time()
+            P2S6Zeit = dict(type='P2S6Weiter')
+            return {0: P2S6Zeit}
 
 
 class Phase_2_Page_7(Page):
@@ -275,6 +285,8 @@ class Phase_2_Page_7(Page):
         if "ZeitP2S7" in data:
             player.P2S7Zeit = data["ZeitP2S7"]
             player.UnixTimeP2S7 = time.time()
+            P2S7Zeit = dict(type='P2S7Weiter')
+            return {0: P2S7Zeit}
 
 
 class Phase_2_Page_8(Page):
@@ -283,6 +295,8 @@ class Phase_2_Page_8(Page):
         if "ZeitP2S8" in data:
             player.P2S8Zeit = data["ZeitP2S8"]
             player.UnixTimeP2S8 = time.time()
+            P2S8Zeit = dict(type='P2S8Weiter')
+            return {0: P2S8Zeit}
 
 
 class Phase_2_Page_9(Page):
@@ -325,6 +339,8 @@ class Phase_2_Page_9(Page):
         if "ZeitP2S9" in data:
             player.P2S9Zeit = data["ZeitP2S9"]
             player.UnixTimeP2S9 = time.time()
+            P2S9Zeit = dict(type='P2S9Weiter')
+            return {0: P2S9Zeit}
 
 
 class Phase_2_Page_10(Page):
@@ -335,6 +351,8 @@ class Phase_2_Page_10(Page):
         if "ZeitP2S10" in data:
             player.P2S10Zeit = data["ZeitP2S10"]
             player.UnixTimeP2S10 = time.time()
+            P2S10Zeit = dict(type='P2S10Weiter')
+            return {0: P2S10Zeit}
 
 
 class Phase_2_Page_11(Page):

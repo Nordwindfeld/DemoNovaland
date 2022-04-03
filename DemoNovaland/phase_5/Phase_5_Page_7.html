@@ -106,8 +106,13 @@ function Spenden(){
     function Next() {
         let ZeitP5S7 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S7": ZeitP5S7, "ZeitP5S7Zeit": ZeitP5S7})
-        document.getElementById("form").submit();
     }
+
+    function liveRecv(data) {
+            if(data['type'] == 'Page7Zeit') {
+                document.getElementById("form").submit();
+            }
+        }
 </script>
 {% endblock %}
 

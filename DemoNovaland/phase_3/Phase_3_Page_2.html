@@ -87,7 +87,12 @@ Die zwei Oppositionsparteien SPN und PPN haben ebenfalls beschlossen, dass sie n
     function Next() {
         let ZeitP3S2 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP3S2": "ZeitP3S2", 'ZeitP3S2': ZeitP3S2});
-        document.getElementById("form").submit();
+
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P3S2Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

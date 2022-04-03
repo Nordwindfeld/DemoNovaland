@@ -79,7 +79,12 @@ Wie zufrieden sind Sie mit der Leistung der Regierung während der Brände?
     function Next() {
         let ZeitP5S6 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S6": "ZeitP5S6", 'ZeitP5S6': ZeitP5S6});
-        document.getElementById("form").submit();
+    }
+
+     function liveRecv(data) {
+        if (data['type'] == 'P5S6Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

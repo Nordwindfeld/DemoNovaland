@@ -89,7 +89,11 @@ Sie haben sich dafür entscheiden in <strong>{% Wohnung %}, {% Verpflegung %} un
     function Next(){
         let ZeitP2S9 = (new Date() - starttime)/1000;
         liveSend({"ZeitP2S9": "ZeitP2S9",'ZeitP2S9': ZeitP2S9});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P2S9Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

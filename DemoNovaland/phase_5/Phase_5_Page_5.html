@@ -83,7 +83,11 @@ Sie haben weiterhin ein Vermögen von <strong>{% player.KontoNachBrandSchaden %}
     function Next() {
         let ZeitP5S5 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S5": "ZeitP5S5", 'ZeitP5S5': ZeitP5S5});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P5S5Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

@@ -104,7 +104,12 @@ Je höher das Einkommen, desto höher die Steuern und Abgaben
     function Next(){
     let TimeFirstRoundPhase2 = (new Date() - starttime)/1000;
         liveSend({'ZeitPhaseEinsZweiteSeite': 'ZeitPhaseEinsZweiteSeite', 'Phase1Seite2Zeit': TimeFirstRoundPhase2});
-        document.getElementById("form").submit();
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P1S2Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

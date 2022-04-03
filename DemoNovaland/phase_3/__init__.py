@@ -157,6 +157,8 @@ class Phase_3_Page_2(Page):
         if "ZeitP3S2" in data:
             player.S3P2Zeit = data["ZeitP3S2"]
             player.UnixTimeP3S2 = time.time()
+            P3S2Zeit = dict(type='P3S2Weiter')
+            return {0: P3S2Zeit}
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -169,6 +171,8 @@ class Phase_3_Page_3(Page):
         if "ZeitP3S3" in data:
             player.S3P3Zeit = data["ZeitP3S3"]
             player.UnixTimeP3S3 = time.time()
+            P3S3Zeit = dict(type='P3S3Weiter')
+            return {0: P3S3Zeit}
 
 
 class Phase_3_Page_4(Page):
@@ -177,6 +181,8 @@ class Phase_3_Page_4(Page):
         if "ZeitP3S4" in data:
             player.S3P4Zeit = data["ZeitP3S4"]
             player.UnixTimeP3S4 = time.time()
+            P3S4Zeit = dict(type='P3S4Weiter')
+            return {0: P3S4Zeit}
 
 
 class Phase_3_Page_5(Page):
@@ -185,6 +191,8 @@ class Phase_3_Page_5(Page):
         if "ZeitP3S5" in data:
             player.S3P5Zeit = data["ZeitP3S5"]
             player.UnixTimeP3S5 = time.time()
+            P3S5Zeit = dict(type='P3S5Weiter')
+            return {0: P3S5Zeit}
 
 
 class Phase_3_Page_6(Page):
@@ -193,6 +201,8 @@ class Phase_3_Page_6(Page):
         if "ZeitP3S6" in data:
             player.S3P6Zeit = data["ZeitP3S6"]
             player.UnixTimeP3S6 = time.time()
+            P3S6Zeit = dict(type='P3S6Weiter')
+            return {0: P3S6Zeit}
 
 
 class Phase_3_Page_7(Page):
@@ -204,6 +214,8 @@ class Phase_3_Page_7(Page):
         if "ZeitP3S7" in data:
             player.S3P7Zeit = data["ZeitP3S7"]
             player.UnixTimeP3S7 = time.time()
+            P3S7Zeit = dict(type='P3S7Weiter')
+            return {0: P3S7Zeit}
 
 
 class Phase_3_Page_8(Page):
@@ -212,6 +224,8 @@ class Phase_3_Page_8(Page):
         if "ZeitP3S8" in data:
             player.S3P8Zeit = data["ZeitP3S8"]
             player.UnixTimeP3S8 = time.time()
+            P3S8Zeit = dict(type='P3S8Weiter')
+            return {0: P3S8Zeit}
 
     @staticmethod
     def vars_for_template(player: Player):

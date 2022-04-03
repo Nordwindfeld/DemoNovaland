@@ -97,7 +97,11 @@ Können Sie als Bürger oder Bürgerin in Novaland durch Wahlen Einfluss auf die
     function Next(){
         let TimeFirstRoundPhase6 = (new Date() - starttime)/1000;
         liveSend({'ZeitPhaseEinsSechsteSeite': 'ZeitPhaseEinsSechsteSeite', 'Phase1Seite6Zeit': TimeFirstRoundPhase6});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P1S6Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

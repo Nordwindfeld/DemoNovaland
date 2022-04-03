@@ -112,7 +112,11 @@ Seitdem Sie das letzte Mal in Novaland waren, ist ein Monat vergangen.
     function Next() {
         let ZeitP5S1 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S1": "ZeitP5S1", 'ZeitP5S1': ZeitP5S1});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P5S1Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

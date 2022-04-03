@@ -84,7 +84,11 @@
     function Next() {
         let Zeitp4s3 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP4S3": "ZeitP4S3", 'ZeitP4S3': Zeitp4s3});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P4S3Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

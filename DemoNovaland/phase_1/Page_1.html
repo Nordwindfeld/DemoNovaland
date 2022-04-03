@@ -98,7 +98,12 @@ Im nächsten Monat steht die folgende Parlamentswahl an, bei der Sie als Bürger
     function Next(){
     let TimeFirstRoundPhase1 = (new Date() - starttime)/1000;
         liveSend({'ZeitPhaseEinsErsteSeite': 'ZeitPhaseEinsErsteSeite', 'Phase1Seite1Zeit': TimeFirstRoundPhase1});
-        document.getElementById("form").submit();
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P1S1Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 

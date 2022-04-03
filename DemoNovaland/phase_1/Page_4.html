@@ -87,7 +87,12 @@ Bislang wurden etwa 5000 Personen und Unternehmen vor Gericht gestellt.
     function Next(){
     let TimeFirstRoundPhase7 = (new Date() - starttime)/1000;
         liveSend({'ZeitPhaseEinsVierteSeite': 'ZeitPhaseEinsVierteSeite', 'Phase1Seite4Zeit': TimeFirstRoundPhase7});
-        document.getElementById("form").submit();
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P1S4Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

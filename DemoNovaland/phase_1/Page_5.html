@@ -99,7 +99,12 @@ Sind Sie ein Staatsbürger bzw. eine Staatsbürgerin von Novaland?
     function Next(){
         let TimeFirstRoundPhase5 = (new Date() - starttime)/1000;
         liveSend({'ZeitPhaseEinsFuenfeSeite': 'ZeitPhaseEinsFuenfeSeite', 'Phase1Seite5Zeit': TimeFirstRoundPhase5});
-        document.getElementById("form").submit();
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P1S5Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

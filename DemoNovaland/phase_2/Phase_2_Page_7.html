@@ -83,7 +83,11 @@ Ihre Nachbarsfamilie mit drei Schulkinder erzählt Ihnen von der guten Ausstattu
     function Next(){
         let ZeitP2S7 = (new Date() - starttime)/1000;
         liveSend({"ZeitP2S7": "ZeitP2S7",'ZeitP2S7': ZeitP2S7});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P2S7Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

@@ -78,7 +78,11 @@ Unglücklicherweise haben sich die Brände aufgrund des trockenen Sommers und de
     function Next() {
         let ZeitP5S3 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S3": "ZeitP5S3", 'ZeitP5S3': ZeitP5S3});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P5S3Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

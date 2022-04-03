@@ -84,7 +84,11 @@ Die Zahl an Menschen, die ihr Zuhause und ihre Existenz verloren haben, steigt i
     function Next() {
         let Zeitp4s8 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP4S8": "ZeitP4S8", 'ZeitP4S8': Zeitp4s8});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P4S8Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

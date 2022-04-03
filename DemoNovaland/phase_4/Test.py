@@ -1,35 +1,11 @@
-import psycopg2
+import requests
 
-connection4 = psycopg2.connect(user='aipclfonwuiort',
-                               password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                               host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                               port='5432',
-                               database='dcoubsit8jsig0')
-cursor4 = connection4.cursor()
-
-IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
-cursor4.execute(IDBekommen)
-ID = cursor4.fetchall()
-AlleSpenden = 0.0
-for ID in ID:
-    USERID = str(str(ID).replace("(", "").replace(")", "").replace(",", "").replace("[", "").replace("]", "").replace("'", ''))
-    ScriptZahl = '''SELECT Spende From Novaland Where nutzer_id = %s'''
-    Users = [USERID]
-    cursor4.execute(ScriptZahl, Users)
-    Spenden = cursor4.fetchone()
-
-    try:
-        SpendenZahl = (str(Spenden).replace("(", "").replace(")", "").replace(",", "").replace("[", "").replace("]", "").replace("'", ''))
-        AlleSpenden = AlleSpenden + float(SpendenZahl)
-        print(USERID + " Spendenzahl " + SpendenZahl)
-        print(AlleSpenden)
-    except:
-        print("Lief schief")
-    else:
-        SpendenZahl = 0
-        AlleSpenden = AlleSpenden + SpendenZahl
-        print(AlleSpenden)
-
-print(AlleSpenden)
-cursor4.close()
-connection4.close()
+api_key = "1aca2f603ca8b4d9d78c01412837f3fe7e582"
+url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
+api_url = f"https://cutt.ly/api/api.php?key={api_key}&short={url}"
+data = requests.get(api_url).json()["url"]
+if data["status"] == 7:
+    shortened_url = data["shortLink"]
+    print("Shortened URL:", shortened_url)
+else:
+    print("[!] Error Shortening URL:", data)

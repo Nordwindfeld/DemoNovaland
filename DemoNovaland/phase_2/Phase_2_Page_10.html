@@ -83,7 +83,11 @@
     function Next(){
         let ZeitP2S10 = (new Date() - starttime)/1000;
         liveSend({"ZeitP2S10": "ZeitP2S10",'ZeitP2S10': ZeitP2S10});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P2S10Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

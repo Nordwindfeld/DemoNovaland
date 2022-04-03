@@ -139,12 +139,6 @@ class Waiting_Site(Page):
 
 class Phase_4_Page_1(Page):
     @staticmethod
-    def live_method(player: Player, data):
-        if "ZeitP4S1" in data:
-            player.S4P1Zeit = data["ZeitP4S1"]
-            player.UnixTimeP4S1 = time.time()
-
-    @staticmethod
     def vars_for_template(player: Player):
         connection3 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
@@ -233,6 +227,8 @@ class Phase_4_Page_1(Page):
         if "ZeitP4S1" in data:
             player.S4P1Zeit = data["ZeitP4S1"]
             player.UnixTimeP4S1 = time.time()
+            P4S1Zeit = dict(type='P4S1Weiter')
+            return {0: P4S1Zeit}
 
 
 class Phase_4_Page_2(Page):
@@ -458,6 +454,8 @@ class Phase_4_Page_2(Page):
         if "ZeitP4S2" in data:
             player.S4P2Zeit = data["ZeitP4S2"]
             player.UnixTimeP4S2 = time.time()
+            P4S2Zeit = dict(type='P4S2Weiter')
+            return {0: P4S2Zeit}
 
 
 class Phase_4_Page_3(Page):
@@ -484,6 +482,8 @@ class Phase_4_Page_3(Page):
         if "ZeitP4S3" in data:
             player.S4P3Zeit = data["ZeitP4S3"]
             player.UnixTimeP4S3 = time.time()
+            P4S3Zeit = dict(type='P4S3Weiter')
+            return {0: P4S3Zeit}
 
 
 class Phase_4_Page_4(Page):
@@ -495,6 +495,8 @@ class Phase_4_Page_4(Page):
         if "ZeitP4S4" in data:
             player.S4P4Zeit = data["ZeitP4S4"]
             player.UnixTimeP4S4 = time.time()
+            P4S4Zeit = dict(type='P4S4Weiter')
+            return {0: P4S4Zeit}
 
 
 class Phase_4_Page_5(Page):
@@ -503,6 +505,8 @@ class Phase_4_Page_5(Page):
         if "ZeitP4S5" in data:
             player.S4P5Zeit = data["ZeitP4S5"]
             player.UnixTimeP4S5 = time.time()
+            P4S5Zeit = dict(type='P4S5Weiter')
+            return {0: P4S5Zeit}
 
 
 class Phase_4_Page_6(Page):
@@ -514,6 +518,8 @@ class Phase_4_Page_6(Page):
         if "ZeitP4S6" in data:
             player.S4P6Zeit = data["ZeitP4S6"]
             player.UnixTimeP4S6 = time.time()
+            P4S6Zeit = dict(type='P4S6Weiter')
+            return {0: P4S6Zeit}
 
 
 class Phase_4_Page_7(Page):
@@ -522,6 +528,8 @@ class Phase_4_Page_7(Page):
         if "ZeitP4S7" in data:
             player.S4P7Zeit = data["ZeitP4S7"]
             player.UnixTimeP4S7 = time.time()
+            P4S7Zeit = dict(type='P4S7Weiter')
+            return {0: P4S7Zeit}
 
 
 class Phase_4_Page_8(Page):
@@ -530,6 +538,8 @@ class Phase_4_Page_8(Page):
         if "ZeitP4S8" in data:
             player.S4P8Zeit = data["ZeitP4S8"]
             player.UnixTimeP4S8 = time.time()
+            P4S8Zeit = dict(type='P4S8Weiter')
+            return {0: P4S8Zeit}
 
 
 class Phase_4_Page_9(Page):
@@ -548,6 +558,8 @@ class Phase_4_Page_9(Page):
         if "ZeitP4S9" in data:
             player.S4P9Zeit = data["ZeitP4S9"]
             player.UnixTimeP4S9 = time.time()
+            P4S9Zeit = dict(type='P4S9Weiter')
+            return {0: P4S9Zeit}
         if "Spende" in data:
             player.Spende = float(data["SpendenZahl"])
             player.KontoPhase4Ende = player.KontoPhase4Anfang - player.Spende

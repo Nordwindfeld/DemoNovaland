@@ -134,7 +134,11 @@ let starttime;
     function Next(){
         let ZeitP2S6 = (new Date() - starttime)/1000;
         liveSend({"ZeitP2S6": "ZeitP2S6",'ZeitP2S6': ZeitP2S6});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P2S6Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

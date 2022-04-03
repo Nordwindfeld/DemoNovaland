@@ -113,8 +113,12 @@ function Spende(){
     function Next(){
         let Zeitp4s9 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP4S9": "ZeitP4S9", 'ZeitP4S9': Zeitp4s9});
-        document.getElementById("form").submit();
+    }
 
+    function liveRecv(data) {
+        if (data['type'] == 'P4S9Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

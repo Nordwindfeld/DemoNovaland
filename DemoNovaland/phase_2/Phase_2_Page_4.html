@@ -149,7 +149,12 @@ let starttime;
     function Next(){
         let ZeitP2S4 = (new Date() - starttime)/1000;
         liveSend({"ZeitP2S4": "ZeitP2S4","ZeitP2S4": ZeitP2S4});
-        document.getElementById("form").submit();
+    }
+
+     function liveRecv(data) {
+        if (data['type'] == 'P2S4Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

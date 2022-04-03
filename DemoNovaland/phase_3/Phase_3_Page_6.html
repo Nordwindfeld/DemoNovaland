@@ -109,7 +109,11 @@ Die Einkommen der Menschen mit hohem Einkommen sollen um etwa 5% sinken und die 
     function Next() {
         let ZeitP3S6 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP3S6": "ZeitP3S6", 'ZeitP3S6': ZeitP3S6});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P3S6Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

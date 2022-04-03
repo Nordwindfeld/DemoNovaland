@@ -107,7 +107,12 @@ Die KPN will die Zuzugsmöglichkeiten für Ausländer einschränken.
     function Next() {
         let ZeitP3S4 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP3S4": "ZeitP3S4", 'ZeitP3S4': ZeitP3S4});
-        document.getElementById("form").submit();
+    }
+
+    function liveRecv(data) {
+        if (data['type'] == 'P3S4Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

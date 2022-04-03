@@ -81,7 +81,11 @@ Durch die zweite Spendenaktion von „Novaland hilft“ kamen {% player.Spenden2
     function Next() {
         let ZeitP5S8 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S8": "ZeitP5S8", 'ZeitP5S8': ZeitP5S8});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P5S8Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

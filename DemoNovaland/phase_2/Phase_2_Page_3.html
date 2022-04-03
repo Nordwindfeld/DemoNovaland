@@ -133,7 +133,12 @@ function niedrig(){
     function Next(){
         let P2S3Zeit = (new Date() - starttime)/1000;
         liveSend({'P2S3Zeit': 'P2S3Zeit','P2S3Zeit': P2S3Zeit});
-        document.getElementById("form").submit();
+    }
+
+ function liveRecv(data) {
+        if (data['type'] == 'P2S3Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

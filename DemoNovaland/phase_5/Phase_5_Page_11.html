@@ -111,7 +111,11 @@ Von der Universität Duisburg-Essen
         liveSend({"OffeneFrage": "OffeneFrage", "OffeneFrageAntwort": Antwort});
         let ZeitP5S11 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP5S11": "ZeitP5S11", 'ZeitP5S11': ZeitP5S11});
-        document.getElementById("form").submit();
+    }
+     function liveRecv(data) {
+        if (data['type'] == 'P5S11Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 
    var maximumChars= function(maxChars, input) {

@@ -98,7 +98,11 @@ Die Regierung, unter Führung von Mika Noel, hat das Militär veranlasst die bet
     function Next() {
         let Zeitp4s7 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP4S7": "ZeitP4S7", 'ZeitP4S7': Zeitp4s7});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P4S7Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

@@ -125,7 +125,11 @@ Sie haben eine Stimme. Welche Partei wählen Sie?
     function Next() {
         let ZeitP3S7 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP3S7": "ZeitP3S7", 'ZeitP3S7': ZeitP3S7});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P3S7Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}
