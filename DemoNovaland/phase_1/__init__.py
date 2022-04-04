@@ -22,7 +22,6 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Geschlecht varchar(10),
                                         Mail varchar(50),
                                         Telefonnummer varchar(50),
-                                        Seitenzahl integer,
                                         ChrisGeschlecht varchar(10),
                                         Frage_1_Staatsbuerger varchar(20),
                                         Frage_2_Einfluss varchar(20),
@@ -93,6 +92,8 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Zeit_P1S6 varchar (8),
                                         UnixTime_P1S7 float,
                                         Zeit_P1S7 varchar (8),
+                                        UnixTime_P2S1 float,
+                                        Zeit_P2S1 varchar (10),
                                         UnixTime_P2S2 float,
                                         Zeit_P2S2 varchar (10),
                                         UnixTime_P2S3 float,
@@ -229,7 +230,6 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Geschlecht varchar(10),
                                         Mail varchar(50),
                                         Telefonnummer varchar(50),
-                                        Seitenzahl integer,
                                         ChrisGeschlecht varchar(10),
                                         Frage_1_Staatsbuerger varchar(20),
                                         Frage_2_Einfluss varchar(20),
@@ -300,6 +300,8 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Zeit_P1S6 varchar (8),
                                         UnixTime_P1S7 float,
                                         Zeit_P1S7 varchar (8),
+                                        UnixTime_P2S1 float,
+                                        Zeit_P2S1 varchar (10),
                                         UnixTime_P2S2 float,
                                         Zeit_P2S2 varchar (10),
                                         UnixTime_P2S3 float,
@@ -556,6 +558,8 @@ class NutzerInfo_Page_1(Page):
     def live_method(player: Player, data):
         if "ZeitErsteRunde" in data:
             player.ZeitErsteSeite = data['Zeit1']
+            P0S1Zeit = dict(type='P0S1Weiter')
+            return {0: P0S1Zeit}
 
 
 class NutzerInfo_Page_2(Page):
@@ -573,6 +577,8 @@ class NutzerInfo_Page_2(Page):
     def live_method(player: Player, data):
         if "ZeitZweiteRunde" in data:
             player.ZeitZweiteSeite = data['Zeit2']
+            P0S2Zeit = dict(type='P0S2Weiter')
+            return {0: P0S2Zeit}
 
         if "Savedata" in data:
             player.NutzerInformationsSeiteAbgeschlossen = "Ja"
@@ -584,6 +590,7 @@ class NutzerInfo_Page_2(Page):
 class NutzerInfo_Page_3(Page):
     @staticmethod
     def vars_for_template(player: Player):
+        player.NutzerInformationsSeiteAbgeschlossen = "Ja"
         player.Loop = 0
         if player.Loop == 0:
             connectToRound0(player.ZeitStartapp, player.NutzerID, player.Nutzer_Alter,
@@ -686,7 +693,6 @@ class Page_8(Page):
     @staticmethod
     def vars_for_template(player: Player):
         player.URL = "https://DemoNovaland.herokuapp.com/InitializeParticipant/" + player.participant.label
-
 
         connection4 = psycopg2.connect(user='aipclfonwuiort',
                                        password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',

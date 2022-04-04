@@ -61,9 +61,11 @@
 
 
 {% block content %}
+        <div id="Change2">
     <p class='p'>
 Die dritte Phase in Novaland startet um 14h. Sie erhalten um 13.30h eine Einladung via Email/SMS. Bis gleich!
         </p>
+    </div>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
@@ -78,6 +80,11 @@ Die dritte Phase in Novaland startet um 14h. Sie erhalten um 13.30h eine Einladu
 <script>
     function Next(){
         document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'Phase2ZeitVorbei') {
+            document.getElementById("Change2").innerHTML = "<p class='p'>" + "Die Dritte Phase hat bereits begonnen und Sie können direkt weiterspielen." + "</p>"
+        }
     }
 </script>
 {% endblock %}

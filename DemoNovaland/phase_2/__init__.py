@@ -80,6 +80,7 @@ class Player(BasePlayer):
     # ----------------------
     # Zeit
     # ---------------------
+    P2S1Zeit = models.FloatField()
     P2S2Zeit = models.FloatField()
     P2S3Zeit = models.FloatField()
     P2S4Zeit = models.FloatField()
@@ -89,6 +90,7 @@ class Player(BasePlayer):
     P2S8Zeit = models.FloatField()
     P2S9Zeit = models.FloatField()
     P2S10Zeit = models.FloatField()
+    UnixTimeP2S1 = models.FloatField()
     UnixTimeP2S2 = models.FloatField()
     UnixTimeP2S3 = models.FloatField()
     UnixTimeP2S4 = models.FloatField()
@@ -117,7 +119,7 @@ class Waiting_Site(Page):
             return False
 
 
-class Phase_2_page_1(Page):
+class Phase_2_Page_1(Page):
     @staticmethod
     def vars_for_template(player: Player):
         player.IDPlayer = player.participant.label
@@ -140,6 +142,14 @@ class Phase_2_page_1(Page):
             "Brutto_Einkommen": player.Brutto_Einkommen,
             "Netto_Einkommen": player.Netto_Einkommen
         }
+
+    @staticmethod
+    def live_method(player: Player, data):
+        if "ZeitP2S1" in data:
+            player.P2S1Zeit = data["ZeitP2S1Time"]
+            player.UnixTimeP2S1 = time.time()
+            P2S1Zeit = dict(type='P2S1Weiter')
+            return {0: P2S1Zeit}
 
 
 class Phase_2_Page_2(Page):
@@ -169,7 +179,7 @@ class Phase_2_Page_2(Page):
             return {0: P2S2Zeit}
 
 
-class Phase_2_page_3(Page):
+class Phase_2_Page_3(Page):
     form_model = 'player'
 
     @staticmethod
@@ -375,10 +385,10 @@ class Phase_2_Page_11(Page):
             player.Mobilitaetskosten, player.Zufriedenheitsfrage1, player.Rest_Einkommen, player.Runde_2_erledigt, player.IDPlayer)
         cursor3.execute(id_script, id_value)
         connection3.commit()
-        InsertValues = '''UPDATE NOVALAND SET zeit_p2s2 = %s, Zeit_p2s3 = %s, Zeit_p2s4 = %s, Zeit_p2s5 = %s, Zeit_p2s6 = %s, Zeit_p2s7 = %s, Zeit_p2s8 = %s, Zeit_p2S9 = %s, Zeit_p2s10 = %s, UnixTime_P2S2 = %s, UnixTime_P2S3 = %s, UnixTime_P2S4 = %s, UnixTime_P2S5 = %s, UnixTime_P2S6 = %s, UnixTime_P2S7 = %s, UnixTime_P2S8 = %s, UnixTime_P2S9 = %s, UnixTime_P2S10 = %s WHERE nutzer_id = %s  '''
+        InsertValues = '''UPDATE NOVALAND SET zeit_p2s1 = %s, zeit_p2s2 = %s, Zeit_p2s3 = %s, Zeit_p2s4 = %s, Zeit_p2s5 = %s, Zeit_p2s6 = %s, Zeit_p2s7 = %s, Zeit_p2s8 = %s, Zeit_p2S9 = %s, Zeit_p2s10 = %s, UnixTime_P2S1 = %s, UnixTime_P2S2 = %s, UnixTime_P2S3 = %s, UnixTime_P2S4 = %s, UnixTime_P2S5 = %s, UnixTime_P2S6 = %s, UnixTime_P2S7 = %s, UnixTime_P2S8 = %s, UnixTime_P2S9 = %s, UnixTime_P2S10 = %s WHERE nutzer_id = %s  '''
         ValueNames = (
-        player.P2S2Zeit, player.P2S3Zeit, player.P2S4Zeit, player.P2S5Zeit, player.P2S6Zeit, player.P2S7Zeit,
-        player.P2S8Zeit, player.P2S9Zeit, player.P2S10Zeit, player.UnixTimeP2S2, player.UnixTimeP2S3, player.UnixTimeP2S4,
+        player.P2S1Zeit, player.P2S2Zeit, player.P2S3Zeit, player.P2S4Zeit, player.P2S5Zeit, player.P2S6Zeit, player.P2S7Zeit,
+        player.P2S8Zeit, player.P2S9Zeit, player.P2S10Zeit, player.UnixTimeP2S1, player.UnixTimeP2S2, player.UnixTimeP2S3, player.UnixTimeP2S4,
         player.UnixTimeP2S5, player.UnixTimeP2S6, player.UnixTimeP2S7, player.UnixTimeP2S8, player.UnixTimeP2S9, player.UnixTimeP2S10,
         player.IDPlayer)
         cursor3.execute(InsertValues, ValueNames)
@@ -387,6 +397,6 @@ class Phase_2_Page_11(Page):
         connection3.close()
 
 
-page_sequence = [Waiting_Site, Phase_2_page_1, Phase_2_Page_2, Phase_2_page_3, Phase_2_Page_4, Phase_2_Page_5,
+page_sequence = [Waiting_Site, Phase_2_Page_1, Phase_2_Page_2, Phase_2_Page_3, Phase_2_Page_4, Phase_2_Page_5,
                  Phase_2_Page_6,
                  Phase_2_Page_7, Phase_2_Page_8, Phase_2_Page_9, Phase_2_Page_10, Phase_2_Page_11]

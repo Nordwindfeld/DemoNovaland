@@ -76,8 +76,12 @@ function time(){
         let TimeSecondRound = (new Date() - starttime)/1000;
         liveSend({'ZeitZweiteRunde': 'Zeit2', 'Zeit2': TimeSecondRound});
         liveSend({'Savedata': 'Savedata'});
-        document.getElementById("form").submit();
 
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P0S2Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

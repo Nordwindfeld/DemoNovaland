@@ -68,8 +68,9 @@
 
 
 {% block content %}
+    <div id="Change2">
 <p class="p"> Die vierte Phase in Novaland startet um 16h. Sie erhalten um 15.30h eine Einladung via Email/SMS. Bis gleich! </p>
-
+    </div>
 <br>
 <button class='button' type='button' onclick='Next()'> Weiter </button>
 <br>
@@ -81,6 +82,11 @@
 <script>
     function Next(){
         document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'Phase3ZeitVorbei') {
+            document.getElementById("Change2").innerHTML = "<p class='p'>" + "Die Vierte Phase hat bereits begonnen und Sie können direkt weiterspielen." + "</p>"
+        }
     }
 </script>
 {% endblock %}

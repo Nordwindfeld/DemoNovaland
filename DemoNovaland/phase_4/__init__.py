@@ -297,7 +297,7 @@ class Phase_4_Page_2(Page):
             PlatzZwei = "Konservative Partei Novaland"
             player.KPNPlatz = 2
             player.KPNBelegt = "Ja"
-            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] != ListeWahl[0]:
+            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] and ListeWahl[2] == ListeWahl[3] != ListeWahl[0]:
                 player.KPNPlatz = 1
                 player.PlatzEinsZwei = Platzeins + " und " + PlatzZwei
                 player.PlatzEinsZweiAktiv = "Ja"
@@ -306,7 +306,7 @@ class Phase_4_Page_2(Page):
             PlatzZwei = "Soziale Partei Novaland"
             player.SPNPlatz = 2
             player.SPNBelegt = "Ja"
-            if ListeWahl[2] == ListeWahl[3] != ListeWahl[0] != ListeWahl[1]:
+            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] and ListeWahl[2] == ListeWahl[3] != ListeWahl[0]:
                 player.SPNPlatz = 1
                 player.PlatzEinsZwei = Platzeins + " und " + PlatzZwei
                 player.PlatzEinsZweiAktiv = "Ja"
@@ -315,7 +315,7 @@ class Phase_4_Page_2(Page):
             PlatzZwei = "Liberale Partei Novaland"
             player.LPNPlatz = 2
             player.LPNBelegt = "Ja"
-            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] != ListeWahl[0]:
+            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] and ListeWahl[2] == ListeWahl[3] != ListeWahl[0]:
                 player.LPNPlatz = 1
                 player.PlatzEinsZwei = Platzeins + " und " + PlatzZwei
                 player.PlatzEinsZweiAktiv = "Ja"
@@ -324,7 +324,7 @@ class Phase_4_Page_2(Page):
             PlatzZwei = "Partei Progressives Novaland"
             player.PPNPlatz = 2
             player.PPNBelegt = "Ja"
-            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] != ListeWahl[0]:
+            if ListeWahl[2] == ListeWahl[3] != ListeWahl[1] and ListeWahl[2] == ListeWahl[3] != ListeWahl[0]:
                 player.PPNPlatz = 1
                 player.PlatzEinsZwei = Platzeins + " und " + PlatzZwei
                 player.PlatzEinsZweiAktiv = "Ja"
@@ -333,7 +333,7 @@ class Phase_4_Page_2(Page):
             PlatzDrei = "Konservative Partei Novaland"
             player.KPNPlatz = 3
             player.KPNBelegt = "Ja"
-            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] != ListeWahl[0]:
+            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] and ListeWahl[1] == ListeWahl[2] != ListeWahl[0]:
                 player.KPNPlatz = 2
                 player.PlatzZweiZwei = PlatzZwei + " und " + PlatzDrei
                 player.PlatzZweiZweiAktiv = "Ja"
@@ -346,7 +346,7 @@ class Phase_4_Page_2(Page):
             PlatzDrei = "Soziale Partei Novaland"
             player.SPNPlatz = 3
             player.SPNBelegt = "Ja"
-            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] != ListeWahl[0]:
+            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] and ListeWahl[1] == ListeWahl[2] != ListeWahl[0]:
                 player.SPNPlatz = 2
                 player.PlatzZweiZwei = PlatzZwei + " und " + PlatzDrei
                 player.PlatzZweiZweiAktiv = "Ja"
@@ -359,7 +359,7 @@ class Phase_4_Page_2(Page):
             PlatzDrei = "Liberale Partei Novaland"
             player.LPNPlatz = 3
             player.LPNBelegt = "Ja"
-            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] != ListeWahl[0]:
+            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] and ListeWahl[1] == ListeWahl[2] != ListeWahl[0]:
                 player.LPNPlatz = 2
                 player.PlatzZweiZwei = PlatzZwei + " und " + PlatzDrei
                 player.PlatzZweiZweiAktiv = "Ja"
@@ -372,7 +372,7 @@ class Phase_4_Page_2(Page):
             PlatzDrei = "Partei Progressives Novaland"
             player.PPNPlatz = 3
             player.PPNBelegt = "Ja"
-            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] != ListeWahl[0]:
+            if ListeWahl[1] == ListeWahl[2] != ListeWahl[3] and ListeWahl[1] == ListeWahl[2] != ListeWahl[0]:
                 player.PPNPlatz = 2
                 player.PlatzZweiZwei = PlatzZwei + " und " + PlatzDrei
                 player.PlatzZweiZweiAktiv = "Ja"
@@ -385,7 +385,7 @@ class Phase_4_Page_2(Page):
             PlatzVier = "Konservative Partei Novaland"
             player.KPNPlatz = 4
             player.KPNBelegt = "Ja"
-            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] != ListeWahl[3]:
+            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] and ListeWahl[0] == ListeWahl[1] != ListeWahl[3]:
                 player.KPNPlatz = 3
                 player.PlatzDreiZwei = PlatzVier + " und " + PlatzDrei
                 player.PlatzDreiZweiAktiv = "Ja"
@@ -398,7 +398,7 @@ class Phase_4_Page_2(Page):
             PlatzVier = "Soziale Partei Novaland"
             player.SPNPlatz = 4
             player.SPNBelegt = "Ja"
-            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] != ListeWahl[3]:
+            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] and ListeWahl[0] == ListeWahl[1] != ListeWahl[3]:
                 player.SPNPlatz = 3
                 player.PlatzDreiZwei = PlatzVier + " und " + PlatzDrei
                 player.PlatzDreiZweiAktiv = "Ja"
@@ -411,7 +411,7 @@ class Phase_4_Page_2(Page):
             PlatzVier = "Liberale Partei Novaland"
             player.LPNPlatz = 4
             player.LPNBelegt = "Ja"
-            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] != ListeWahl[3]:
+            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] and ListeWahl[0] == ListeWahl[1] != ListeWahl[3]:
                 player.LPNPlatz = 3
                 player.PlatzDreiZwei = PlatzVier + " und " + PlatzDrei
                 player.PlatzDreiZweiAktiv = "Ja"
@@ -424,7 +424,7 @@ class Phase_4_Page_2(Page):
             PlatzVier = "Partei Progressives Novaland"
             player.PPNPlatz = 4
             player.PPNBelegt = "Ja"
-            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] != ListeWahl[3]:
+            if ListeWahl[0] == ListeWahl[1] != ListeWahl[2] and ListeWahl[0] == ListeWahl[1] != ListeWahl[3]:
                 player.PPNPlatz = 3
                 player.PlatzDreiZwei = PlatzVier + " und " + PlatzDrei
                 player.PlatzDreiZweiAktiv = "Ja"

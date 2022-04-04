@@ -53,6 +53,7 @@
 
 
 {% block content %}
+    <body onload="time()"></body>
     <p class="p">
 Herzlich willkommen zurück in Novaland. Nun geht es weiter um Ihre persönliche Situation in Novaland.
 <br>
@@ -78,8 +79,19 @@ der Bevölkerung von Novaland hat ein geringeres Nettoeinkommen als Sie. Von Ihr
 
 {% block script %}
 <script>
+let starttime;
+
+ function time(){
+   starttime = new Date();
+}
     function Next(){
-        document.getElementById("form").submit();
+        let ZeitP2S1 = (new Date() - starttime)/1000;
+        liveSend({'ZeitP2S1':'ZeitP2S1', 'ZeitP2S1Time': ZeitP2S1});
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P2S1Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 
 </script>

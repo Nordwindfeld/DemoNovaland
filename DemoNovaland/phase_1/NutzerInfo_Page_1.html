@@ -114,8 +114,12 @@ function time(){
     function Next(){
         let TimeFirstRound = (new Date() - starttime)/1000;
         liveSend({'ZeitErsteRunde': 'Zeit1', 'Zeit1': TimeFirstRound});
-        document.getElementById("form").submit();
 
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P0S1Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

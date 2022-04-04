@@ -79,13 +79,12 @@ def zwoelfUhrMail():
                 connection.commit()
                 print("Die Mail an: " + To_Mail + " wurde versendet. \n")
             except:
-                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
                 server.quit()
                 ChangeValue = '''UPDATE Novaland SET ZwoelfUhrMail = %s WHERE Nutzer_ID = %s'''
                 Values = ["Nein", USERID]
                 cursor.execute(ChangeValue, Values)
                 connection.commit()
-                pass
+                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
     except Exception as error:
         print(error)
     finally:
@@ -254,15 +253,14 @@ def SechzehnUhrMail():
 def achzehnUhrMail():
     connection4 = None
     cursor4 = None
+    connection4 = psycopg2.connect(user='aipclfonwuiort',
+                                   password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                   host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                   port='5432',
+                                   database='dcoubsit8jsig0')
+    cursor4 = connection4.cursor()
 
     try:
-        connection4 = psycopg2.connect(user='aipclfonwuiort',
-                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                                       port='5432',
-                                       database='dcoubsit8jsig0')
-        cursor4 = connection4.cursor()
-
         IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
         cursor4.execute(IDBekommen)
         ID = cursor4.fetchall()
@@ -280,7 +278,7 @@ def achzehnUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
+            Url = "https://pilotnovaland2022.herokuapp.com/room/DemoNovaland?participant_label=" + code
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -301,15 +299,17 @@ def achzehnUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                ChangeValue = '''UPDATE Novaland SET AchtzehnUhrMail = %s, AchtzehnUhrMailZeit = %s, AchtzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
-                Values = ["Ja", datetime.now(), time.time(), USERID]
+                print("Die Mail an: " + code + " - " + To_Mail + " wurde versendet. \n")
+                ChangeValue = '''UPDATE Novaland SET achtzehnuhrmail = %s, achtzehnuhrmailzeit = %s, achtzehnuhrmailunixtime = %s  WHERE Nutzer_ID = %s'''
+                Values = ["Ja", datetime.now(), time.time(), code]
                 cursor4.execute(ChangeValue, Values)
                 connection4.commit()
-                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
+                print("Die Daten von " + code + " wurden in der Datenbank aktualisiert.")
+
             except:
-                print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
+                print('PROBLEM!! - Es gab ein Problem mit: ' + code + " - " + To_Mail + '\n')
                 ChangeValue = '''UPDATE Novaland SET AchtzehnUhrMail = %s WHERE Nutzer_ID = %s'''
-                Values = ["Nein", USERID]
+                Values = ["Nein", code]
                 cursor4.execute(ChangeValue, Values)
                 connection4.commit()
                 server.quit()
@@ -340,44 +340,35 @@ Datum_Programm = date.today()
 Zeit_Programm = datetime.now().time()
 ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
         datetime.now().time().minute * 60) + datetime.now().time().second
-print(ProgrammTagZeit)
 
 # Studie Uhrzeit
-Datum_Studie = date(2022, 3, 21)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
+Datum_Studie = date(2022, 4,
+                    4)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
 zwoelfUhrZeit = time(12, 0, 0)
-ZeitZwoelf = 12 * 30 * 60
-print(ZeitZwoelf)
+ZeitZwoelf = 12 * 60 * 60
 vierzehnUhrZeit = time(14, 0, 0)
-ZeitVierzehnUhr = 14 * 30 * 60
-print(ZeitVierzehnUhr)
+ZeitVierzehnUhr = 14 * 60 * 60
 SechZehnUhrZeit = time(16, 0, 0)
-ZeitSechzehnUhr = 16 * 30 * 60
-print(ZeitSechzehnUhr)
+ZeitSechzehnUhr = 16 * 60 * 60
 achtzehnUhrzeit = time(18, 0, 0)
-ZeitAchtZehnUhr = 18 * 30 * 60
-print(ZeitAchtZehnUhr)
-
-print(zwoelfUhrZeit)
+ZeitAchtZehnUhr = 9 * 60 * 60
 
 differenzZwoelf = ZeitZwoelf - ProgrammTagZeit
 differenzVierzehn = ZeitVierzehnUhr - ProgrammTagZeit
 differentSechzehn = ZeitSechzehnUhr - ProgrammTagZeit
 differenzAchtzehn = ZeitAchtZehnUhr - ProgrammTagZeit
-print(differenzZwoelf)
 
 Test = Datum_Studie - Datum_Programm
 if str(Datum_Programm - Datum_Studie) == "0:00:00":
-    if 3600 >= differenzZwoelf > 0:
+    if 1800 >= differenzZwoelf > 0:
         zwoelfUhrMail()
         print(differenzZwoelf)
-    if 3600 >= differenzVierzehn > 0:
+    if 1800 >= differenzVierzehn > 0:
         vierzehnUhrMail()
         print(differenzVierzehn)
-    if 3600 >= differentSechzehn > 0:
+    if 1800 >= differentSechzehn > 0:
         SechzehnUhrMail()
         print(differentSechzehn)
-    if 3600 >= differenzAchtzehn > 0:
+    if 1800 >= differenzAchtzehn > 0:
         achzehnUhrMail()
         print(differenzAchtzehn)
-
-
