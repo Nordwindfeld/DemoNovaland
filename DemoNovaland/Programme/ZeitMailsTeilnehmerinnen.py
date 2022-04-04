@@ -251,8 +251,6 @@ def SechzehnUhrMail():
 ###################################################
 
 def achzehnUhrMail():
-    connection4 = None
-    cursor4 = None
     connection4 = psycopg2.connect(user='aipclfonwuiort',
                                    password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
                                    host='ec2-3-216-113-109.compute-1.amazonaws.com',
@@ -261,14 +259,14 @@ def achzehnUhrMail():
     cursor4 = connection4.cursor()
 
     try:
-        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
+        IDBekommen = '''SELECT DISTINCT nutzer_id FROM Novaland'''
         cursor4.execute(IDBekommen)
         ID = cursor4.fetchall()
         for ID in ID:
             MailAdress = str(ID).replace("(", "").replace(")", "").replace(",", "")
             USERID = (str(MailAdress).replace("[", "").replace("]", "").replace("'", ''))
             print("Die User ID lautet: " + USERID)
-            ScriptMail = '''SELECT DISTINCT Mail FROM Novaland WHERE nutzer_id = %s'''
+            ScriptMail = '''SELECT Mail FROM Novaland WHERE nutzer_id = %s'''
             MailID = [USERID]
             cursor4.execute(ScriptMail, MailID)
             Mail = cursor4.fetchone()
@@ -300,7 +298,13 @@ def achzehnUhrMail():
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
                 print("Die Mail an: " + code + " - " + To_Mail + " wurde versendet. \n")
-                ChangeValue = '''UPDATE Novaland SET achtzehnuhrmail = %s, achtzehnuhrmailzeit = %s, achtzehnuhrmailunixtime = %s  WHERE Nutzer_ID = %s'''
+                connection4 = psycopg2.connect(user='aipclfonwuiort',
+                                               password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
+                                               host='ec2-3-216-113-109.compute-1.amazonaws.com',
+                                               port='5432',
+                                               database='dcoubsit8jsig0')
+                cursor4 = connection4.cursor()
+                ChangeValue = '''UPDATE Novaland SET achtzehnuhrmail = %s, achtzehnuhrmailzeit = %s, achtzehnuhrmailunixtime = %s WHERE Nutzer_ID = %s'''
                 Values = ["Ja", datetime.now(), time.time(), code]
                 cursor4.execute(ChangeValue, Values)
                 connection4.commit()
@@ -351,7 +355,7 @@ ZeitVierzehnUhr = 14 * 60 * 60
 SechZehnUhrZeit = time(16, 0, 0)
 ZeitSechzehnUhr = 16 * 60 * 60
 achtzehnUhrzeit = time(18, 0, 0)
-ZeitAchtZehnUhr = 9 * 60 * 60
+ZeitAchtZehnUhr = 18 * 60 * 60
 
 differenzZwoelf = ZeitZwoelf - ProgrammTagZeit
 differenzVierzehn = ZeitVierzehnUhr - ProgrammTagZeit
