@@ -62,7 +62,7 @@
          top: 50%;
          left: 50%;
          transform: translate(-50%, -50%);
-         width: 550px;
+         width: 100%;
          height: 300px;
          background: transparent;
          border-bottom: 1px solid #000;
@@ -77,7 +77,7 @@
      }
      .box .skill .graph{
          position: absolute;
-         width: 40px;
+         width: 20%;
          bottom: 0;
          background: rgba(0,0,0,.1);
          left: 50%;
@@ -88,8 +88,8 @@
          content: '';
          position: absolute;
          top: 2px;
-         left: 2px;
-         right: 2px;
+         left: 1px;
+         right: 1px;
          bottom: 0;
          background: linear-gradient(0deg, #000000,#200000 );
      }
@@ -98,8 +98,8 @@
          content: '';
          position: absolute;
          top: 2px;
-         left: 2px;
-         right: 2px;
+         left: 1px;
+         right: 1px;
          bottom: 0;
          background: linear-gradient(0deg, #000000,#200000 );
      }
@@ -121,19 +121,17 @@
          transform: translateX(-50%);
          text-align: center;
          color: black;
-         padding: 2px 6pc;
+         padding: 1px 3px;
          border-radius: 4px;
      }
 
      .column1{
         float: top;
-        padding: 10px;
-        height: 20%;
+         padding-down: 10px;
     }
      .column2{
         float: top;
-        padding: 10px;
-        height: 50%;
+         padding-down: 10px;
      }
 
 
@@ -204,8 +202,6 @@
 <p> </p>
 
 <br>
-<br>
-<br>
 <p class="p">
 <!-- Hier werden alle verschiedenen Szenarios an Text definiert -->
 <!----------------------------- Zwei mal Platz Eins -->
@@ -253,9 +249,11 @@
     {% endif %}
 </p>
 <br>
-<div class="column1">
+<div class="column2">
 <button class='button' type='button' onclick='Next()'> Weiter </button>
     </div>
+<br>
+    <br>
 
 <h2 class="h2"> </h2>
 
