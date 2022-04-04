@@ -1,6 +1,6 @@
 import smtplib
 from datetime import *
-from datetime import time
+import time
 import psycopg2
 import ssl
 from email import *
@@ -52,7 +52,7 @@ def zwoelfUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
+            Url = "https://pilotnovaland2022.herokuapp.com/room/DemoNovaland?participant_label=" + code
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -73,11 +73,12 @@ def zwoelfUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                ChangeValue = '''UPDATE Novaland SET ZwoelfUhrMail = %s, SMSZwoelfUhrMailZeit = %s, SMSZwoelfUhrMailUnixTime = %s WHERE Nutzer_ID = %s'''
-                Values = ["Nein", datetime.now(), time.time(), USERID]
+                print("Die Mail an: " + code + " - " + To_Mail + " wurde versendet. \n")
+                ChangeValue = '''UPDATE Novaland SET ZwoelfUhrMail = %s, ZwoelfUhrMailZeit = %s, ZwoelfUhrMailUnixTime = %s WHERE Nutzer_ID = %s'''
+                Values = ["Ja", str(datetime.now()), time.time(), code]
                 cursor.execute(ChangeValue, Values)
                 connection.commit()
-                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
+                print("Die Daten von " + code + " wurden in der Datenbank aktualisiert." + '\n' + '\n')
             except:
                 server.quit()
                 ChangeValue = '''UPDATE Novaland SET ZwoelfUhrMail = %s WHERE Nutzer_ID = %s'''
@@ -127,7 +128,7 @@ def vierzehnUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
+            Url = "https://pilotnovaland2022.herokuapp.com/room/DemoNovaland?participant_label=" + code
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -148,11 +149,12 @@ def vierzehnUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                ChangeValue = '''UPDATE Novaland SET VierzehnUhrMail = %s, SMSVierzehnUhrMailZeit = %s, SMSVierzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
-                Values = ["Ja", datetime.now(), time.time(), USERID]
+                print("Die Mail an: " + code + " - " + To_Mail + " wurde versendet. \n")
+                ChangeValue = '''UPDATE Novaland SET VierzehnUhrMail = %s, VierzehnUhrMailZeit = %s, VierzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
+                Values = ["Ja", str(datetime.now()), time.time(), code]
                 cursor2.execute(ChangeValue, Values)
                 connection2.commit()
-                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
+                print("Die Daten von " + code + " wurden in der Datenbank aktualisiert." + '\n' + '\n')
             except:
                 print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
                 server.quit()
@@ -203,7 +205,7 @@ def SechzehnUhrMail():
             ssl_context = ssl.create_default_context()
             subject = 'Ihre Teilnahme an unserem politischen Verhaltensspiel "Novaland.'
             code = USERID
-            Url = "https://DemoNovaland.herokuapp.com/InitializeParticipant/"
+            Url = "https://pilotnovaland2022.herokuapp.com/room/DemoNovaland?participant_label=" + code
             Nachricht = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                         "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                         "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -224,11 +226,12 @@ def SechzehnUhrMail():
                 server.login(From_mail, Passwort)
                 server.sendmail(msg['From'], msg['To'], msg.as_string())
                 server.quit()
-                ChangeValue = '''UPDATE Novaland SET SechzehnUhrMail = %s, SMSSechzehnUhrMailZeit = %s, SMSSechzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
-                Values = ["Ja", datetime.now(), time.time(), USERID]
+                print("Die Mail an: " + code + " - " + To_Mail + " wurde versendet. \n")
+                ChangeValue = '''UPDATE Novaland SET SechzehnUhrMail = %s, SechzehnUhrMailZeit = %s, SechzehnUhrMailUnixTime = %s  WHERE Nutzer_ID = %s'''
+                Values = ["Ja", str(datetime.now()), time.time(), code]
                 cursor3.execute(ChangeValue, Values)
                 connection3.commit()
-                print("Die Mail an: " + To_Mail + " wurde versendet. \n")
+                print("Die Daten von " + code + " wurden in der Datenbank aktualisiert." + '\n' + '\n')
             except:
                 print('PROBLEM!! - Es gab ein Problem mit: ' + To_Mail + '\n')
                 ChangeValue = '''UPDATE Novaland SET SechzehnUhrMail = %s WHERE Nutzer_ID = %s'''
@@ -305,10 +308,10 @@ def achzehnUhrMail():
                                                database='dcoubsit8jsig0')
                 cursor4 = connection4.cursor()
                 ChangeValue = '''UPDATE Novaland SET achtzehnuhrmail = %s, achtzehnuhrmailzeit = %s, achtzehnuhrmailunixtime = %s WHERE Nutzer_ID = %s'''
-                Values = ["Ja", datetime.now(), time.time(), code]
+                Values = ["Ja", str(datetime.now()), time.time(), code]
                 cursor4.execute(ChangeValue, Values)
                 connection4.commit()
-                print("Die Daten von " + code + " wurden in der Datenbank aktualisiert.")
+                print("Die Daten von " + code + " wurden in der Datenbank aktualisiert." + '\n' + '\n')
 
             except:
                 print('PROBLEM!! - Es gab ein Problem mit: ' + code + " - " + To_Mail + '\n')
@@ -317,8 +320,6 @@ def achzehnUhrMail():
                 cursor4.execute(ChangeValue, Values)
                 connection4.commit()
                 server.quit()
-
-                pass
     except Exception as error:
         print(error)
     finally:
@@ -348,13 +349,9 @@ ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
 # Studie Uhrzeit
 Datum_Studie = date(2022, 4,
                     4)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
-zwoelfUhrZeit = time(12, 0, 0)
 ZeitZwoelf = 12 * 60 * 60
-vierzehnUhrZeit = time(14, 0, 0)
 ZeitVierzehnUhr = 14 * 60 * 60
-SechZehnUhrZeit = time(16, 0, 0)
-ZeitSechzehnUhr = 16 * 60 * 60
-achtzehnUhrzeit = time(18, 0, 0)
+ZeitSechzehnUhr = 20 * 60 * 60
 ZeitAchtZehnUhr = 18 * 60 * 60
 
 differenzZwoelf = ZeitZwoelf - ProgrammTagZeit

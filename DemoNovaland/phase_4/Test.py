@@ -61,6 +61,12 @@ PROVIDERS = {
         "mms_support": True,
     },
 }
+carriers = {
+    'att': '@mms.att.net',
+    'tmobile': ' @tmomail.net',
+    'verizon': '@vtext.com',
+    'sprint': '@page.nextel.com'
+}
 
 connection4 = psycopg2.connect(user='aipclfonwuiort',
                                    password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
@@ -87,7 +93,7 @@ for ID in ID:
     msg['Content-type'] = 'text/plain; charset=utf-8'
     msg['Content-transfer-encoding'] = '8bit'
     msg['From'] = "novaland@uni-duisburg-essen.de"
-    msg['To'] = f"{To_SMS}@{PROVIDERS.get('T-Mobile').get('sms')}"
+    msg['To'] = To_SMS + "@vtext.com"
     print(msg['To'])
     code = NutzerID
     url = "https://pilotnovaland2022.herokuapp.com/room/DemoNovaland?participant_label=" + code

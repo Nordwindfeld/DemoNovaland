@@ -4,7 +4,7 @@ from email import message
 import psycopg2
 from twilio.rest import Client
 from datetime import *
-from datetime import time
+import time
 import pyshorteners
 import ssl
 
@@ -176,7 +176,7 @@ def SMSAchtZehnUhr():
         msg['Content-type'] = 'text/plain; charset=utf-8'
         msg['Content-transfer-encoding'] = '8bit'
         msg['From'] = "novaland@uni-duisburg-essen.de"
-        msg['To'] = To_SMS.format("@mms.att.net") + "@tmomail.net"
+        msg['To'] = To_SMS.format() + "@tmomail.net"
         print(msg['To'])
         code = NutzerID
         url = "https://pilotnovaland2022.herokuapp.com/room/DemoNovaland?participant_label=" + code
@@ -184,6 +184,7 @@ def SMSAchtZehnUhr():
             type_tiny = pyshorteners.Shortener()
             shortend_url = type_tiny.tinyurl.short(url)
             URL = shortend_url
+            print(shortend_url)
             msg = "Sehr geehrte:r Teilnehmer:in an unserem politischen Verhaltensspiel 'Novaland', " \
                   "\nDie Universität Duisburg bedankt sich bei Ihnen für ihre Teilnahme an der ersten Runde. " \
                   "Damit die Teilnahme vollständig ist, würden wir Sie drum bitte, an der zweiten Runde teilzunehmen. \n" \
@@ -207,14 +208,10 @@ ProgrammTagZeit = (datetime.now().time().hour * 60 * 60) + (
         datetime.now().time().minute * 60) + datetime.now().time().second
 
 Datum_Studie = date(2022, 4, 4)  ########## Diese Variabel muss geändert werden, um das Datum für die Studie anzupassen ########
-zwoelfUhrZeit = time(12, 0, 0)
 ZeitZwoelf = 12 * 60 * 60
-vierzehnUhrZeit = time(14, 0, 0)
 ZeitVierzehnUhr = 16 * 60 * 60
-SechZehnUhrZeit = time(16, 0, 0)
 ZeitSechzehnUhr = 16 * 60 * 60
-achtzehnUhrzeit = time(18, 0, 0)
-ZeitAchtZehnUhr = 14.5 * 3600
+ZeitAchtZehnUhr = 20 * 3600
 
 differenzZwoelf = ZeitZwoelf - ProgrammTagZeit
 differenzVierzehn = ZeitVierzehnUhr - ProgrammTagZeit
