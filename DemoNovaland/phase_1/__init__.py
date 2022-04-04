@@ -591,13 +591,10 @@ class NutzerInfo_Page_3(Page):
     @staticmethod
     def vars_for_template(player: Player):
         player.NutzerInformationsSeiteAbgeschlossen = "Ja"
-        player.Loop = 0
-        if player.Loop == 0:
-            connectToRound0(player.ZeitStartapp, player.NutzerID, player.Nutzer_Alter,
-                            player.Nutzer_Gender, player.Nutzer_Email, player.NutzerInformationsSeiteAbgeschlossen,
-                            player.Telefonnummer)
-            player.Loop = 1
-        player.Loop = 1
+        connectToRound0(player.ZeitStartapp, player.NutzerID, player.Nutzer_Alter,
+                        player.Nutzer_Gender, player.Nutzer_Email, player.NutzerInformationsSeiteAbgeschlossen,
+                        player.Telefonnummer)
+
 
 
 # ----------------------------------------------------------------------------------------
