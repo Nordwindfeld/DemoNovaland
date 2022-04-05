@@ -194,13 +194,13 @@ class Phase_4_Page_1(Page):
         ##########################
 
         if player.Wohnungskosten == 1100:
-            Wohnung_satz = "einem großen Haus zu wohnen"
+            Wohnung_satz = "einem freistehendes Haus zu wohnen"
         elif player.Wohnungskosten == 950:
             Wohnung_satz = "einem Reihenhaus zu wohnen"
         elif player.Wohnungskosten == 700:
             Wohnung_satz = "in einer geräumigen Wohnung zu wohnen"
         elif player.Wohnungskosten == 500:
-            Wohnung_satz = "einer normal großen Wohnung zu wohnen"
+            Wohnung_satz = "einer kleinen Wohnung zu wohnen"
 
         if player.Verpflegungskosten == 400:
             Verpflegungssatz = "regelmäßig in Restaurants Essen zu gehen"

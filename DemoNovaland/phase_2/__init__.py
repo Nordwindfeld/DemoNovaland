@@ -312,13 +312,13 @@ class Phase_2_Page_8(Page):
 class Phase_2_Page_9(Page):
     def vars_for_template(player: Player):
         if player.Wohnungskosten == 1100:
-            Wohnung_satz = "einem großen Haus zu wohnen"
+            Wohnung_satz = "einem freistehenden Haus zu wohnen"
         elif player.Wohnungskosten == 950:
             Wohnung_satz = "einem Reihenhaus zu wohnen"
         elif player.Wohnungskosten == 700:
             Wohnung_satz = "in einer geräumigen Wohnung zu wohnen"
         elif player.Wohnungskosten == 500:
-            Wohnung_satz = "einer normal großen Wohnung zu wohnen"
+            Wohnung_satz = "einer kleinen Wohnung zu wohnen"
 
         if player.Verpflegungskosten == 400:
             Verpflegungssatz = "regelmäßig in Restaurants Essen zu gehen"

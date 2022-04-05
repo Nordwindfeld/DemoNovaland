@@ -79,13 +79,13 @@ Sie haben eine Stimme. Welche Partei wählen Sie?
 <br>
 <div class="row">
     <div class="column3">
-        <img src="{% static 'phase_3/KPN.png' %}" width="30%" class="center">
+        <img src="{% static 'phase_3/KPN.png' %}" width="30%" class="center" onmouseover="SHOWKPN()">
         <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Konservative Partei Novaland"> Konservative Partei Novaland </p>
 
     </div>
 
     <div class="column3">
-        <img src="{% static 'phase_3/LPN.png' %}" width="30%" class="center">
+        <img src="{% static 'phase_3/LPN.png' %}" width="30%" class="center" onmouseover="SHOWLPN()">
        <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Liberale Partei Novaland">  Liberale Partei Novaland </p>
     </div>
 </div>
@@ -94,12 +94,12 @@ Sie haben eine Stimme. Welche Partei wählen Sie?
 
 <div class="row">
     <div class="column3">
-        <img src="{% static 'phase_3/SPN.png' %}" width="30%" class="center">
+        <img src="{% static 'phase_3/SPN.png' %}" width="30%" class="center" onmouseover="SHOWSPN()">
         <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Soziale Partei Novaland">  Soziale Partei Novaland </p>
     </div>
 
     <div class="column3">
-        <img src="{% static 'phase_3/PPN.png' %}" width="30%" class="center">
+        <img src="{% static 'phase_3/PPN.png' %}" width="30%" class="center" onmouseover="SHOWPPN()">
         <p class="p" style="text-align: center"> <input type="radio" id="wahlen" name="Partei" value="Partei Progressives Novaland">  Partei Progressives Novaland </p>
     </div>
 </div>
@@ -109,6 +109,9 @@ Sie haben eine Stimme. Welche Partei wählen Sie?
 <br>
 <br>
 <br>
+    <div id="test">
+
+    </div>
 <h2 class="h2"> </h2>
 
 
@@ -116,6 +119,22 @@ Sie haben eine Stimme. Welche Partei wählen Sie?
 
 {% block script %}
 <script>
+    function SHOWPPN(){
+        document.getElementById("test").innerHTML = "PPN TEXT"
+    }
+
+    function SHOWLPN(){
+
+    }
+    function SHOWKPN(){
+
+    }
+
+    function SHOWSPN(){
+
+    }
+
+
  function time(){
    starttime = new Date();
 }
