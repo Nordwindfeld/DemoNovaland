@@ -25,6 +25,20 @@
     .p{
         font-size: larger;
     }
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+
+    }
 
     </style>
 {% endblock %}
@@ -35,7 +49,7 @@
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Life-Style Frage 2 </h1>
+    <h1 class="h1"> Lebensstil Frage </h1>
 {% endblock %}
 
 
@@ -49,7 +63,7 @@ Ihnen stehen verschiedene Möglichkeiten der Verpflegung zur Auswahl:
 <br>
 <input type="radio" name="Frage_4_Verpflegung" onclick="EssenBestellen()" class="radio" value="Essen bestellen"> Sie bestellen sich häufig etwas zu essen nach Hause (300 Novas) </input>
 <br>
-<input type="radio" name="Frage_4_Verpflegung" onclick="SelberKochen()" class="radio" value="Selber kochen"> Sie kaufen günstig ein und kochen selbst (200 Novas) </input>
+<input type="radio" name="Frage_4_Verpflegung" onclick="SelberKochen()" class="radio" value="Selber kochen"> Sie kaufen günstig ein und kochen zu Hause selbst (200 Novas) </input>
 <br>
  </div>
  <div id="Kontostand">

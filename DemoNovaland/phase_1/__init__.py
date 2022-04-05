@@ -22,7 +22,6 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Geschlecht varchar(10),
                                         Mail varchar(50),
                                         Telefonnummer varchar(50),
-                                        ChrisGeschlecht varchar(10),
                                         Frage_1_Staatsbuerger varchar(20),
                                         Frage_2_Einfluss varchar(20),
                                         Frage_3_Sozialleistung varchar(20),
@@ -78,6 +77,10 @@ def connectToRound0(AppStart, UserId, Alter, Gender, EMail, Nuterinformation_erl
                                         Runde_3_Erledigt varchar(4),
                                         Runde_4_Erledigt varchar(4), 
                                         Runde_5_Erledigt varchar(4),
+                                        UnixTime_NutzerInfoS1 float,
+                                        Zeit_NutzerInfoS1 varchar(8),
+                                        UnixTime_NutzerInfoS2 float,
+                                        Zeit_NutzerInfoS2 varchar(8),
                                         UnixTime_P1S1 float,
                                         Zeit_P1S1 varchar (8),
                                         UnixTime_P1S2 float,
@@ -230,7 +233,6 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Geschlecht varchar(10),
                                         Mail varchar(50),
                                         Telefonnummer varchar(50),
-                                        ChrisGeschlecht varchar(10),
                                         Frage_1_Staatsbuerger varchar(20),
                                         Frage_2_Einfluss varchar(20),
                                         Frage_3_Sozialleistung varchar(20),
@@ -286,6 +288,10 @@ create_script = '''CREATE TABLE IF NOT EXISTS Novaland(
                                         Runde_3_Erledigt varchar(4),
                                         Runde_4_Erledigt varchar(4), 
                                         Runde_5_Erledigt varchar(4),
+                                        UnixTime_NutzerInfoS1 float,
+                                        Zeit_NutzerInfoS1 varchar(8),
+                                        UnixTime_NutzerInfoS2 float,
+                                        Zeit_NutzerInfoS2 varchar(8),
                                         UnixTime_P1S1 float,
                                         Zeit_P1S1 varchar (8),
                                         UnixTime_P1S2 float,
@@ -442,18 +448,18 @@ class Player(BasePlayer):
     # Seite 2
     # -----------------------------
     Nutzer_Email = models.StringField(
-        label="Geben Sie bitte eine E-Mail Adresse ein, unter welcher wir Sie erreichen können, für die weitere Teilnahme an der Studie")
+        label="Geben Sie bitte eine E-Mail Adresse ein, unter welcher wir Sie für die weitere Teilnahme an der Studie erreichen können")
     Nutzer_Alter = models.IntegerField(label="Geben Sie bitte ihr Alter ein")
     Nutzer_Gender = models.StringField(
         choices=[["Männlich", "Männlich"],
                  ["Weiblich", "Weiblich"],
                  ["Divers", "Divers"],
                  ["Keine Angabe", "Keine Angabe"]],
-        label="Wählen Sie bitte das Geschlecht aus, welches Sie sich zugehörig fühlen",
+        label="Wählen Sie bitte das Geschlecht aus, dem Sie sich zugehörig fühlen",
         widget=widgets.RadioSelect
     )
     Telefonnummer = models.StringField(
-        label="Wenn Sie eine Benachrichtung per SMS bekommen wollen, können Sie hier ihre Telefonnummer eingeben. Bitte geben Sie zusätzlich noch ihre Landesvorwahl mit an. Beispiel: +491763456784  -   Wenn Sie das nicht wollen, geben Sie bitte ein Minus - ein.")
+        label="Wenn Sie eine Benachrichtung per SMS bekommen wollen, können Sie hier ihre Telefonnummer eingeben. -  Wenn Sie das nicht wollen, geben Sie bitte ein Minus - ein.")
 
     # ------------------------------
     # Zeitabfrage
@@ -461,11 +467,13 @@ class Player(BasePlayer):
     # Wann die App geöffnet worden ist
     ZeitStartapp = models.StringField()
 
-    # Zeit: Erste Seite - Nutzerinfo
-    ZeitErsteSeite = models.FloatField()
-
-    # Zeit: Zweite Seite - Nutzerinfo
-    ZeitZweiteSeite = models.FloatField()
+    # --------------------------------------------------
+    # Nutzerinfo zeit
+    # -------------------------------------------------
+    UnixTime_NutzerInfoS1 = models.FloatField()
+    Zeit_NutzerInfoS1 = models.FloatField()
+    UnixTime_NutzerInfoS2 = models.FloatField()
+    Zeit_NutzerInfoS2 = models.FloatField()
 
     # --------------------------------------------------
     # Phase Eins Zeit
@@ -536,17 +544,6 @@ class Player(BasePlayer):
 
 class NutzerInfo_Page_1(Page):
     form_model = 'player'
-
-    # -----------------------------
-    # Prüft ob das heutige Datum in der Vorraussetzung definiert ist
-    # -----------------------------
-
-    # def is_displayed(player: Player):
-    # HeutigeDatum = str(datetime.now().strftime("%H:%M:%S %d.%m.%Y)"))
-    # DatumDerStudie = str(datetime(2022, 3, 14).strftime("%d.%m.%Y"))
-    # if DatumDerStudie in HeutigeDatum:
-    #     return True
-
     @staticmethod
     def vars_for_template(player: Player):
         DatumHeute = datetime.now()
@@ -556,15 +553,16 @@ class NutzerInfo_Page_1(Page):
 
     @staticmethod
     def live_method(player: Player, data):
-        if "ZeitErsteRunde" in data:
-            player.ZeitErsteSeite = data['Zeit1']
+        if "ZeitNutzerInfoSeiteEins" in data:
+            player.Zeit_NutzerInfoS1 = data['Zeit1']
+            player.UnixTime_NutzerInfoS1 = time.time()
             P0S1Zeit = dict(type='P0S1Weiter')
             return {0: P0S1Zeit}
 
 
 class NutzerInfo_Page_2(Page):
     form_model = 'player'
-    form_fields = ["Nutzer_Email", "Nutzer_Alter", "Nutzer_Gender", "Telefonnummer"]
+    form_fields = ["Nutzer_Email", "Telefonnummer", "Nutzer_Alter", "Nutzer_Gender"]
 
     @staticmethod
     def error_message(player, value):
@@ -576,7 +574,8 @@ class NutzerInfo_Page_2(Page):
     @staticmethod
     def live_method(player: Player, data):
         if "ZeitZweiteRunde" in data:
-            player.ZeitZweiteSeite = data['Zeit2']
+            player.Zeit_NutzerInfoS2 = data['Zeit2']
+            player.UnixTime_NutzerInfoS2 = time.time()
             P0S2Zeit = dict(type='P0S2Weiter')
             return {0: P0S2Zeit}
 
@@ -596,17 +595,12 @@ class NutzerInfo_Page_3(Page):
                         player.Telefonnummer)
 
 
-
 # ----------------------------------------------------------------------------------------
 #
 # PHASE 1 SEITEN
 #
 # ---------------------------------------------------------------------------------------
-
 class Page_1(Page):
-    form_model = 'player'
-    form_fields = ['ChrisGender']
-
     @staticmethod
     def live_method(player: Player, data):
         if "ZeitPhaseEinsErsteSeite" in data:
@@ -699,10 +693,10 @@ class Page_8(Page):
 
         cursor4 = connection4.cursor()
 
-        id_script2 = 'UPDATE Novaland SET chrisgeschlecht = %s, frage_1_staatsbuerger = %s, frage_2_einfluss = %s,' \
-                     'Frage_3_Sozialleistung = %s, Zeit_P1S1 = %s, Zeit_P1S2 = %s, Zeit_P1S3 = %s,' \
+        id_script2 = 'UPDATE Novaland SET frage_1_staatsbuerger = %s, frage_2_einfluss = %s,' \
+                     'Frage_3_Sozialleistung = %s, UnixTime_NutzerInfoS1 = %s, Zeit_NutzerInfoS1 = %s, UnixTime_NutzerInfoS2 = %s, Zeit_NutzerInfoS2 = %s, Zeit_P1S1 = %s, Zeit_P1S2 = %s, Zeit_P1S3 = %s,' \
                      'Zeit_P1S4 = %s, Zeit_P1S5 = %s, Zeit_P1S6 = %s, Zeit_P1S7 = %s, Runde_1_Erledigt = %s, UnixTime_P1S1 =%s, UnixTime_P1S2 = %s, UnixTime_P1S3 = %s, UnixTime_P1S4 = %s, UnixTime_P1S5 = %s, UnixTime_P1S6 = %s, UnixTime_P1S7 = %s WHERE nutzer_id = %s'
-        id_value2 = (player.ChrisGender, player.Frage_1, player.Frage_2, player.Frage_3,
+        id_value2 = (player.Frage_1, player.Frage_2, player.Frage_3, player.UnixTime_NutzerInfoS1, player.Zeit_NutzerInfoS1, player.UnixTime_NutzerInfoS2, player.Zeit_NutzerInfoS2,
                      player.PhaseEinsSeiteEins, player.PhaseEinsSeiteZwei, player.PhaseEinsSeiteDrei,
                      player.PhaseEinsSeiteVier,
                      player.PhaseEinsSeiteFuenf, player.PhaseEinsSeiteSechs, player.PhaseEinsSeiteSieben,

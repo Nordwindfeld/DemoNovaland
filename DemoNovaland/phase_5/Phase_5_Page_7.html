@@ -49,7 +49,7 @@
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Storytelling </h1>
+    <h1 class="h1"> Spendenaktion </h1>
 {% endblock %}
 
 
@@ -63,8 +63,9 @@ Die Organisation „Novaland hilft“ sammelt weiterhin Spenden, um den Opfern d
 
 <br>
  <div id="DeleteZwei">
+ <p class="p">
     Spendenfrage:
-    Ich spende <input id="Spende5" type="number" pattern="[0-9]*" step="1" min="0" oninput="this.value = Math.abs(this.value)"> Novas
+    Ich spende <input id="Spende5" type="number" pattern="[0-9]*" step="1" min="0" oninput="this.value = Math.abs(this.value)"> Novas </p>
             <br>
             <br>
             <button class="button" type="button" onclick="Spenden()"> Spenden</button>

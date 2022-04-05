@@ -74,6 +74,9 @@ Die Verantwortung für diese Studie liegt bei Prof. Dr. Achim Goerres von der Un
 Die Studie hat ein Datenschutzkonzept, das mit dem Datenschutzbeauftragten der Universität Duisburg-Essen durchgesprochen ist: Dr. Kai-Uwe Loser. Bei Fragen zum Datenschutz wenden Sie sich bitte an ERC@ oder an den Datenschutzbeauftragten …
 <br>
 <br>
+Stimmen Sie der Erhebung ihrer Daten zu?
+<br>
+<br>
         </p>
 
 
@@ -110,7 +113,7 @@ function time(){
 
     function Next(){
         let TimeFirstRound = (new Date() - starttime)/1000;
-        liveSend({'ZeitErsteRunde': 'Zeit1', 'Zeit1': TimeFirstRound});
+        liveSend({'ZeitNutzerInfoSeiteEins': 'Zeit1', 'Zeit1': TimeFirstRound});
 
     }
     function liveRecv(data) {

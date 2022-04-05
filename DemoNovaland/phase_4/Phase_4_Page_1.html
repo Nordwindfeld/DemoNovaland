@@ -54,8 +54,10 @@
 
 {% block content %}
     <body onload="time()"></body>
+    <p class="p">
 Seitdem Sie das letzte Mal in Novaland waren, ist ein Monat vergangen.
-<br>
+        </p>
+    <br>
 <p class="p">
 Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %}</strong>  Novas.
     Sie haben sich dafür entschieden <strong>{% Wohnung %}, {% Verpflegung %} und {% Mobilitaet %} </strong>.
@@ -81,7 +83,11 @@ Sie erhalten Ihr Netto-Einkommen in Höhe von <strong>{% player.NettoEinkommen %
     function Next() {
         let ZeitP4S1 = (new Date() - starttime) / 1000;
         liveSend({"ZeitP4S1": "ZeitP4S1", 'ZeitP4S1': ZeitP4S1});
-        document.getElementById("form").submit();
+    }
+    function liveRecv(data) {
+        if (data['type'] == 'P4S1Weiter') {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 {% endblock %}

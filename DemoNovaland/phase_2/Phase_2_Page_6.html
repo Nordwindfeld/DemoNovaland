@@ -25,6 +25,20 @@
     .p{
         font-size: larger;
     }
+    .button{
+        background-color: #363636; /* Green */
+        border: NONE;
+        color: white;
+        alignment: center;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+
+    }
 
     </style>
 {% endblock %}
@@ -35,7 +49,7 @@
 {% block title %}
 <!-- Im Block Title habe ich die Unterschrift der Seite definiert und gleich im Design angepasst.-->
     <link rel="stylesheet" type="text/css" href="Button.css"/>
-    <h1 class="h1"> Life-Style Frage 3 </h1>
+    <h1 class="h1"> Lebensstil Frage </h1>
 {% endblock %}
 
 
@@ -47,7 +61,7 @@ Ihnen stehen verschiedene Möglichkeiten der Mobilität zur Auswahl:
  <div id="Korrektur">
 <input type="radio" name="Frage_5_Mobilitaet" onclick="EigenesAuto()" class="radio" value="Eigenes Auto"> Sie fahren hauptsächlich mit dem eigenen Auto (200 Novas) </input>
 <br>
-<input type="radio" name="Frage_5_Mobilitaet" onclick="AutoMieten()" class="radio" value="Auto mieten"> Sie mieten bei Bedarf ein Auto und nutzen ansonsten öffentliche Verkehrsmittel (150 Novas) </input>
+<input type="radio" name="Frage_5_Mobilitaet" onclick="AutoMieten()" class="radio" value="Auto mieten"> Sie nutzen öffentliche Verkehrsmittel und mieten bei Bedarf ein Auto (150 Novas) </input>
 <br>
 <input type="radio" name="Frage_5_Mobilitaet" onclick="Fahrrad()" class="radio" value="Fahrrad - Öffentliche Verkehrsmittel"> Sie fahren Fahrrad und nutzen bei Bedarf öffentliche Verkehrsmittel (50 Novas) </input>
 <br>

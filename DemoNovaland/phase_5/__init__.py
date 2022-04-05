@@ -59,11 +59,6 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    # Seite 7
-    Spende2 = models.FloatField()
-
-    # Seite 8
-    Spenden2Insgesamt = models.FloatField()
 
     # Seite 9
     SteuerFrage1 = models.StringField(
@@ -455,51 +450,6 @@ class Phase_5_Page_7(Page):
             SpendenSchicken()
 
 
-class Phase_5_Page_8(Page):
-    @staticmethod
-    def live_method(player: Player, data):
-        if "ZeitP5S8" in data:
-            player.S5P8Zeit = data["ZeitP5S8"]
-            player.UnixTimeP5S8 = time.time()
-            P5S8Zeit = dict(type='P5S8Weiter')
-            return {0: P5S8Zeit}
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        connection5 = psycopg2.connect(user='aipclfonwuiort',
-                                       password='b124aca3006fd58f483bfb154045ce201c4578231285d94b782244a044986e49',
-                                       host='ec2-3-216-113-109.compute-1.amazonaws.com',
-                                       port='5432',
-                                       database='dcoubsit8jsig0')
-        cursor5 = connection5.cursor()
-
-        IDBekommen = 'SELECT DISTINCT nutzer_id FROM Novaland'
-        cursor5.execute(IDBekommen)
-        ID = cursor5.fetchall()
-        AlleSpenden2 = 0.0
-        for ID in ID:
-            USERID = (str(str(ID).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
-                                                                                                               "").replace(
-                "'", ''))
-            ScriptZahl = '''SELECT Spende2 From Novaland Where nutzer_id = %s'''
-            Users = [USERID]
-            cursor5.execute(ScriptZahl, Users)
-            Spenden2 = cursor5.fetchone()
-            try:
-                SpendenZahl2 = float(
-                    str(str(Spenden2).replace("(", "").replace(")", "").replace(",", "")).replace("[", "").replace("]",
-                                                                                                               "").replace(
-                        "'", ''))
-                AlleSpenden2 = AlleSpenden2 + SpendenZahl2
-            except:
-                SpendenZahl2 = 0
-                AlleSpenden2 = AlleSpenden2 + SpendenZahl2
-
-        player.Spenden2Insgesamt = AlleSpenden2
-        cursor5.close()
-        connection5.close()
-
-
 class Phase_5_Page_9(Page):
     form_model = 'player'
     form_fields = ['SteuerFrage1']
@@ -587,5 +537,5 @@ class Phase_5_Page_12(Page):
 
 
 page_sequence = [Waiting_Site, Phase_5_Page_1, Phase_5_Page_2, Phase_5_Page_3, Phase_5_Page_4, Phase_5_Page_5,
-                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_9, Phase_5_Page_8, Phase_5_Page_10, Phase_5_Page_11,
+                 Phase_5_Page_6, Phase_5_Page_7, Phase_5_Page_9, Phase_5_Page_10, Phase_5_Page_11,
                  Phase_5_Page_12]

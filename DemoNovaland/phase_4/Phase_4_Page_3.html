@@ -56,11 +56,13 @@
     <body onload="time()"></body>
     <p class="p">
     {% if player.KoalitionsBund != "Gleichstand" %}
+        Nach intensiven Koalitionsverhandlungen hat das Parlament von Novaland per Mehrheitsbeschluss erfolgreich eine neue Regierung bestimmt.
+        <br>
 {% if player.LPNundKPNbund == "Ja" and player.SPNundPPNbund == "Nein" %}Ein Regierungsbündnis der LPN (Liberale Partei Novaland) und der KPN (Konservative Partei Novaland) wird die kommenden 5 Jahre die politischen Geschicke Novalands leiten. {% endif %}
  {% if player.SPNundPPNbund == "Ja" and player.LPNundKPNbund == "Nein" %}Ein Regierungsbündnis der SPN (Soziale Partei Novaland) und der PPN (Partei Progressives Novaland) wird die kommenden 5 Jahre die politischen Geschicke Novalands leiten. {% endif %}
 <br>
     Die Regierung wird angeführt von Mika Noel der "{% if player.LPNundKPNbund == "Ja" and player.SPNundPPNbund == "Nein" and player.LPNProzent > player.KPNProzent  %}Liberale Partei Novaland{% elif player.LPNundKPNbund == "Ja" and player.SPNundPPNbund == "Nein" and player.LPNProzent <= player.KPNProzent %}Konservative Partei Novaland{% elif player.SPNundPPNbund == "Ja" and player.LPNundKPNbund == "Nein" and player.SPNProzent >= player.PPNProzent %}Soziale Partei Novaland{% elif player.SPNundPPNbund == "Ja" and player.LPNundKPNbund == "Nein" and player.SPNProzent < player.PPNProzent %}Partei Progressives Novaland{% endif %}" Partei.
-        Noel ist bekannt für Ihre Glaubwürdigkeit und Durchsetzungskraft. Es ist zu erwarten, dass die Wahlversprechen zügig umgesetzt werden.
+        Noel ist bekannt für ihre Glaubwürdigkeit und Durchsetzungskraft. Es ist zu erwarten, dass die Wahlversprechen zügig umgesetzt werden.
     {% else %} Es kam leider kein Bündnis Zustande. Dadurch gibt es keine politischen Veränderungen in Novaland. {% endif %}
     </p>
     <br>

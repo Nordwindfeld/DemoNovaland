@@ -55,8 +55,7 @@
 {% block content %}
      <body onload="time()"></body>
     <p class="p">
-Haben Sie im Vergleich zu der restlichen Novaland Bevölkerung mit Ihrem monatlichen Nettoeinkommen in Höhe von {% player.Netto_Einkommen %} Novas ein niedriges, mittleres oder ein hohes Einkommen?
-    </p>
+Haben Sie im Vergleich zu der restlichen Bevölkerung in Novaland mit Ihrem monatlichen Netto-Einkommen ein niedriges, mittleres oder hohes Einkommen?    </p>
     <br>
  <div id="Korrektur">
 <input type="radio" name="Frage_2" onclick="niedrig()" class="radio" value="Niedrig"> Niedriges Einkommen </input>
@@ -96,7 +95,7 @@ else if (NettoEinkommen == 3500) {
 function niedrig(){
     if(NettoEinkommen != 1400){
             liveSend({"P2S3FrageRelation":"P2S3FrageRelation", "P2S3AntwortRelation": "Falsch"});
-            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> In Relation zur restlichen Bevölkerung von Novaland, haben Sie ein <br>" + Einkommen + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Im Vergleich zur restlichen Bevölkerung in Novaland haben Sie ein <br>" + Einkommen + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
                  }
     else if (NettoEinkommen == 1400){
         liveSend({"P2S3FrageRelation":"P2S3FrageRelation", "P2S3AntwortRelation": "Richtig"});
@@ -108,7 +107,7 @@ function niedrig(){
     function mittel(){
         if(NettoEinkommen != 2000){
             liveSend({"P2S3FrageRelation":"P2S3FrageRelation", "P2S3AntwortRelation": "Falsch"});
-            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> In Relation zur restlichen Bevölkerung von Novaland, haben Sie ein <br>" + Einkommen + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Im Vergleich zur restlichen Bevölkerung in Novaland haben Sie ein <br>" + Einkommen + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
                  }
     else if (NettoEinkommen == 2000){
         liveSend({"P2S3FrageRelation":"P2S3FrageRelation", "P2S3AntwortRelation": "Richtig"});
@@ -119,7 +118,7 @@ function niedrig(){
      function hoch(){
         if(NettoEinkommen != 3500){
             liveSend({"P2S3FrageRelation":"P2S3FrageRelation", "P2S3AntwortRelation": "Falsch"});
-            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> In Relation zur restlichen Bevölkerung von Novaland, haben Sie ein <br>" + Einkommen + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
+            document.getElementById("Korrektur").innerHTML = "<p style='color:darkred' class='p'> Im Vergleich zur restlichen Bevölkerung in Novaland haben Sie ein <br>" + Einkommen + "</p>" + "<br>" + "<button class='button' type='button' onclick='Next()'> Weiter </button>";
                  }
     else if (NettoEinkommen == 3500){
         liveSend({"P2S3FrageRelation":"P2S3FrageRelation", "P2S3AntwortRelation": "Richtig"});
